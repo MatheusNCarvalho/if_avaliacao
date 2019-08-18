@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Visual="Material"
+             NavigationPage.HasNavigationBar="true"
+             BackgroundColor="{StaticResource BackgroundColor}"
+             Opacity="50"
+             Title="{Binding Title}"
+             x:Class="IFAvaliacao.MainPage">
+
+    <ContentPage.Content>
+        <StackLayout 
+            VerticalOptions="FillAndExpand"
+            HorizontalOptions="FillAndExpand"
+            Padding="5"
+            Spacing="10">
+
+            <Label
+                FontSize="Medium"
+                TextColor="Black"
+                Text="Para iniciar a Avalicação preenche os dados abaixo!"
+                Margin="0,0,0,15"/>
+
+            <FlexLayout
+                    Direction="Column"
+                    AlignItems="Stretch">
+
+                <Entry Placeholder="Numero da Vaca"
+                       Keyboard="Numeric"
+                       TextColor="Black"
+                       BackgroundColor="White"
+                       Margin="0,0,0,5"/>
+
+                <Entry Placeholder="Peso Corporal"
+                           Keyboard="Numeric"
+                           TextColor="Black"
+                           BackgroundColor="White"/>
+            </FlexLayout>
+
+
+            <Button Text="Iniciar" 
+                    VerticalOptions="EndAndExpand" 
+                    BackgroundColor="{StaticResource GreenDark}" 
+                    HeightRequest="40"/>
+
+
+            <!--<ScrollView>
+              <FlexLayout  
+                  Direction="Column"
+                  AlignItems="Stretch">
+
+                  <Label Text="Escolhar há Angulosidade"/>
+                  <Slider Minimum="1"  Maximum="9">
+                       
+                  </Slider>
+
+                  <FlexLayout FlexLayout.Grow="1" 
+                              Direction="Row">
+                      <Label Text="Sem Angulosidade"/>
+                      <Label Text="Sem Angulosidade"/>
+                      <Label Text="Sem Angulosidade"/>
+                  </FlexLayout>
+
+              </FlexLayout>
+            </ScrollView>-->
+        </StackLayout>
+    </ContentPage.Content>
+
+
+</ContentPage>
