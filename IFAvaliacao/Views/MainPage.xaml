@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converter="clr-namespace:IFAvaliacao.Converter;assembly=IFAvaliacao"
              mc:Ignorable="d"
              Visual="Material"
              NavigationPage.HasNavigationBar="true"
@@ -10,6 +11,12 @@
              Opacity="50"
              Title="{Binding Title}"
              x:Class="IFAvaliacao.MainPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:DecimalConverter x:Key="DecimalConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.Content>
         <StackLayout 
@@ -28,23 +35,31 @@
                     Direction="Column"
                     AlignItems="Stretch">
 
-                <Entry Placeholder="Numero da Vaca"
-                       Keyboard="Numeric"
-                       TextColor="Black"
-                       BackgroundColor="White"
-                       Margin="0,0,0,5"/>
+                <Entry  x:Name="entryNameCow"
+                        Placeholder="Numero da Vaca"
+                        Keyboard="Numeric"
+                        Text="{Binding NameCow}"
+                        TextColor="Black"
+                        BackgroundColor="White"
+                        Margin="0,0,0,5"/>
 
-                <Entry Placeholder="Peso Corporal"
-                           Keyboard="Numeric"
-                           TextColor="Black"
-                           BackgroundColor="White"/>
+                <Editor  x:Name="entryBodyWight"
+                        Placeholder="Peso Corporal"
+                        Keyboard="Numeric"
+                        Text="{Binding BodyWight, Converter ={StaticResource DecimalConverter}}"
+                        TextColor="Black"
+                        BackgroundColor="White">
+                </Editor>
             </FlexLayout>
 
 
-            <Button Text="Iniciar" 
+            <Button x:Name="btnStart"
+                    Text="Iniciar" 
                     VerticalOptions="EndAndExpand" 
                     BackgroundColor="{StaticResource GreenDark}" 
-                    HeightRequest="40"/>
+                    HeightRequest="40"
+                    Command="{Binding StartCommand}"
+                    IsEnabled="False"/>
 
 
             <!--<ScrollView>

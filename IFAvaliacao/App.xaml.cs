@@ -1,4 +1,5 @@
 ﻿using IFAvaliacao.ViewModels;
+using IFAvaliacao.Views;
 using Prism;
 using Prism.DryIoc;
 using Prism.Ioc;
@@ -27,6 +28,7 @@ namespace IFAvaliacao
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainViewModel>();
+            containerRegistry.RegisterForNavigation<PreenchimentoPage, PreenchimentoViewModel>();
         }
 
 

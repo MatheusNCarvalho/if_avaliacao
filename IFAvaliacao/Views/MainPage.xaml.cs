@@ -1,21 +1,41 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using IFAvaliacao.ViewModels;
 using Xamarin.Forms;
 
 namespace IFAvaliacao
 {
-    // Learn more about making custom code visible in the Xamarin.Forms previewer
-    // by visiting https://aka.ms/xamarinforms-previewer
+   
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
+        private MainViewModel MainViewModel => (MainViewModel)BindingContext;
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
+            entryBodyWight.Completed += Entry_NameCowCompleted;
+            entryNameCow.Completed += Entry_NameCowCompleted;
+            btnStart.IsEnabled = false;
+            base.OnAppearing();
+        }
+
+        protected override void OnDisappearing()
+        {
+            entryBodyWight.Completed -= Entry_NameCowCompleted;
+            entryNameCow.Completed -= Entry_NameCowCompleted;
+            base.OnDisappearing();
+        }
+
+        private void Entry_NameCowCompleted(object sender, EventArgs e)
+        {
+            if (MainViewModel.BodyWight > 0 && MainViewModel.NameCow > 0)
+            {
+                btnStart.IsEnabled = true;
+            }
         }
     }
 }

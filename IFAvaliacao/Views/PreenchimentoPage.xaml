@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             BackgroundColor="{StaticResource BackgroundColor}"
+             x:Class="IFAvaliacao.Views.PreenchimentoPage">
+
+    <ContentPage.Content>
+        <StackLayout 
+            Spacing="5"
+            Padding="5">
+
+            <Label Text="Nome da vaca" />
+
+            <Label Text="Peso corporal da balança"/>
+
+
+            <Label Text="Escolha há Angulosidade"
+                   FontSize="Medium"
+                   FontAttributes="Bold"/>
+
+            <FlexLayout Direction="Row" 
+                        AlignContent="Center"
+                        JustifyContent="Start"
+                        Padding="0">
+
+                <Slider x:Name="slider"
+                        Value="{Binding Angulosiodade}"
+                        Margin="-10"
+                        FlexLayout.Grow="1"
+                        MaximumTrackColor="OrangeRed"
+                        MinimumTrackColor="Black"
+                        Minimum="{Binding SliderMinimum}"
+                        Maximum="9"/>
+
+                <Label  x:Name="lbValue" WidthRequest="10" Text="{Binding Angulosiodade, StringFormat='{0:0}'}"/>
+            </FlexLayout>
+
+            <FlexLayout Direction="Row"
+                       Padding="0"
+                       AlignItems="Stretch">
+
+                <Label FlexLayout.Grow="1"
+                      Text="Sem angulosidade"
+                      FontAttributes="Bold">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding TapCommand}"
+                                              CommandParameter="Angulosiodade.1,08"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label x:Name="label2" FlexLayout.Grow="1"
+                      VerticalTextAlignment="Center"
+                      HorizontalTextAlignment="Center"
+                      Text="Intermediário"
+                      FontAttributes="Bold">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding TapCommand}"
+                                              CommandParameter="Angulosiodade.5,08"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label x:Name="label3"
+                        FlexLayout.Grow="1" 
+                       Text="Angulosa e descamada" 
+                       FontAttributes="Bold" 
+                       LineBreakMode="TailTruncation">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding TapCommand}"
+                                              CommandParameter="Angulosiodade.9,08"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </FlexLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
