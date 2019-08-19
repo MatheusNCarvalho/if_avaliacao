@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             Visual="Material"
              BackgroundColor="{StaticResource BackgroundColor}"
              x:Class="IFAvaliacao.Views.PreenchimentoPage">
 
@@ -22,14 +23,19 @@
             </Style>
             <Style x:Key="LabelTitulo" TargetType="Label">
                 <Setter Property="TextColor" Value="Black"/>
-                <Setter Property="TextDecorations" Value="Underline"/>
+                <!--<Setter Property="TextDecorations" Value="Underline"/>-->
                 <Setter Property="FontSize" Value="Medium"/>
                
+            </Style>
+            <Style x:Key="LabelItemStart" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
             </Style>
             <Style x:Key="LabelItemEnd" TargetType="Label">
                 <Setter Property="TextColor" Value="Black"/>
                 <Setter Property="HorizontalTextAlignment" Value="End"/>
                 <Setter Property="LineBreakMode" Value="TailTruncation"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
             </Style>
             <Style x:Key="LabelItemCenter" TargetType="Label">
                 <Setter Property="HorizontalTextAlignment" Value="Center"/>
@@ -55,7 +61,7 @@
 
     <ContentPage.Content>
         <StackLayout 
-            Spacing="10"
+            Spacing="20"
             Padding="5">
 
             <Label 
@@ -64,16 +70,18 @@
 
             <Label FontSize="Medium" 
                    Text="{Binding BodyWight, StringFormat='Peso corporal da balança: {0}'}"/>
+           
+          <BoxView HorizontalOptions="FillAndExpand" VerticalOptions="Center" HeightRequest="1" BackgroundColor="White" />
 
             <ScrollView Orientation="Vertical">
-               <Grid RowSpacing="15">
+               <Grid RowSpacing="20">
                    <Grid.RowDefinitions>
                        <RowDefinition Height="*" />
                        <RowDefinition Height="*" />
                    </Grid.RowDefinitions>
 
                     <StackLayout Grid.Row="0" Style="{StaticResource StackLayoutOptions}">
-                        <Label Text="Escolha há Angulosidade" Style="{StaticResource LabelTitulo}"/>
+                        <Label Text="Escolha uma Angulosidade?" Style="{StaticResource LabelTitulo}"/>
 
                         <FlexLayout  Direction="Row" Style="{StaticResource FlexLayoutRows}">
                             <Slider FlexLayout.Grow="1" Value="{Binding Angulosiodade}" Minimum="{Binding SliderMinimum}" Maximum="9"/>
@@ -82,7 +90,7 @@
                         </FlexLayout>
 
                         <FlexLayout Direction="Row" Style="{StaticResource FlexLayoutRows}">
-                            <Label FlexLayout.Grow="1" Text="Sem angulosidade">
+                            <Label FlexLayout.Grow="1" Text="Sem angulosidade" Style="{StaticResource LabelItemStart}">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="Angulosiodade.1,08"/>
                                 </Label.GestureRecognizers>
@@ -103,64 +111,68 @@
                     </StackLayout>
 
                    <StackLayout Grid.Row="1" Style="{StaticResource StackLayoutOptions}">
-                       <Label Text="Escolha há Angulosidade" Style="{StaticResource LabelTitulo}"/>
+                       <Label Text="Profundiade Corporal?" Style="{StaticResource LabelTitulo}"/>
 
                        <FlexLayout  Direction="Row" Style="{StaticResource FlexLayoutRows}">
-                           <Slider FlexLayout.Grow="1" Value="{Binding Angulosiodade}" Minimum="{Binding SliderMinimum}" Maximum="9"/>
+                            <Slider FlexLayout.Grow="1" Value="{Binding ProfundidadeCorporal}" Minimum="{Binding SliderMinimum}" Maximum="9"/>
 
-                           <Label Style="{StaticResource LabelSliderValue}" Text="{Binding Angulosiodade, StringFormat='{0:0}'}"/>
+                            <Label Style="{StaticResource LabelSliderValue}" Text="{Binding ProfundidadeCorporal, StringFormat='{0:0}'}"/>
                        </FlexLayout>
 
                        <FlexLayout Direction="Row" Style="{StaticResource FlexLayoutRows}">
-                           <Label FlexLayout.Grow="1" Text="Sem angulosidade">
+                            <Label FlexLayout.Grow="1" Text="Raso" Style="{StaticResource LabelItemStart}">
                                <Label.GestureRecognizers>
-                                   <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="Angulosiodade.1,08"/>
+                                    <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="ProfundidadeCorporal.1,08"/>
                                </Label.GestureRecognizers>
                            </Label>
 
                            <Label FlexLayout.Grow="1" Text="Intermediário" Style="{StaticResource LabelItemCenter}">
                                <Label.GestureRecognizers>
-                                   <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="Angulosiodade.5,08"/>
+                                    <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="ProfundidadeCorporal.5,08"/>
                                </Label.GestureRecognizers>
                            </Label>
 
-                           <Label FlexLayout.Grow="1" Style="{StaticResource LabelItemEnd}" Text="Angulosa e descamada">
+                           <Label FlexLayout.Grow="1" Style="{StaticResource LabelItemEnd}" Text="Profundo">
                                <Label.GestureRecognizers>
-                                   <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="Angulosiodade.9,08"/>
+                                    <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="ProfundidadeCorporal.9,08"/>
                                </Label.GestureRecognizers>
                            </Label>
                        </FlexLayout>
                    </StackLayout>
 
                    <StackLayout Grid.Row="2" Style="{StaticResource StackLayoutOptions}">
-                       <Label Text="Escolha há Angulosidade" Style="{StaticResource LabelTitulo}"/>
+                       <Label Text="Força Leiteira?" Style="{StaticResource LabelTitulo}"/>
 
                        <FlexLayout  Direction="Row" Style="{StaticResource FlexLayoutRows}">
-                           <Slider FlexLayout.Grow="1" Value="{Binding Angulosiodade}" Minimum="{Binding SliderMinimum}" Maximum="9"/>
+                            <Slider FlexLayout.Grow="1" Value="{Binding ForcaLeiteira}" Minimum="{Binding SliderMinimum}" Maximum="9"/>
 
-                           <Label Style="{StaticResource LabelSliderValue}" Text="{Binding Angulosiodade, StringFormat='{0:0}'}"/>
+                            <Label Style="{StaticResource LabelSliderValue}" Text="{Binding ForcaLeiteira, StringFormat='{0:0}'}"/>
                        </FlexLayout>
 
                        <FlexLayout Direction="Row" Style="{StaticResource FlexLayoutRows}">
-                           <Label FlexLayout.Grow="1" Text="Sem angulosidade">
+                            <Label FlexLayout.Grow="1" Text="Estreito" Style="{StaticResource LabelItemStart}">
                                <Label.GestureRecognizers>
-                                   <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="Angulosiodade.1,08"/>
+                                    <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="ForcaLeiteira.1,08"/>
                                </Label.GestureRecognizers>
                            </Label>
 
                            <Label FlexLayout.Grow="1" Text="Intermediário" Style="{StaticResource LabelItemCenter}">
                                <Label.GestureRecognizers>
-                                   <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="Angulosiodade.5,08"/>
+                                    <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="ForcaLeiteira.5,08"/>
                                </Label.GestureRecognizers>
                            </Label>
 
-                           <Label FlexLayout.Grow="1" Style="{StaticResource LabelItemEnd}" Text="Angulosa e descamada">
+                           <Label FlexLayout.Grow="1" Style="{StaticResource LabelItemEnd}" Text="Largo">
                                <Label.GestureRecognizers>
-                                   <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="Angulosiodade.9,08"/>
+                                    <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="ForcaLeiteira.9,08"/>
                                </Label.GestureRecognizers>
                            </Label>
                        </FlexLayout>
                    </StackLayout>
+
+                    <Entry Grid.Row="3" Placeholder="Altura de garupa: medido pelo hipômetro" Keyboard="Numeric" Text="{Binding AlturaGarupaHipometro}"></Entry>
+                    <Entry Grid.Row="4" Placeholder="Comprimento de corpo: medido pela fita" Keyboard="Numeric" Text="{Binding AlturaGarupaHipometro}"></Entry>
+
                 </Grid>
             </ScrollView>
         </StackLayout>

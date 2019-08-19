@@ -14,19 +14,8 @@ namespace IFAvaliacao.ViewModels
         {
             _tapCommand = new Command(OnTapped);
             SliderMinimum = 1.0;
-            SliderMaximum = 9.0;
-            Perguntas = new ObservableCollection<Perguntas>();
         }
-
-
-
-        private ObservableCollection<Perguntas> _perguntas;
-        public ObservableCollection<Perguntas> Perguntas
-        {
-            get => _perguntas;
-            set => SetProperty(ref _perguntas, value);
-        }
-
+   
         public ICommand TapCommand { get => _tapCommand; }
 
         private double _angulosidade;
@@ -35,6 +24,28 @@ namespace IFAvaliacao.ViewModels
             get => _angulosidade;
             set => SetProperty(ref _angulosidade, value);
         }
+
+        private double _profundidadeCorporal;
+        public double ProfundidadeCorporal
+        {
+            get => _profundidadeCorporal;
+            set => SetProperty(ref _profundidadeCorporal, value);
+        }
+
+        private double _forcaLeiteira;
+        public double ForcaLeiteira
+        {
+            get => _forcaLeiteira;
+            set => SetProperty(ref _forcaLeiteira, value);
+        }
+
+        private double _alturaGarupaHipometro;
+        public double AlturaGarupaHipometro
+        {
+            get => _alturaGarupaHipometro;
+            set => SetProperty(ref _alturaGarupaHipometro, value);
+        }
+
 
         private int _nameCow;
 
@@ -54,18 +65,7 @@ namespace IFAvaliacao.ViewModels
         public double SliderMinimum { get; set; }
         public double SliderMaximum { get; set; }
 
-
-        public void LoadPerguntas()
-        {
-            Perguntas.Add(new Perguntas("Angulosidade", "Sem angulosidade", "Intermediário",
-                "angulosa e descarnada"));
-
-            Perguntas.Add(new Perguntas("Profundidade Corporal", "raso", "Intermediário",
-                "profundo"));
-        }
-
-
-
+        
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             var profileCow = (ProfileCow)parameters[nameof(ProfileCow)];
@@ -86,9 +86,13 @@ namespace IFAvaliacao.ViewModels
                 case nameof(Angulosiodade):
                     Angulosiodade = double.Parse(value[1]);
                     break;
+                case nameof(ProfundidadeCorporal):
+                    ProfundidadeCorporal = double.Parse(value[1]);
+                    break;
+                case nameof(ForcaLeiteira):
+                    ForcaLeiteira = double.Parse(value[1]);
+                    break;
             }
-
         }
-
     }
 }
