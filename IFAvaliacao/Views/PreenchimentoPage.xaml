@@ -173,6 +173,35 @@
                     <Entry Grid.Row="3" Placeholder="Altura de garupa: medido pelo hipômetro" Keyboard="Numeric" Text="{Binding AlturaGarupaHipometro}"></Entry>
                     <Entry Grid.Row="4" Placeholder="Comprimento de corpo: medido pela fita" Keyboard="Numeric" Text="{Binding AlturaGarupaHipometro}"></Entry>
 
+                    <StackLayout Grid.Row="5" Style="{StaticResource StackLayoutOptions}">
+                        <Label Text="Ângulo de Garupa" Style="{StaticResource LabelTitulo}"/>
+
+                        <FlexLayout  Direction="Row" Style="{StaticResource FlexLayoutRows}">
+                            <Slider FlexLayout.Grow="1" Value="{Binding ForcaLeiteira}" Minimum="{Binding SliderMinimum}" Maximum="9"/>
+
+                            <Label Style="{StaticResource LabelSliderValue}" Text="{Binding ForcaLeiteira, StringFormat='{0:0}'}"/>
+                        </FlexLayout>
+
+                        <FlexLayout Direction="Row" Style="{StaticResource FlexLayoutRows}">
+                            <Label FlexLayout.Grow="1" Text="Reta" Style="{StaticResource LabelItemStart}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="ForcaLeiteira.1,08"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+
+                            <Label FlexLayout.Grow="1" Text="Intermediário" Style="{StaticResource LabelItemCenter}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="ForcaLeiteira.5,08"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+
+                            <Label FlexLayout.Grow="1" Style="{StaticResource LabelItemEnd}" Text="Inclinada">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="ForcaLeiteira.9,08"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </FlexLayout>
+                    </StackLayout>
                 </Grid>
             </ScrollView>
         </StackLayout>

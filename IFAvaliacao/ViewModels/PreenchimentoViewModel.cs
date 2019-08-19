@@ -15,7 +15,7 @@ namespace IFAvaliacao.ViewModels
             _tapCommand = new Command(OnTapped);
             SliderMinimum = 1.0;
         }
-   
+
         public ICommand TapCommand { get => _tapCommand; }
 
         private double _angulosidade;
@@ -45,10 +45,13 @@ namespace IFAvaliacao.ViewModels
             get => _alturaGarupaHipometro;
             set => SetProperty(ref _alturaGarupaHipometro, value);
         }
+        private int _comprimentoCorpo;
+        public int ComprimentoCorpor { get => _comprimentoCorpo; set => SetProperty(ref _comprimentoCorpo, value); }
 
+        private double _anguloGarupa;
+        public double AnguloGarupa { get => _anguloGarupa; set => SetProperty(ref _anguloGarupa, value); }
 
         private int _nameCow;
-
         public int NameCow
         {
             get => _nameCow;
@@ -65,7 +68,7 @@ namespace IFAvaliacao.ViewModels
         public double SliderMinimum { get; set; }
         public double SliderMaximum { get; set; }
 
-        
+
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             var profileCow = (ProfileCow)parameters[nameof(ProfileCow)];
