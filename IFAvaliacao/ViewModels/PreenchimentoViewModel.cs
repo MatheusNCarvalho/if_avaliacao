@@ -45,11 +45,18 @@ namespace IFAvaliacao.ViewModels
             get => _alturaGarupaHipometro;
             set => SetProperty(ref _alturaGarupaHipometro, value);
         }
-        private int _comprimentoCorpo;
-        public int ComprimentoCorpor { get => _comprimentoCorpo; set => SetProperty(ref _comprimentoCorpo, value); }
+        private double _comprimentoCorpo;
+        public double ComprimentoCorpo { get => _comprimentoCorpo; set => SetProperty(ref _comprimentoCorpo, value); }
 
-        private double _anguloGarupa;
-        public double AnguloGarupa { get => _anguloGarupa; set => SetProperty(ref _anguloGarupa, value); }
+        private double _anguloCarupa;
+        public double AnguloCarupa { get => _anguloCarupa; set => SetProperty(ref _anguloCarupa, value); }
+
+        private double _larguraIleo;
+        public double LarguraIleo { get => _larguraIleo; set => SetProperty(ref _larguraIleo, value); }
+
+        private double _larguraIsquio;
+        public double LarguraIsquio { get => _larguraIsquio; set => SetProperty(ref _larguraIsquio, value); }
+
 
         private int _nameCow;
         public int NameCow
@@ -94,6 +101,9 @@ namespace IFAvaliacao.ViewModels
                     break;
                 case nameof(ForcaLeiteira):
                     ForcaLeiteira = double.Parse(value[1]);
+                    break;
+                case nameof(AnguloCarupa):
+                    AnguloCarupa = double.Parse(value[1]);
                     break;
             }
         }
