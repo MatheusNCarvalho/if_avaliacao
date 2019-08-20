@@ -15,7 +15,7 @@ namespace IFAvaliacao.ViewModels
             _tapCommand = new Command(OnTapped);
             SliderMinimum = 1.0;
         }
-   
+
         public ICommand TapCommand { get => _tapCommand; }
 
         private double _angulosidade;
@@ -45,6 +45,17 @@ namespace IFAvaliacao.ViewModels
             get => _alturaGarupaHipometro;
             set => SetProperty(ref _alturaGarupaHipometro, value);
         }
+        private double _comprimentoCorpo;
+        public double ComprimentoCorpo { get => _comprimentoCorpo; set => SetProperty(ref _comprimentoCorpo, value); }
+
+        private double _anguloCarupa;
+        public double AnguloCarupa { get => _anguloCarupa; set => SetProperty(ref _anguloCarupa, value); }
+
+        private double _larguraIleo;
+        public double LarguraIleo { get => _larguraIleo; set => SetProperty(ref _larguraIleo, value); }
+
+        private double _larguraIsquio;
+        public double LarguraIsquio { get => _larguraIsquio; set => SetProperty(ref _larguraIsquio, value); }
 
 
         private int _nameCow;
@@ -65,7 +76,7 @@ namespace IFAvaliacao.ViewModels
         public double SliderMinimum { get; set; }
         public double SliderMaximum { get; set; }
 
-        
+
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             var profileCow = (ProfileCow)parameters[nameof(ProfileCow)];
@@ -91,6 +102,9 @@ namespace IFAvaliacao.ViewModels
                     break;
                 case nameof(ForcaLeiteira):
                     ForcaLeiteira = double.Parse(value[1]);
+                    break;
+                case nameof(AnguloCarupa):
+                    AnguloCarupa = double.Parse(value[1]);
                     break;
             }
         }

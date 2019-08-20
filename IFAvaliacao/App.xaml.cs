@@ -21,7 +21,7 @@ namespace IFAvaliacao
             InitializeComponent();
             XF.Material.Forms.Material.Init(this);
             VersionTracking.Track();
-            await NavigationService.NavigateAsync("/NavigationPage/PreenchimentoPage");
+            await NavigationService.NavigateAsync("/NavigationPage/MainPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
