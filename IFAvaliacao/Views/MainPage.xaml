@@ -58,8 +58,7 @@
                     VerticalOptions="EndAndExpand" 
                     BackgroundColor="{StaticResource GreenDark}" 
                     HeightRequest="40"
-                    Command="{Binding StartCommand}"
-                    IsEnabled="False"/>
+                    Command="{Binding StartCommand}"/>
 
 
             <!--<ScrollView>

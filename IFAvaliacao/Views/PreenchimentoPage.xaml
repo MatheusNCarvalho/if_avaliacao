@@ -9,11 +9,11 @@
              x:Class="IFAvaliacao.Views.PreenchimentoPage">
 
     <ContentPage.Resources>
-        <ResourceDictionary>           
+        <ResourceDictionary>
 
             <Style x:Key="StackLayoutOptions" TargetType="StackLayout">
                 <Setter Property="Padding" Value="0"/>
-                <Setter Property="Spacing" Value="0"/>                
+                <Setter Property="Spacing" Value="0"/>
             </Style>
             <Style TargetType="Label">
                 <Setter Property="TextColor" Value="Black"/>
@@ -61,12 +61,12 @@
                 <Setter Property="CornerRadius" Value="3"/>
                 <Setter Property="Padding" Value="5"/>
             </Style>
-            <Style x:Key="FlexLayoutMaster" TargetType="FlexLayout">               
+            <Style x:Key="FlexLayoutMaster" TargetType="FlexLayout">
                 <Setter Property="AlignItems" Value="Center"/>
                 <Setter Property="JustifyContent" Value="SpaceEvenly"/>
                 <Setter Property="Direction" Value="Column"/>
             </Style>
-            <Style x:Key="FlexLayouWithEntrytMaster" TargetType="FlexLayout">               
+            <Style x:Key="FlexLayouWithEntrytMaster" TargetType="FlexLayout">
                 <Setter Property="JustifyContent" Value="SpaceEvenly"/>
                 <Setter Property="Direction" Value="Column"/>
             </Style>
@@ -84,9 +84,6 @@
 
             <Label FontSize="Medium" 
                    Text="{Binding BodyWight, StringFormat='Peso corporal da balança: {0}'}"/>
-
-            <!--<BoxView HorizontalOptions="FillAndExpand" VerticalOptions="Center" HeightRequest="3" BackgroundColor="White" />-->
-
 
             <ScrollView >
                 <FlexLayout 
@@ -488,7 +485,7 @@
                                     </Label.GestureRecognizers>
                                 </Label>
 
-                                <Label FlexLayout.Grow="1" Text="para dentro" Style="{StaticResource LabelItemEnd}">
+                                <Label FlexLayout.Grow="1" Text="Para dentro" Style="{StaticResource LabelItemEnd}">
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="PosicaoTetos.9,08"/>
                                     </Label.GestureRecognizers>
@@ -497,31 +494,36 @@
                         </FlexLayout>
                     </Frame>
 
-                    <Frame>
-                        <FlexLayout Style="{StaticResource FlexLayoutMaster}">
-                            <Label Text="Comprimento de tetos:"/>
-
+                    <Frame HeightRequest="150">
+                        <FlexLayout Style="{StaticResource FlexLayoutMaster}" Padding="0">
+                            <Label Text="Comprimento de Tetos"/>
                             <FlexLayout FlexLayout.Grow="1" Padding="0" JustifyContent="Center">
-                                <Entry FlexLayout.Grow="1" Margin="5" Placeholder="T1"/>
-                                <Entry FlexLayout.Grow="1" Margin="5" Placeholder="T2"/>
-                                <Entry FlexLayout.Grow="1" Margin="5" Placeholder="T2"/>
+                                <Entry FlexLayout.Grow="1" Keyboard="Numeric" HeightRequest="60" Margin="5" Placeholder="T1"/>
+                                <Entry FlexLayout.Grow="1" Keyboard="Numeric" HeightRequest="60" Margin="5" Placeholder="T2"/>                                
+                            </FlexLayout>
+                            <FlexLayout FlexLayout.Grow="1" Padding="0" JustifyContent="Center">
+                                <Entry FlexLayout.Grow="1" Keyboard="Numeric" HeightRequest="60" Margin="5" Placeholder="T3"/>
+                                <Entry FlexLayout.Grow="1" Keyboard="Numeric" HeightRequest="60" Margin="5" Placeholder="T4"/>
                             </FlexLayout>
                         </FlexLayout>
                     </Frame>
 
-                    <Frame>
-                        <FlexLayout Style="{StaticResource FlexLayoutMaster}">
-                            <Label Text="Diâmetro de tetos:"/>
+                    <Frame HeightRequest="150">
+                        <FlexLayout Style="{StaticResource FlexLayoutMaster}" Padding="0">
+                            <Label Text="Diâmetro de Tetos"/>
 
                             <FlexLayout FlexLayout.Grow="1" Padding="0" JustifyContent="Center">
-                                <Entry FlexLayout.Grow="1" Margin="5" Placeholder="T1"/>
-                                <Entry FlexLayout.Grow="1" Margin="5" Placeholder="T2"/>
-                                <Entry FlexLayout.Grow="1" Margin="5" Placeholder="T2"/>
+                                <Entry FlexLayout.Grow="1" Margin="5" HeightRequest="60" Keyboard="Numeric" Placeholder="T1"/>
+                                <Entry FlexLayout.Grow="1" Margin="5" HeightRequest="60" Keyboard="Numeric"  Placeholder="T2"/>                               
+                            </FlexLayout>
+                            <FlexLayout FlexLayout.Grow="1" Padding="0" JustifyContent="Center">
+                                <Entry FlexLayout.Grow="1" Keyboard="Numeric" HeightRequest="60" Margin="5" Placeholder="T3"/>
+                                <Entry FlexLayout.Grow="1" Keyboard="Numeric" HeightRequest="60" Margin="5" Placeholder="T4"/>
                             </FlexLayout>
                         </FlexLayout>
                     </Frame>
 
-                    <Button CornerRadius="5" BackgroundColor="{StaticResource GreenDark}" Text="Concluir"/>
+                    <Button CornerRadius="5" HeightRequest="40" BackgroundColor="{StaticResource GreenDark}" Text="Concluir"/>
                 </FlexLayout>
             </ScrollView>
 

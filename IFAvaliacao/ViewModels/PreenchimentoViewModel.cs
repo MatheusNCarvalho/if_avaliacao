@@ -57,7 +57,7 @@ namespace IFAvaliacao.ViewModels
         public double LarguraIsquio { get => _larguraIsquio; set => SetProperty(ref _larguraIsquio, value); }
 
         private double _anguloCasco;
-        private double AnguloCasco { get => _anguloCasco; set => SetProperty(ref _anguloCasco, value); }
+        public double AnguloCasco { get => _anguloCasco; set => SetProperty(ref _anguloCasco, value); }
 
         private double _jarreteLateral;
         public double JarreteLateral { get => _jarreteLateral; set => SetProperty(ref _jarreteLateral,value); }
