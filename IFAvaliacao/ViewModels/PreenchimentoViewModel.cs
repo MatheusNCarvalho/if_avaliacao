@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using IFAvaliacao.Models;
 using Prism.Navigation;
 using Prism.Services;
@@ -57,6 +56,30 @@ namespace IFAvaliacao.ViewModels
         private double _larguraIsquio;
         public double LarguraIsquio { get => _larguraIsquio; set => SetProperty(ref _larguraIsquio, value); }
 
+        private double _anguloCasco;
+        private double AnguloCasco { get => _anguloCasco; set => SetProperty(ref _anguloCasco, value); }
+
+        private double _jarreteLateral;
+        public double JarreteLateral { get => _jarreteLateral; set => SetProperty(ref _jarreteLateral,value); }
+
+        private double _jarreteTras;
+        public double JarreteTras { get => _jarreteTras; set => SetProperty(ref _jarreteTras, value); }
+
+        private double _ubereFirmeza;
+        public double UbereFirmeza { get => _ubereFirmeza; set => SetProperty(ref _ubereFirmeza,value); }
+
+        private double _uberePosterior;
+        public double UberePosterior { get => _uberePosterior; set => SetProperty(ref _uberePosterior, value); }
+
+        private double _alturaUltere;
+        public double AlturaUbere { get => _alturaUltere; set => SetProperty(ref _alturaUltere, value); }
+
+        private double _ligamentoCentral;
+        public double LigamentoCentral { get => _ligamentoCentral; set => SetProperty(ref _ligamentoCentral,value); }
+
+        private double _posicaoTetos;
+        public double PosicaoTetos { get => _posicaoTetos; set => SetProperty(ref _posicaoTetos, value); }
+                         
 
         private int _nameCow;
         public int NameCow
@@ -104,6 +127,30 @@ namespace IFAvaliacao.ViewModels
                     break;
                 case nameof(AnguloCarupa):
                     AnguloCarupa = double.Parse(value[1]);
+                    break;
+                case nameof(AnguloCasco):
+                    AnguloCasco = double.Parse(value[1]);
+                    break;
+                case nameof(JarreteLateral):
+                    JarreteLateral = double.Parse(value[1]);
+                    break;
+                case nameof(JarreteTras):
+                    JarreteTras = double.Parse(value[1]);
+                    break;
+                case nameof(UbereFirmeza):
+                    UbereFirmeza = double.Parse(value[1]);
+                    break;
+                case nameof(UberePosterior):
+                    UberePosterior = double.Parse(value[1]);
+                    break;
+                case nameof(AlturaUbere):
+                    AlturaUbere = double.Parse(value[1]);
+                    break;
+                case nameof(LigamentoCentral):
+                    LigamentoCentral = double.Parse(value[1]);
+                    break;
+                case nameof(PosicaoTetos):
+                    PosicaoTetos = double.Parse(value[1]);
                     break;
             }
         }

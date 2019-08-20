@@ -47,8 +47,8 @@
             <Style TargetType="Slider">
                 <Setter Property="Margin" Value="-10"/>
                 <Setter Property="BackgroundColor" Value="Red"/>
-                <Setter Property="MaximumTrackColor" Value="OrangeRed"/>
-                <Setter Property="MinimumTrackColor" Value="Black"/>
+                <Setter Property="MaximumTrackColor" Value="Green"/>
+                <Setter Property="MinimumTrackColor" Value="Red"/>
             </Style>
 
             <Style x:Key="FlexLayoutRows" TargetType="FlexLayout">
@@ -243,6 +243,285 @@
                             <Entry  Placeholder="Largura de ísquio: medido pelo hipômentro" Keyboard="Numeric" Text="{Binding LarguraIsquio}"></Entry>
                         </FlexLayout>
                     </Frame>
+
+                    <Frame>
+                        <FlexLayout Style="{StaticResource FlexLayoutMaster}" >
+                            <Label Text="Ângulo de cascos" Style="{StaticResource LabelTitulo}"/>
+
+                            <FlexLayout FlexLayout.Grow="1"  Direction="Row" Style="{StaticResource FlexLayoutRows}">
+                                <Slider FlexLayout.Grow="1" Value="{Binding AnguloCasco}" Minimum="{Binding SliderMinimum}" Maximum="9"/>
+
+                                <Label Style="{StaticResource LabelSliderValue}" Text="{Binding AnguloCasco, StringFormat='{0:0}'}"/>
+                            </FlexLayout>
+
+                            <FlexLayout FlexLayout.Grow="1" Direction="Row" Style="{StaticResource FlexLayoutRows}">
+                                <Label FlexLayout.Grow="1" Text="Achinelado" Style="{StaticResource LabelItemStart}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="AnguloCasco.1,08"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                                <Label FlexLayout.Grow="1" Text="Intermediária" Style="{StaticResource LabelItemCenter}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="AnguloCasco.5,08"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                                <Label FlexLayout.Grow="1" Style="{StaticResource LabelItemEnd}" Text="Encastelado">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="AnguloCasco.9,08"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </FlexLayout>
+                        </FlexLayout>
+                    </Frame>
+                    <Frame>
+                        <FlexLayout Style="{StaticResource FlexLayoutMaster}" >
+                            <Label Text="Jarrete lateral" Style="{StaticResource LabelTitulo}"/>
+
+                            <FlexLayout FlexLayout.Grow="1"  Direction="Row" Style="{StaticResource FlexLayoutRows}">
+                                <Slider FlexLayout.Grow="1" Value="{Binding JarreteLateral}" Minimum="{Binding SliderMinimum}" Maximum="9"/>
+
+                                <Label Style="{StaticResource LabelSliderValue}" Text="{Binding JarreteLateral, StringFormat='{0:0}'}"/>
+                            </FlexLayout>
+
+                            <FlexLayout FlexLayout.Grow="1" Direction="Row" Style="{StaticResource FlexLayoutRows}">
+                                <Label FlexLayout.Grow="1" Text="Reto" Style="{StaticResource LabelItemStart}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="JarreteLateral.1,08"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                                <Label FlexLayout.Grow="1" Text="Intermediaria" Style="{StaticResource LabelItemCenter}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="JarreteLateral.5,08"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                                <Label FlexLayout.Grow="1" Text="Inclinado" Style="{StaticResource LabelItemEnd}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="JarreteLateral.9,08"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </FlexLayout>
+                        </FlexLayout>
+                    </Frame>
+
+                    <Frame>
+                        <FlexLayout Style="{StaticResource FlexLayoutMaster}" >
+                            <Label Text="Jarrete trás" Style="{StaticResource LabelTitulo}"/>
+
+                            <FlexLayout FlexLayout.Grow="1"  Direction="Row" Style="{StaticResource FlexLayoutRows}">
+                                <Slider FlexLayout.Grow="1" Value="{Binding JarreteTras}" Minimum="{Binding SliderMinimum}" Maximum="9"/>
+
+                                <Label Style="{StaticResource LabelSliderValue}" Text="{Binding JarreteTras, StringFormat='{0:0}'}"/>
+                            </FlexLayout>
+
+                            <FlexLayout FlexLayout.Grow="1" Direction="Row" Style="{StaticResource FlexLayoutRows}">
+                                <Label FlexLayout.Grow="1" Text="Ganchudo" Style="{StaticResource LabelItemStart}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="JarreteTras.1,08"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                                <Label FlexLayout.Grow="1" Text="Normal" Style="{StaticResource LabelItemCenter}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="JarreteTras.5,08"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                                <Label FlexLayout.Grow="1" Text="Arqueado" Style="{StaticResource LabelItemEnd}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="JarreteTras.9,08"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </FlexLayout>
+                        </FlexLayout>
+                    </Frame>
+
+                    <Frame>
+                        <FlexLayout Style="{StaticResource FlexLayoutMaster}" >
+                            <Label Text="Úbere Firmeza" Style="{StaticResource LabelTitulo}"/>
+
+                            <FlexLayout FlexLayout.Grow="1"  Direction="Row" Style="{StaticResource FlexLayoutRows}">
+                                <Slider FlexLayout.Grow="1" Value="{Binding UbereFirmeza}" Minimum="{Binding SliderMinimum}" Maximum="9"/>
+
+                                <Label Style="{StaticResource LabelSliderValue}" Text="{Binding UbereFirmeza, StringFormat='{0:0}'}"/>
+                            </FlexLayout>
+
+                            <FlexLayout FlexLayout.Grow="1" Direction="Row" Style="{StaticResource FlexLayoutRows}">
+                                <Label FlexLayout.Grow="1" Text="Fraco" Style="{StaticResource LabelItemStart}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="UbereFirmeza.1,08"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                                <Label FlexLayout.Grow="1" Text="Intermediário" Style="{StaticResource LabelItemCenter}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="UbereFirmeza.5,08"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                                <Label FlexLayout.Grow="1" Text="Forte" Style="{StaticResource LabelItemEnd}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="UbereFirmeza.9,08"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </FlexLayout>
+                        </FlexLayout>
+                    </Frame>
+                    <Frame>
+                        <FlexLayout Style="{StaticResource FlexLayoutMaster}" >
+                            <Label Text="Úbere Posterior" Style="{StaticResource LabelTitulo}"/>
+
+                            <FlexLayout FlexLayout.Grow="1"  Direction="Row" Style="{StaticResource FlexLayoutRows}">
+                                <Slider FlexLayout.Grow="1" Value="{Binding UberePosterior}" Minimum="{Binding SliderMinimum}" Maximum="9"/>
+
+                                <Label Style="{StaticResource LabelSliderValue}" Text="{Binding UberePosterior, StringFormat='{0:0}'}"/>
+                            </FlexLayout>
+
+                            <FlexLayout FlexLayout.Grow="1" Direction="Row" Style="{StaticResource FlexLayoutRows}">
+                                <Label FlexLayout.Grow="1" Text="Estreito" Style="{StaticResource LabelItemStart}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="UberePosterior.1,08"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                                <Label FlexLayout.Grow="1" Text="Intermediário" Style="{StaticResource LabelItemCenter}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="UberePosterior.5,08"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                                <Label FlexLayout.Grow="1" Text="Largo" Style="{StaticResource LabelItemEnd}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="UberePosterior.9,08"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </FlexLayout>
+                        </FlexLayout>
+                    </Frame>
+                    <Frame>
+                        <FlexLayout Style="{StaticResource FlexLayoutMaster}" >
+                            <Label Text="Altura de Úbere" Style="{StaticResource LabelTitulo}"/>
+
+                            <FlexLayout FlexLayout.Grow="1"  Direction="Row" Style="{StaticResource FlexLayoutRows}">
+                                <Slider FlexLayout.Grow="1" Value="{Binding AlturaUbere}" Minimum="{Binding SliderMinimum}" Maximum="9"/>
+
+                                <Label Style="{StaticResource LabelSliderValue}" Text="{Binding AlturaUbere, StringFormat='{0:0}'}"/>
+                            </FlexLayout>
+
+                            <FlexLayout FlexLayout.Grow="1" Direction="Row" Style="{StaticResource FlexLayoutRows}">
+                                <Label FlexLayout.Grow="1" Text="Raso" Style="{StaticResource LabelItemStart}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="AlturaUbere.1,08"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                                <Label FlexLayout.Grow="1" Text="Intermediário" Style="{StaticResource LabelItemCenter}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="AlturaUbere.5,08"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                                <Label FlexLayout.Grow="1" Text="Profundo" Style="{StaticResource LabelItemEnd}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="AlturaUbere.9,08"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </FlexLayout>
+                        </FlexLayout>
+                    </Frame>
+
+                    <Frame>
+                        <FlexLayout Style="{StaticResource FlexLayoutMaster}" >
+                            <Label Text="Ligamento central" Style="{StaticResource LabelTitulo}"/>
+
+                            <FlexLayout FlexLayout.Grow="1"  Direction="Row" Style="{StaticResource FlexLayoutRows}">
+                                <Slider FlexLayout.Grow="1" Value="{Binding LigamentoCentral}" Minimum="{Binding SliderMinimum}" Maximum="9"/>
+
+                                <Label Style="{StaticResource LabelSliderValue}" Text="{Binding LigamentoCentral, StringFormat='{0:0}'}"/>
+                            </FlexLayout>
+
+                            <FlexLayout FlexLayout.Grow="1" Direction="Row" Style="{StaticResource FlexLayoutRows}">
+                                <Label FlexLayout.Grow="1" Text="Frouxo" Style="{StaticResource LabelItemStart}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="LigamentoCentral.1,08"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                                <Label FlexLayout.Grow="1" Text="Intermediário" Style="{StaticResource LabelItemCenter}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="LigamentoCentral.5,08"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                                <Label FlexLayout.Grow="1" Text="Forte" Style="{StaticResource LabelItemEnd}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="LigamentoCentral.9,08"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </FlexLayout>
+                        </FlexLayout>
+                    </Frame>
+
+                    <Frame>
+                        <FlexLayout Style="{StaticResource FlexLayoutMaster}" >
+                            <Label Text="Posição dos tetos" Style="{StaticResource LabelTitulo}"/>
+
+                            <FlexLayout FlexLayout.Grow="1"  Direction="Row" Style="{StaticResource FlexLayoutRows}">
+                                <Slider FlexLayout.Grow="1" Value="{Binding PosicaoTetos}" Minimum="{Binding SliderMinimum}" Maximum="9"/>
+
+                                <Label Style="{StaticResource LabelSliderValue}" Text="{Binding PosicaoTetos, StringFormat='{0:0}'}"/>
+                            </FlexLayout>
+
+                            <FlexLayout FlexLayout.Grow="1" Direction="Row" Style="{StaticResource FlexLayoutRows}">
+                                <Label FlexLayout.Grow="1" Text="Para fora" Style="{StaticResource LabelItemStart}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="PosicaoTetos.1,08"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                                <Label FlexLayout.Grow="1" Text="Intermediário" Style="{StaticResource LabelItemCenter}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="PosicaoTetos.5,08"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                                <Label FlexLayout.Grow="1" Text="para dentro" Style="{StaticResource LabelItemEnd}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="PosicaoTetos.9,08"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </FlexLayout>
+                        </FlexLayout>
+                    </Frame>
+
+                    <Frame>
+                        <FlexLayout Style="{StaticResource FlexLayoutMaster}">
+                            <Label Text="Comprimento de tetos:"/>
+
+                            <FlexLayout FlexLayout.Grow="1" Padding="0" JustifyContent="Center">
+                                <Entry FlexLayout.Grow="1" Margin="5" Placeholder="T1"/>
+                                <Entry FlexLayout.Grow="1" Margin="5" Placeholder="T2"/>
+                                <Entry FlexLayout.Grow="1" Margin="5" Placeholder="T2"/>
+                            </FlexLayout>
+                        </FlexLayout>
+                    </Frame>
+
+                    <Frame>
+                        <FlexLayout Style="{StaticResource FlexLayoutMaster}">
+                            <Label Text="Diâmetro de tetos:"/>
+
+                            <FlexLayout FlexLayout.Grow="1" Padding="0" JustifyContent="Center">
+                                <Entry FlexLayout.Grow="1" Margin="5" Placeholder="T1"/>
+                                <Entry FlexLayout.Grow="1" Margin="5" Placeholder="T2"/>
+                                <Entry FlexLayout.Grow="1" Margin="5" Placeholder="T2"/>
+                            </FlexLayout>
+                        </FlexLayout>
+                    </Frame>
+
+                    <Button CornerRadius="5" BackgroundColor="{StaticResource GreenDark}" Text="Concluir"/>
                 </FlexLayout>
             </ScrollView>
 
