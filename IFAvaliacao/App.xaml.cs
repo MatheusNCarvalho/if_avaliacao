@@ -29,6 +29,8 @@ namespace IFAvaliacao
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainViewModel>();
             containerRegistry.RegisterForNavigation<PreenchimentoPage, PreenchimentoViewModel>();
+            containerRegistry.RegisterForNavigation<PreenchimentoTabPage, PreenchimentoTabViewModel>();
+            containerRegistry.RegisterForNavigation<PreenchimentoConcluidosPage, PreenchimentoConcluidosViewModel>();
         }
 
 
