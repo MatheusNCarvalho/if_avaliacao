@@ -10,12 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace IFAvaliacao.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Menu : MasterDetailPage
+    public partial class AvaliacaoInicioPage : ContentPage
     {
-        public Menu()
+        public AvaliacaoInicioPage()
         {
             InitializeComponent();
-            Detail = new NavigationPage(new MenuDetail());
         }
     }
 }

@@ -5,8 +5,9 @@ namespace IFAvaliacao.ViewModels
 {
     public class PreenchimentoConcluidosViewModel : ViewModelBase
     {
-        protected PreenchimentoConcluidosViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
+        public PreenchimentoConcluidosViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
         {
+            Title = "Concluidos";
         }
     }
 }

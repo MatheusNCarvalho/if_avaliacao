@@ -7,7 +7,32 @@
         <Color x:Key="MainColor">#f8cc45</Color>
         <Color x:Key="TextColor">#FFFFFF</Color>
         <Color x:Key="GreenDark">#15B35A</Color>
+        <Collor x:Key="LimeGreen">#32CD32</Collor>
         <Color x:Key="BackgroundColor">#F3F0E2</Color>
 
+        <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:String" 
+                x:Key="FontAwesomeBrands">
+                <On Platform="Android" 
+                    Value="FontAwesome5BrandsRegular.otf#Regular" />
+                <On Platform="iOS" 
+                    Value="FontAwesome5Brands-Regular" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" 
+                x:Key="FontAwesomeSolid">
+                <On Platform="Android" 
+          Value="FontAwesome5Solid.otf#Regular" />
+                <On Platform="iOS" 
+          Value="FontAwesome5Free-Solid" />
+            </OnPlatform>
+
+            <OnPlatform x:TypeArguments="x:String" 
+                x:Key="FontAwesomeRegular">
+                <On Platform="Android" 
+          Value="FontAwesome5Regular.otf#Regular" />
+                <On Platform="iOS" 
+          Value="FontAwesome5Free-Regular" />
+            </OnPlatform>
+        </ResourceDictionary>
     </Application.Resources>
 </prism:PrismApplication>

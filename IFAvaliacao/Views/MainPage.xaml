@@ -1,87 +1,67 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:converter="clr-namespace:IFAvaliacao.Converter;assembly=IFAvaliacao"
-             mc:Ignorable="d"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"                  
+             mc:Ignorable="d"       
              Visual="Material"
-             NavigationPage.HasNavigationBar="true"
-             BackgroundColor="{StaticResource BackgroundColor}"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
              Opacity="50"
              Title="{Binding Title}"
              x:Class="IFAvaliacao.MainPage">
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <converter:DecimalConverter x:Key="DecimalConverter" />
-        </ResourceDictionary>
-    </ContentPage.Resources>
 
-    <ContentPage.Content>
-        <StackLayout 
-            VerticalOptions="FillAndExpand"
-            HorizontalOptions="FillAndExpand"
-            Padding="5"
-            Spacing="10">
+    <MasterDetailPage.Master>
+        <ContentPage Padding="0"
+                     Title="Menu">
 
-            <Label
-                FontSize="Medium"
-                TextColor="Black"
-                Text="Para iniciar a Avalicação preenche os dados abaixo!"
-                Margin="0,0,0,15"/>
+            <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-            <FlexLayout
-                    Direction="Column"
-                    AlignItems="Stretch">
+                <FlexLayout Grid.Row="0"
+                            Direction="Row"
+                            AlignItems="Center"
+                            Padding="20,0">
 
-                <Entry  x:Name="entryNameCow"
-                        Placeholder="Numero da Vaca"
-                        Keyboard="Numeric"
-                        Text="{Binding NameCow}"
-                        TextColor="Black"
-                        BackgroundColor="White"
-                        Margin="0,0,0,5"/>
+                    <StackLayout Spacing="0"
+                                 HorizontalOptions="StartAndExpand"
+                                 Padding="10,0,0,0">
 
-                <Editor  x:Name="entryBodyWight"
-                        Placeholder="Peso Corporal"
-                        Keyboard="Numeric"
-                        Text="{Binding BodyWight, Converter ={StaticResource DecimalConverter}}"
-                        TextColor="Black"
-                        BackgroundColor="White">
-                </Editor>
-            </FlexLayout>
+                        <Label Text="Nome do Usuario"
+                               FontSize="Medium"/>
+                        <Label Text="E-mail"
+                               FontSize="Small"/>
 
+                    </StackLayout>
+                </FlexLayout>
 
-            <Button x:Name="btnStart"
-                    Text="Iniciar" 
-                    VerticalOptions="EndAndExpand" 
-                    BackgroundColor="{StaticResource GreenDark}" 
-                    HeightRequest="40"
-                    Command="{Binding StartCommand}"/>
-
-
-            <!--<ScrollView>
-              <FlexLayout  
-                  Direction="Column"
-                  AlignItems="Stretch">
-
-                  <Label Text="Escolhar há Angulosidade"/>
-                  <Slider Minimum="1"  Maximum="9">
-                       
-                  </Slider>
-
-                  <FlexLayout FlexLayout.Grow="1" 
-                              Direction="Row">
-                      <Label Text="Sem Angulosidade"/>
-                      <Label Text="Sem Angulosidade"/>
-                      <Label Text="Sem Angulosidade"/>
-                  </FlexLayout>
-
-              </FlexLayout>
-            </ScrollView>-->
-        </StackLayout>
-    </ContentPage.Content>
-
-
-</ContentPage>
+                <StackLayout Grid.Row="1">
+                    <BoxView HorizontalOptions="FillAndExpand" VerticalOptions="Center" HeightRequest="1" BackgroundColor="Black" />
+                    <ListView SeparatorVisibility="None"
+                              CachingStrategy="RecycleElement"
+                              HasUnevenRows="True"
+                              ItemsSource="{Binding MenuList}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <FlexLayout AlignItems="Center"
+                                                Padding="25,0"
+                                                HeightRequest="50">
+                                        <Image Source="{Binding Icon}"
+                                               HeightRequest="{OnPlatform Android=30, iOS=40}" />
+                                        <Label Text="{Binding Name}"
+                                               Margin="10,0,0,0" FontAttributes="Bold"/>
+                                    </FlexLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </Grid>
+        </ContentPage>
+    </MasterDetailPage.Master>
+</MasterDetailPage>

@@ -5,11 +5,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:views="clr-namespace:IFAvaliacao.Views;assembly=IFAvaliacao"           
              mc:Ignorable="d"
+             BarBackgroundColor="{StaticResource LimeGreen}"            
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             Title="{Binding Title}"
              x:Class="IFAvaliacao.Views.PreenchimentoTabPage">
   <!--Pages can be added as references or inline-->
     <TabbedPage.Children>
-        <views:PreenchimentoPage>
-        </views:PreenchimentoPage>
+        <views:AvaliacaoInicioPage>
+        </views:AvaliacaoInicioPage>
         <views:PreenchimentoConcluidosPage>            
         </views:PreenchimentoConcluidosPage>   
     </TabbedPage.Children>

@@ -1,19 +1,18 @@
-﻿using System;
-using System.ComponentModel;
-using IFAvaliacao.ViewModels;
+﻿using System.ComponentModel;
+using IFAvaliacao.Views;
 using Xamarin.Forms;
 
 namespace IFAvaliacao
 {
-   
-    [DesignTimeVisible(false)]
-    public partial class MainPage : ContentPage
+    public partial class MainPage : MasterDetailPage
     {
-        private MainViewModel MainViewModel => (MainViewModel)BindingContext;
+
         public MainPage()
         {
             InitializeComponent();
-        }   
-        
+            Detail = new NavigationPage(new PreenchimentoTabPage());
+            NavigationPage.SetHasNavigationBar(this, false);
+        }
+
     }
 }

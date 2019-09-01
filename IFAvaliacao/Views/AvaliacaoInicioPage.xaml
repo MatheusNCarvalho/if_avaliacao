@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converter="clr-namespace:IFAvaliacao.Converter"
+             mc:Ignorable="d"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             Icon="checklist_white.png"
+             Title="{Binding Title}"
+             x:Class="IFAvaliacao.Views.AvaliacaoInicioPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:DecimalConverter x:Key="DecimalConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="sem_foto.png"
+                     Priority="0"
+                     Order="Primary">
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout 
+            VerticalOptions="FillAndExpand"
+            HorizontalOptions="FillAndExpand"
+            Padding="5"
+            Spacing="10">
+
+            <Label
+                FontSize="Medium"
+                TextColor="Black"
+                Text="Para iniciar a Avalicação preenche os dados abaixo!"
+                Margin="0,0,0,15"/>
+
+            <FlexLayout
+                    Direction="Column"
+                    AlignItems="Stretch">
+
+                <Entry  x:Name="entryNameCow"
+                        Placeholder="Numero da Vaca"
+                        Keyboard="Numeric"
+                        Text="{Binding NameCow}"
+                        TextColor="Black"
+                        BackgroundColor="White"
+                        Margin="0,0,0,5"/>
+
+                <Editor  x:Name="entryBodyWight"
+                        Placeholder="Peso Corporal"
+                        Keyboard="Numeric"
+                        Text="{Binding BodyWight, Converter ={StaticResource DecimalConverter}}"
+                        TextColor="Black"
+                        BackgroundColor="White">
+                </Editor>
+            </FlexLayout>
+
+
+            <Button x:Name="btnStart"
+                    Text="Iniciar" 
+                    VerticalOptions="EndAndExpand" 
+                    BackgroundColor="{StaticResource GreenDark}" 
+                    HeightRequest="40"
+                    Command="{Binding StartCommand}"/>
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>

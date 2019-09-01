@@ -5,8 +5,9 @@ namespace IFAvaliacao.ViewModels
 {
     public class PreenchimentoTabViewModel : ViewModelBase
     {
-        protected PreenchimentoTabViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
+        public PreenchimentoTabViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
         {
+            Title = "Avaliações";
         }
     }
 }

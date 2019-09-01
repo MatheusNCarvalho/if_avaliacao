@@ -14,8 +14,7 @@ namespace IFAvaliacao.ViewModels
         protected ViewModelBase(INavigationService navigationService, IPageDialogService pageDialogService)
         {
             NavigationService = navigationService;
-            PageDialogService = pageDialogService;
-            Title = $"Default";
+            PageDialogService = pageDialogService;           
         }
 
 

@@ -20,7 +20,7 @@ namespace IFAvaliacao
         {
             InitializeComponent();
             XF.Material.Forms.Material.Init(this);
-            VersionTracking.Track();
+            VersionTracking.Track();           
             await NavigationService.NavigateAsync("/NavigationPage/MainPage");
         }
 
@@ -31,6 +31,7 @@ namespace IFAvaliacao
             containerRegistry.RegisterForNavigation<PreenchimentoPage, PreenchimentoViewModel>();
             containerRegistry.RegisterForNavigation<PreenchimentoTabPage, PreenchimentoTabViewModel>();
             containerRegistry.RegisterForNavigation<PreenchimentoConcluidosPage, PreenchimentoConcluidosViewModel>();
+            containerRegistry.RegisterForNavigation<AvaliacaoInicioPage, InicioAvaliacaoViewModel>();
         }
 
 
