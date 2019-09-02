@@ -1,13 +1,12 @@
-﻿using System;
-
+﻿
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
 using Prism;
 using Prism.Ioc;
+using IFAvaliacao.Data.Repository.Interfaces;
+using IFAvaliacao.Droid.Services;
 
 namespace IFAvaliacao.Droid
 {
@@ -41,7 +40,7 @@ namespace IFAvaliacao.Droid
     {
         public void RegisterTypes(IContainerRegistry container)
         {
-            // Register any platform specific implementations
+            container.Register<ISQLitePlatform, AndroidSQLitePlatform>();
         }
     }
 }

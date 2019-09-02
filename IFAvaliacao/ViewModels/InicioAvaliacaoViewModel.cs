@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using IFAvaliacao.Models;
+using IFAvaliacao.Domain.Entities;
 using IFAvaliacao.Views;
 using Prism.Commands;
 using Prism.Navigation;
@@ -40,7 +40,7 @@ namespace IFAvaliacao.ViewModels
                 var parameters = new NavigationParameters { { nameof(ProfileCow), new ProfileCow(NameCow, BodyWight) } };
                 NameCow = 0;
                 BodyWight = 0;
-                await NavigateToPage(nameof(PreenchimentoTabPage), parameters);
+                await NavigateToPage(nameof(PreenchimentoPage), parameters);
             }
             catch (Exception e)
             {

@@ -5,12 +5,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"                  
              mc:Ignorable="d"       
              Visual="Material"
+                   xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             prism:ViewModelLocator.AutowireViewModel="True"
+                  xmlns:c="clr-namespace:IFAvaliacao.Converter"
+                  prism:ViewModelLocator.AutowireViewModel="True"
              Opacity="50"
              Title="{Binding Title}"
              x:Class="IFAvaliacao.MainPage">
 
+    <MasterDetailPage.Resources>
+        <ResourceDictionary>
+            <c:ItemTappedEventArgsConverter x:Key="ItemTappedEventArgsConverter" />
+        </ResourceDictionary>
+    </MasterDetailPage.Resources>
 
     <MasterDetailPage.Master>
         <ContentPage Padding="0"
@@ -20,6 +27,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="100" />
                     <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <FlexLayout Grid.Row="0"
@@ -43,11 +51,13 @@
                     <BoxView HorizontalOptions="FillAndExpand" VerticalOptions="Center" HeightRequest="1" BackgroundColor="Black" />
                     <ListView SeparatorVisibility="None"
                               CachingStrategy="RecycleElement"
-                              HasUnevenRows="True"
-                              ItemsSource="{Binding MenuList}">
+                              HasUnevenRows="True"                                                       
+                              ItemsSource="{Binding MenuList}"
+                              SelectionMode="None">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
+
                                     <FlexLayout AlignItems="Center"
                                                 Padding="25,0"
                                                 HeightRequest="50">
@@ -56,10 +66,22 @@
                                         <Label Text="{Binding Name}"
                                                Margin="10,0,0,0" FontAttributes="Bold"/>
                                     </FlexLayout>
+
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
+                        <ListView.Behaviors >
+                            <b:EventToCommandBehavior EventName="ItemTapped"                                                      
+                                          Command="{Binding MenuCommand}"
+                                          EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}" />
+                        </ListView.Behaviors>
                     </ListView>
+                </StackLayout>
+                <StackLayout Grid.Row="2"
+                             HeightRequest="50">
+                    <BoxView HorizontalOptions="FillAndExpand" VerticalOptions="Center" HeightRequest="1" BackgroundColor="Black" />
+                    <Label Text="{Binding Version, StringFormat='Versão: {0}'}"
+                           HorizontalTextAlignment="End"/>
                 </StackLayout>
             </Grid>
         </ContentPage>

@@ -1,8 +1,8 @@
-﻿using IFAvaliacao.Models.Enum;
+﻿using IFAvaliacao.Domain.Entities.Enum;
 using System;
 using Xamarin.Forms;
 
-namespace IFAvaliacao.Models
+namespace IFAvaliacao.Domain.Entities
 {
     public class Menu : BindableObject
     {

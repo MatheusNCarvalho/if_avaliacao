@@ -1,6 +1,7 @@
-﻿using System;
+﻿using SQLite;
+using System;
 
-namespace IFAvaliacao.Models
+namespace IFAvaliacao.Domain.Entities
 {
     public abstract class EntityBase
     {
@@ -9,6 +10,7 @@ namespace IFAvaliacao.Models
             Id = Guid.NewGuid().ToString();
         }
 
+        [PrimaryKey]
         public string Id { get; protected set; }
     }
 }

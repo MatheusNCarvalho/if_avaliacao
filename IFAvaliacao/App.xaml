@@ -7,7 +7,7 @@
         <Color x:Key="MainColor">#f8cc45</Color>
         <Color x:Key="TextColor">#FFFFFF</Color>
         <Color x:Key="GreenDark">#15B35A</Color>
-        <Collor x:Key="LimeGreen">#32CD32</Collor>
+        <Color x:Key="LimeGreen">#32CD32</Color>
         <Color x:Key="BackgroundColor">#F3F0E2</Color>
 
         <ResourceDictionary>

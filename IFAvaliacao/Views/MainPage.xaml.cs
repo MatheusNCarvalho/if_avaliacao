@@ -14,5 +14,9 @@ namespace IFAvaliacao
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
+        private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+
+        }
     }
 }

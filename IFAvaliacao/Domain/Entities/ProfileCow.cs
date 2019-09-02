@@ -1,9 +1,9 @@
-﻿namespace IFAvaliacao.Models
+﻿namespace IFAvaliacao.Domain.Entities
 {
     public class ProfileCow : EntityBase
     {
         protected ProfileCow() { }
-        
+
         public ProfileCow(int nameCow, decimal bodyWight)
         {
             NameCow = nameCow;

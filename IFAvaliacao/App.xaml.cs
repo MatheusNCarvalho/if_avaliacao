@@ -1,40 +1,29 @@
-﻿using IFAvaliacao.ViewModels;
-using IFAvaliacao.Views;
+﻿using IFAvaliacao.Utils.Extensions;
 using Prism;
 using Prism.DryIoc;
 using Prism.Ioc;
 using Xamarin.Essentials;
-using Xamarin.Forms;
 
 namespace IFAvaliacao
 {
     public partial class App : PrismApplication
     {
         public App(IPlatformInitializer initializer)
-            : base(initializer)
-        {
-
-        }
+            : base(initializer) { }
 
         protected override async void OnInitialized()
         {
             InitializeComponent();
             XF.Material.Forms.Material.Init(this);
-            VersionTracking.Track();           
+            VersionTracking.Track();
             await NavigationService.NavigateAsync("/NavigationPage/MainPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<MainPage, MainViewModel>();
-            containerRegistry.RegisterForNavigation<PreenchimentoPage, PreenchimentoViewModel>();
-            containerRegistry.RegisterForNavigation<PreenchimentoTabPage, PreenchimentoTabViewModel>();
-            containerRegistry.RegisterForNavigation<PreenchimentoConcluidosPage, PreenchimentoConcluidosViewModel>();
-            containerRegistry.RegisterForNavigation<AvaliacaoInicioPage, InicioAvaliacaoViewModel>();
+            containerRegistry.DependecyInjection();
         }
-
-
+        
 
         protected override void OnStart()
         {

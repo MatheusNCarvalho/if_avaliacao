@@ -1,10 +1,8 @@
-﻿
-
-namespace IFAvaliacao.Models.Enum
+﻿namespace IFAvaliacao.Domain.Entities.Enum
 {
     public enum EMenuType
     {
-        Avaliacao =1,
+        Avaliacao = 1,
         Fazenda,
         Vaca,
         Exit

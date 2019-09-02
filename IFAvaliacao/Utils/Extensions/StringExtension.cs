@@ -1,4 +1,4 @@
-﻿namespace IFAvaliacao.Extensions
+﻿namespace IFAvaliacao.Utils.Extensions
 {
     public static class StringExtension
     {

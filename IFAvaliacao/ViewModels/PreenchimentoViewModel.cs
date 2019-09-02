@@ -1,5 +1,5 @@
 ﻿using System.Windows.Input;
-using IFAvaliacao.Models;
+using IFAvaliacao.Domain.Entities;
 using Prism.Navigation;
 using Prism.Services;
 using Xamarin.Forms;

@@ -17,8 +17,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
-        <ToolbarItem Icon="sem_foto.png"
-                     Priority="0"
+        <ToolbarItem Priority="0"
                      Order="Primary">
         </ToolbarItem>
     </ContentPage.ToolbarItems>
