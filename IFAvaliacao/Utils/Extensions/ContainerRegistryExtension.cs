@@ -21,6 +21,7 @@ namespace IFAvaliacao.Utils.Extensions
             container.RegisterForNavigation<AvaliacaoInicioPage, InicioAvaliacaoViewModel>();
             container.RegisterForNavigation<FazendaPage, FazendaViewModel>();
             container.RegisterForNavigation<VacaPage, VacaViewModel>();
+            container.RegisterForNavigation<CadastroFazendaPage, CadastroFazendaViewModel>();
 
             return container;
         }

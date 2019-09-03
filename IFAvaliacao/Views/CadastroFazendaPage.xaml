@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="IFAvaliacao.Views.CadastroFazendaPage"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"     
+             Visual="Material"
+             BackgroundColor="{StaticResource BackgroundColor}"
+             Title="{Binding Title}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Entry">
+                <Setter  Property="Margin" Value="0,10"/>
+                <Setter Property="BackgroundColor" Value="White"/>
+            </Style>
+        </ResourceDictionary>
+        
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView>
+            <FlexLayout 
+            Direction="Column"
+            Padding="20">
+
+                <Entry Placeholder="Nome do Proprietário" Text="{Binding Nome}" />
+                <Entry Placeholder="Nome da Fazenda" Text="{Binding NomeFazenda}"/>
+                <Entry Placeholder="Inscrição Estadual" Text="{Binding InscricaoEstadual}"/>
+                <Entry Placeholder="Cep" Text="{Binding Cep}" />
+                <Entry Placeholder="Rua" Text="{Binding Rua}"/>
+                <Entry Placeholder="Bairro" Text="{Binding Bairro}"/>
+                <Entry Placeholder="Cidade" Text="{Binding Cidade}"/>
+                <Entry Placeholder="Estado" Text="{Binding Estado}"/>
+
+                <Button Text="Salvar"
+                     BackgroundColor="{StaticResource GreenDark}" 
+                     HeightRequest="50"
+                     Command="{Binding RegisterCommand}"/>
+            </FlexLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -4,7 +4,17 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             Icon="plus.png"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"           
+             Title="{Binding Title}"
              x:Class="IFAvaliacao.Views.FazendaPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Priority="0"
+                     Icon="plus_white.png"
+                     Command="{Binding NavigatePageCommand}">            
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Listagem de fazenda"

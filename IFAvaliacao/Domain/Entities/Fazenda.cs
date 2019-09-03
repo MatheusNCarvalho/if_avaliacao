@@ -26,5 +26,10 @@ namespace IFAvaliacao.Domain.Entities
         public string Cidade { get; private set; }
         public string Estado { get; private set; }
 
+        public void AddId(string id)
+        {
+            Id = id;
+        }
+
     }
 }

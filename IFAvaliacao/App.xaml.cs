@@ -1,4 +1,5 @@
-﻿using IFAvaliacao.Utils.Extensions;
+﻿using IFAvaliacao.Data.Repository;
+using IFAvaliacao.Utils.Extensions;
 using Prism;
 using Prism.DryIoc;
 using Prism.Ioc;
@@ -13,9 +14,9 @@ namespace IFAvaliacao
 
         protected override async void OnInitialized()
         {
-            InitializeComponent();
-            XF.Material.Forms.Material.Init(this);
+            InitializeComponent();            
             VersionTracking.Track();
+            new MobileDatabaseService().GenerateDatabase();
             await NavigationService.NavigateAsync("/NavigationPage/MainPage");
         }
 

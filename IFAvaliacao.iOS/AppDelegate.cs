@@ -5,6 +5,7 @@ using System.Linq;
 using Foundation;
 using Prism;
 using Prism.Ioc;
+using SuaveControls.FloatingActionButton.iOS.Renderers;
 using UIKit;
 using Xamarin.Forms;
 
@@ -29,7 +30,8 @@ namespace IFAvaliacao.iOS
             FormsMaterial.Init();
             XF.Material.iOS.Material.Init();
             LoadApplication(new App(new iOSInitializer()));
-           
+            FloatingActionButtonRenderer.InitRenderer();
+
 
             return base.FinishedLaunching(app, options);
         }
