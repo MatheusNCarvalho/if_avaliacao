@@ -1,20 +1,17 @@
-﻿using System;
-using Prism;
-using Prism.Mvvm;
+﻿using Prism.Mvvm;
 using Prism.Navigation;
-using Prism.Services;
+using Acr.UserDialogs;
 
 namespace IFAvaliacao.ViewModels
 {
     public class ViewModelBase : BindableBase, INavigationAware, IDestructible
     {
         protected INavigationService NavigationService { get; set; }
-        protected IPageDialogService PageDialogService { get; set; }
+        protected IUserDialogs DialogService { get; set; }
 
-        protected ViewModelBase(INavigationService navigationService, IPageDialogService pageDialogService)
+        protected ViewModelBase(INavigationService navigationService)
         {
-            NavigationService = navigationService;
-            PageDialogService = pageDialogService;           
+            NavigationService = navigationService;       
         }
 
 

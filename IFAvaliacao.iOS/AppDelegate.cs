@@ -28,9 +28,7 @@ namespace IFAvaliacao.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             FormsMaterial.Init();
-            XF.Material.iOS.Material.Init();
             LoadApplication(new App(new iOSInitializer()));
-            FloatingActionButtonRenderer.InitRenderer();
 
 
             return base.FinishedLaunching(app, options);

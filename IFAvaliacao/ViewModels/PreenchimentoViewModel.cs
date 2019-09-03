@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using Acr.UserDialogs;
 using IFAvaliacao.Domain.Entities;
 using Prism.Navigation;
 using Prism.Services;
@@ -9,7 +10,7 @@ namespace IFAvaliacao.ViewModels
     public class PreenchimentoViewModel : ViewModelBase
     {
         private readonly ICommand _tapCommand;
-        public PreenchimentoViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
+        public PreenchimentoViewModel(INavigationService navigationService) : base(navigationService)
         {
             _tapCommand = new Command(OnTapped);
             SliderMinimum = 1.0;

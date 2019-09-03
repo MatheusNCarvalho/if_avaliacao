@@ -2,13 +2,12 @@
 using IFAvaliacao.Views;
 using Prism.Commands;
 using Prism.Navigation;
-using Prism.Services;
 
 namespace IFAvaliacao.ViewModels
 {
     public class FazendaViewModel : ViewModelBase
     {
-        public FazendaViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
+        public FazendaViewModel(INavigationService navigationService) : base(navigationService)
         {
             Title = "Fazendas";
             NavigatePageCommand = new DelegateCommand(async () => await NavigateToCadastroPage());

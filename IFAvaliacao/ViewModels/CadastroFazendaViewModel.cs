@@ -1,9 +1,9 @@
-﻿using IFAvaliacao.Data.Repository.Interfaces;
+﻿using Acr.UserDialogs;
+using IFAvaliacao.Data.Repository.Interfaces;
 using IFAvaliacao.Domain.Entities;
 using IFAvaliacao.Utils.Extensions;
 using Prism.Commands;
 using Prism.Navigation;
-using Prism.Services;
 using System;
 using System.Threading.Tasks;
 
@@ -12,8 +12,7 @@ namespace IFAvaliacao.ViewModels
     public class CadastroFazendaViewModel : ViewModelBase
     {
         private readonly IFazendaRepository _fazendaRepository;
-        public CadastroFazendaViewModel(INavigationService navigationService, IPageDialogService pageDialogService,
-            IFazendaRepository fazendaRepository) : base(navigationService, pageDialogService)
+        public CadastroFazendaViewModel(INavigationService navigationService, IFazendaRepository fazendaRepository) : base(navigationService)
         {
             Title = "Cadastro de fazenda";
             _fazendaRepository = fazendaRepository;
@@ -56,19 +55,55 @@ namespace IFAvaliacao.ViewModels
             {
                 if (Id.HasValue())
                 {
-                    var fazenda = new Fazenda(InscricaoEstadual, Nome, NomeFazenda, Cep, Rua, Bairro, Cidade, Estado);
-                    fazenda.AddId(Id);
-                    await _fazendaRepository.UpdateAsync(fazenda);
+                    var fazenda = new Fazenda
+                    {
+                        Id = Id,
+                        EscricaoEstadual = InscricaoEstadual,
+                        Nome = Nome,
+                        NomeFazenda = NomeFazenda,
+                        Cep = Cep,
+                        Rua = Rua,
+                        Bairro = Bairro,
+                        Cidade = Cidade,
+                        Estado = Estado
+                    };
+
+                    if (await _fazendaRepository.UpdateAsync(fazenda))
+                    {
+                        var toastConfig = new ToastConfig("Cadastro realizado com sucesso!");
+                        toastConfig.SetBackgroundColor(System.Drawing.Color.Green);
+                        DialogService.Toast(toastConfig);
+                        await NavigationService.GoBackAsync();
+                    }
                 }
                 else
                 {
-                    var fazenda = new Fazenda(InscricaoEstadual, Nome, NomeFazenda, Cep, Rua, Bairro, Cidade, Estado);
-                    await _fazendaRepository.AddAsync(fazenda);
+                    var fazenda = new Fazenda
+                    {
+                        EscricaoEstadual = InscricaoEstadual,
+                        Nome = Nome,
+                        NomeFazenda = NomeFazenda,
+                        Cep = Cep,
+                        Rua = Rua,
+                        Bairro = Bairro,
+                        Cidade = Cidade,
+                        Estado = Estado
+                    };
+
+                    if (await _fazendaRepository.AddAsync(fazenda))
+                    {
+                        var toastConfig = new ToastConfig("Cadastro realizado com sucesso!");
+                        toastConfig.SetBackgroundColor(System.Drawing.Color.Green);
+                        DialogService.Toast(toastConfig);
+                        await NavigationService.GoBackAsync();
+                    }
+
+
                 }
             }
             catch (Exception e)
             {
-
+                DialogService.Toast(e.Message);
             }
 
         }

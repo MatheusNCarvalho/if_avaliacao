@@ -4,7 +4,6 @@ using IFAvaliacao.Domain.Entities;
 using IFAvaliacao.Views;
 using Prism.Commands;
 using Prism.Navigation;
-using Prism.Services;
 
 namespace IFAvaliacao.ViewModels
 {
@@ -12,7 +11,7 @@ namespace IFAvaliacao.ViewModels
     {
         public DelegateCommand StartCommand { get; set; }
 
-        public InicioAvaliacaoViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
+        public InicioAvaliacaoViewModel(INavigationService navigationService) : base(navigationService)
         {
             Title = "Iniciar";
             StartCommand = new DelegateCommand(async () => await LoadNavigation());
@@ -44,7 +43,7 @@ namespace IFAvaliacao.ViewModels
             }
             catch (Exception e)
             {
-                await PageDialogService.DisplayAlertAsync("Opss..", e.Message, "OK");
+                 DialogService.Toast(e.Message);
             }
         }
 

@@ -1,11 +1,11 @@
-﻿using Prism.Navigation;
-using Prism.Services;
+﻿using Acr.UserDialogs;
+using Prism.Navigation;
 
 namespace IFAvaliacao.ViewModels
 {
     public class VacaViewModel : ViewModelBase
     {
-        public VacaViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
+        public VacaViewModel(INavigationService navigationService) : base(navigationService)
         {
         }
     }

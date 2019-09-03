@@ -3,7 +3,7 @@ using System;
 
 namespace IFAvaliacao.Domain.Entities
 {
-    public abstract class EntityBase
+    public class EntityBase
     {
         public EntityBase()
         {
@@ -11,6 +11,6 @@ namespace IFAvaliacao.Domain.Entities
         }
 
         [PrimaryKey]
-        public string Id { get; protected set; }
+        public string Id { get; set; }
     }
 }

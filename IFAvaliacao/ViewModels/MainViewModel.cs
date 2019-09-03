@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Acr.UserDialogs;
 using IFAvaliacao.Domain.Entities.Enum;
 using IFAvaliacao.Views;
 using Prism.Commands;
@@ -16,7 +17,7 @@ namespace IFAvaliacao.ViewModels
     public class MainViewModel : ViewModelBase, IMasterDetailPageOptions
     {
 
-        public MainViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
+        public MainViewModel(INavigationService navigationService) : base(navigationService)
         {
             MenuList = new ObservableCollection<Domain.Entities.Menu>();
             LoadMenu();
