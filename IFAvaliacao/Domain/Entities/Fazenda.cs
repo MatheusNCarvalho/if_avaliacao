@@ -4,7 +4,7 @@ namespace IFAvaliacao.Domain.Entities
 {
     public class Fazenda : EntityBase
     {
-        public Fazenda() { }
+
         //public Fazenda(string escricaoEstadual, string nome, string nomeFazenda, string cep, string rua, string bairro, string cidade, string estado)
         //{
         //    EscricaoEstadual = escricaoEstadual;
@@ -25,6 +25,9 @@ namespace IFAvaliacao.Domain.Entities
         public string Bairro { get; set; }
         public string Cidade { get; set; }
         public string Estado { get; set; }
+
+        public string CidadeEstado => $"{Cidade}/{Estado}";
+
 
 
     }

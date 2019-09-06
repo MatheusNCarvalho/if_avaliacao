@@ -11,7 +11,8 @@ namespace IFAvaliacao.ViewModels
 
         protected ViewModelBase(INavigationService navigationService)
         {
-            NavigationService = navigationService;       
+            NavigationService = navigationService;
+            DialogService = UserDialogs.Instance;
         }
 
 
@@ -37,15 +38,15 @@ namespace IFAvaliacao.ViewModels
             set => SetProperty(ref _isBusy, value);
         }
 
-        public virtual  void OnNavigatedFrom(INavigationParameters parameters)
+        public virtual void OnNavigatedFrom(INavigationParameters parameters)
         {
 
         }
         public virtual void OnNavigatedTo(INavigationParameters parameters)
         {
         }
-        
-        
+
+
         public virtual void Destroy()
         {
 

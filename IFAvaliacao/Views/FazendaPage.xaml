@@ -8,18 +8,45 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"           
              Title="{Binding Title}"
-             x:Class="IFAvaliacao.Views.FazendaPage">
+             x:Class="IFAvaliacao.Views.FazendaPage"
+             BackgroundColor="{StaticResource BackgroundColor}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Priority="0"
                      Icon="plus_white.png"
-                     Command="{Binding NavigatePageCommand}">            
+                     Command="{Binding NavigatePageCommand}">
         </ToolbarItem>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Listagem de fazenda"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <CollectionView ItemsSource="{Binding Fazendas}"  Margin="10,10,10,0"
+                            SelectionMode="Single">
+                <CollectionView.EmptyView>
+                    <Label Text="Não temos fazendas para Exibir :("/>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <ContentView BackgroundColor="{StaticResource BackgroundColor}">
+                            <Frame CornerRadius="3" HasShadow="False" Margin="0,0,0,5">
+                                <FlexLayout Direction="Row"
+                                            AlignContent="Center"
+                                            HeightRequest="40">
+
+                                    <StackLayout FlexLayout.Grow="1" Spacing="0" Padding="0">
+                                        <Label  Text="{Binding Nome}" FontAttributes="Bold" FontSize="Medium"/>
+                                        <Label  Text="{Binding NomeFazenda}" FontSize="Small" FontAttributes="Bold"/>
+                                    </StackLayout>
+
+                                    
+                                        <Label  Text="{Binding CidadeEstado}" FontSize="Medium"
+                                            FontAttributes="Bold"
+                                            VerticalTextAlignment="Center"/>                                     
+                                 
+                                </FlexLayout>
+                            </Frame>
+                        </ContentView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

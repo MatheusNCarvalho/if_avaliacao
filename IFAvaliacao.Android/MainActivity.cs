@@ -7,6 +7,7 @@ using Prism.Ioc;
 using IFAvaliacao.Data.Repository.Interfaces;
 using IFAvaliacao.Droid.Services;
 using System;
+using Acr.UserDialogs;
 
 namespace IFAvaliacao.Droid
 {
@@ -19,13 +20,14 @@ namespace IFAvaliacao.Droid
             {
                 TabLayoutResource = Resource.Layout.Tabbar;
                 ToolbarResource = Resource.Layout.Toolbar;
+                global::Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
 
                 base.OnCreate(savedInstanceState);
 
                 Xamarin.Essentials.Platform.Init(this, savedInstanceState);
                 global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
                 global::Xamarin.Forms.FormsMaterial.Init(this, savedInstanceState);
-                //UserDialogs.Init(() => this);
+                UserDialogs.Init(() => this);
                 LoadApplication(new App(new AndroidInitializer()));
             }
             catch (Exception e)

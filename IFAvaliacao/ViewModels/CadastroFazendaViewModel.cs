@@ -55,18 +55,8 @@ namespace IFAvaliacao.ViewModels
             {
                 if (Id.HasValue())
                 {
-                    var fazenda = new Fazenda
-                    {
-                        Id = Id,
-                        EscricaoEstadual = InscricaoEstadual,
-                        Nome = Nome,
-                        NomeFazenda = NomeFazenda,
-                        Cep = Cep,
-                        Rua = Rua,
-                        Bairro = Bairro,
-                        Cidade = Cidade,
-                        Estado = Estado
-                    };
+                    var fazenda = CreateNewInstancia();
+                    fazenda.Id = Id;
 
                     if (await _fazendaRepository.UpdateAsync(fazenda))
                     {
@@ -78,19 +68,9 @@ namespace IFAvaliacao.ViewModels
                 }
                 else
                 {
-                    var fazenda = new Fazenda
-                    {
-                        EscricaoEstadual = InscricaoEstadual,
-                        Nome = Nome,
-                        NomeFazenda = NomeFazenda,
-                        Cep = Cep,
-                        Rua = Rua,
-                        Bairro = Bairro,
-                        Cidade = Cidade,
-                        Estado = Estado
-                    };
 
-                    if (await _fazendaRepository.AddAsync(fazenda))
+                    var newFazenda = CreateNewInstancia();
+                    if (await _fazendaRepository.AddAsync(newFazenda))
                     {
                         var toastConfig = new ToastConfig("Cadastro realizado com sucesso!");
                         toastConfig.SetBackgroundColor(System.Drawing.Color.Green);
@@ -101,10 +81,32 @@ namespace IFAvaliacao.ViewModels
 
                 }
             }
+            catch (NullReferenceException ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex);
+            }
             catch (Exception e)
             {
                 DialogService.Toast(e.Message);
             }
+
+        }
+
+
+        private Fazenda CreateNewInstancia()
+        {
+            return new Fazenda
+            {
+                EscricaoEstadual = InscricaoEstadual,
+                Nome = Nome,
+                NomeFazenda = NomeFazenda,
+                Cep = Cep,
+                Rua = Rua,
+                Bairro = Bairro,
+                Cidade = Cidade,
+                Estado = Estado
+            };
+
 
         }
     }

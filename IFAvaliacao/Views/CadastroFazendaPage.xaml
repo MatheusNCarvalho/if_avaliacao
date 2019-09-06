@@ -15,6 +15,8 @@
             <Style TargetType="Entry">
                 <Setter  Property="Margin" Value="0,10"/>
                 <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="ReturnType" Value="Next"/>
+                <Setter Property="Keyboard" Value="Text" />
             </Style>
         </ResourceDictionary>
         
@@ -25,10 +27,19 @@
             Direction="Column"
             Padding="20">
 
-                <Entry Placeholder="Nome do Proprietário" Text="{Binding Nome}" />
+                <Entry Placeholder="Nome do Proprietário" Text="{Binding Nome}" >
+                    <Entry.Keyboard>
+                        <Keyboard x:FactoryMethod="Create">
+                            <x:Arguments>
+                                <KeyboardFlags>CapitalizeWord</KeyboardFlags>
+                            </x:Arguments>
+                        </Keyboard>
+                    </Entry.Keyboard>
+
+                </Entry>
                 <Entry Placeholder="Nome da Fazenda" Text="{Binding NomeFazenda}"/>
-                <Entry Placeholder="Inscrição Estadual" Text="{Binding InscricaoEstadual}"/>
-                <Entry Placeholder="Cep" Text="{Binding Cep}" />
+                <Entry Placeholder="Inscrição Estadual" Text="{Binding InscricaoEstadual}" Keyboard="Numeric"/>
+                <Entry Placeholder="Cep" Text="{Binding Cep}" Keyboard="Numeric" />
                 <Entry Placeholder="Rua" Text="{Binding Rua}"/>
                 <Entry Placeholder="Bairro" Text="{Binding Bairro}"/>
                 <Entry Placeholder="Cidade" Text="{Binding Cidade}"/>
