@@ -6,49 +6,59 @@
              mc:Ignorable="d"
              x:Class="IFAvaliacao.Views.CadastroFazendaPage"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:behaviorPack="clr-namespace:Xamarin.Forms.BehaviorValidationPack;assembly=Xamarin.Forms.BehaviorValidationPack"
              prism:ViewModelLocator.AutowireViewModel="True"     
              Visual="Material"
              BackgroundColor="{StaticResource BackgroundColor}"
              Title="{Binding Title}">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Style TargetType="Entry">
+            <Keyboard x:Key="CapitalizeWordKeyboard"  x:FactoryMethod="Create">
+                <x:Arguments>
+                    <KeyboardFlags>CapitalizeWord</KeyboardFlags>
+                </x:Arguments>
+            </Keyboard>
+
+            <Style x:Key="CapitalizeWordEntryStyle"   TargetType="Entry">
+                <Setter Property="Keyboard"
+                        Value="{StaticResource CapitalizeWordKeyboard}"/>
+            </Style>
+
+            <Style TargetType="Entry" BasedOn="{StaticResource CapitalizeWordEntryStyle}">
                 <Setter  Property="Margin" Value="0,10"/>
                 <Setter Property="BackgroundColor" Value="White"/>
                 <Setter Property="ReturnType" Value="Next"/>
-                <Setter Property="Keyboard" Value="Text" />
             </Style>
         </ResourceDictionary>
-        
+
     </ContentPage.Resources>
     <ContentPage.Content>
         <ScrollView>
             <FlexLayout 
-            Direction="Column"
-            Padding="20">
+                        Direction="Column"
+                        Padding="20">
 
-                <Entry Placeholder="Nome do Proprietário" Text="{Binding Nome}" >
-                    <Entry.Keyboard>
-                        <Keyboard x:FactoryMethod="Create">
-                            <x:Arguments>
-                                <KeyboardFlags>CapitalizeWord</KeyboardFlags>
-                            </x:Arguments>
-                        </Keyboard>
-                    </Entry.Keyboard>
-
-                </Entry>
+                <Entry Placeholder="Nome do Proprietário" Text="{Binding Nome}" />
                 <Entry Placeholder="Nome da Fazenda" Text="{Binding NomeFazenda}"/>
                 <Entry Placeholder="Inscrição Estadual" Text="{Binding InscricaoEstadual}" Keyboard="Numeric"/>
-                <Entry Placeholder="Cep" Text="{Binding Cep}" Keyboard="Numeric" />
-                <Entry Placeholder="Rua" Text="{Binding Rua}"/>
-                <Entry Placeholder="Bairro" Text="{Binding Bairro}"/>
-                <Entry Placeholder="Cidade" Text="{Binding Cidade}"/>
-                <Entry Placeholder="Estado" Text="{Binding Estado}"/>
+                <Entry Placeholder="Cep" Text="{Binding Cep}" 
+                       Keyboard="Numeric"
+                       Completed="Entry_Completed">
+                    <Entry.Behaviors>
+                        <behaviorPack:CEPValidationBehavior />
+                        <behaviorPack:MaskedBehavior Mask="XXXXX-XXX" />
+                    </Entry.Behaviors>
+                </Entry>
+
+                <Entry x:Name="entryEndereco" Placeholder="Endereco" IsEnabled="False" Text="{Binding Endereco}"/>
+                <Entry x:Name="entryCidade" Placeholder="Cidade" IsEnabled="False" Text="{Binding Cidade}"/>
+                <Entry x:Name="entryEstado" Placeholder="Estado" IsEnabled="False" Text="{Binding Estado}"/>
 
                 <Button Text="Salvar"
                      BackgroundColor="{StaticResource GreenDark}" 
                      HeightRequest="50"
                      Command="{Binding RegisterCommand}"/>
+
             </FlexLayout>
         </ScrollView>
     </ContentPage.Content>

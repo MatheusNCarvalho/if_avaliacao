@@ -53,6 +53,7 @@
                               CachingStrategy="RecycleElement"
                               HasUnevenRows="True"                                                       
                               ItemsSource="{Binding MenuList}"
+                              SelectedItem="{Binding ItemSelected}"
                               SelectionMode="None">
                         <ListView.ItemTemplate>
                             <DataTemplate>

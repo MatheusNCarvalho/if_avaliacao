@@ -1,10 +1,15 @@
 ﻿using Acr.UserDialogs;
 using IFAvaliacao.Data.Repository.Interfaces;
 using IFAvaliacao.Domain.Entities;
+using IFAvaliacao.Domain.Validation;
+using IFAvaliacao.Services.Api;
+using IFAvaliacao.Utils;
 using IFAvaliacao.Utils.Extensions;
 using Prism.Commands;
 using Prism.Navigation;
+using Refit;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace IFAvaliacao.ViewModels
@@ -12,10 +17,12 @@ namespace IFAvaliacao.ViewModels
     public class CadastroFazendaViewModel : ViewModelBase
     {
         private readonly IFazendaRepository _fazendaRepository;
+        private readonly IFindZipCodeApi _findZipCodeApi;
         public CadastroFazendaViewModel(INavigationService navigationService, IFazendaRepository fazendaRepository) : base(navigationService)
         {
             Title = "Cadastro de fazenda";
             _fazendaRepository = fazendaRepository;
+            _findZipCodeApi = RestService.For<IFindZipCodeApi>("https://viacep.com.br/ws");
             RegisterCommand = new DelegateCommand(async () => await ExecuteSaveCommand());
         }
 
@@ -36,11 +43,8 @@ namespace IFAvaliacao.ViewModels
         private string _cep;
         public string Cep { get => _cep; set => SetProperty(ref _cep, value); }
 
-        private string _rua;
-        public string Rua { get => _rua; set => SetProperty(ref _rua, value); }
-
-        private string _bairro;
-        public string Bairro { get => _bairro; set => SetProperty(ref _bairro, value); }
+        private string _endereco;
+        public string Endereco { get => _endereco; set => SetProperty(ref _endereco, value); }
 
         private string _cidade;
         public string Cidade { get => _cidade; set => SetProperty(ref _cidade, value); }
@@ -48,51 +52,105 @@ namespace IFAvaliacao.ViewModels
         private string _estado;
         public string Estado { get => _estado; set => SetProperty(ref _estado, value); }
 
+
+
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            var fazenda = (Fazenda)parameters[nameof(Fazenda)];
+            if (fazenda != null)
+                MontarViewEdit(fazenda);
+
+
+            base.OnNavigatedTo(parameters);
+        }
+
+        public async Task<bool> ExecuteFinZipCodeCommand()
+        {
+            try
+            {
+                if (!Help.IsConnected)
+                {
+                    await DialogService.AlertAsync("Dispostivo não está conectado com a internet!");
+                    return false;
+                }
+                DialogService.ShowLoading("Aguarde, buscando cep!");
+                var zipCode = await _findZipCodeApi.FindZipCodeAsync(Cep.Replace("-", ""));
+                if (zipCode.Erro)
+                {
+                    ToastWarning("Cep inexistente!");
+                    return false;
+                }
+                Cidade = zipCode.Localidade;
+                Estado = zipCode.Uf;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                DialogService.HideLoading();
+                ToastError(ex.Message);
+                return false;
+            }
+            finally
+            {
+                DialogService.HideLoading();
+
+            }
+        }
+
+
         private async Task ExecuteSaveCommand()
         {
 
             try
             {
+                var fazenda = CreateNewInstancia();
+
                 if (Id.HasValue())
                 {
-                    var fazenda = CreateNewInstancia();
+                    var result = await ValidateFazenda(fazenda);
+                    if (!result) return;
                     fazenda.Id = Id;
-
                     if (await _fazendaRepository.UpdateAsync(fazenda))
                     {
-                        var toastConfig = new ToastConfig("Cadastro realizado com sucesso!");
-                        toastConfig.SetBackgroundColor(System.Drawing.Color.Green);
-                        DialogService.Toast(toastConfig);
+                        ToastSuccess("Cadastro atualizado com sucesso!");
                         await NavigationService.GoBackAsync();
+                        return;
                     }
+
                 }
                 else
                 {
-
-                    var newFazenda = CreateNewInstancia();
-                    if (await _fazendaRepository.AddAsync(newFazenda))
+                    var result = await ValidateFazenda(fazenda);
+                    if (!result) return;
+                    if (await _fazendaRepository.AddAsync(fazenda))
                     {
-                        var toastConfig = new ToastConfig("Cadastro realizado com sucesso!");
-                        toastConfig.SetBackgroundColor(System.Drawing.Color.Green);
-                        DialogService.Toast(toastConfig);
+                        ToastSuccess("Cadastro realizado com sucesso!");
                         await NavigationService.GoBackAsync();
+                        return;
                     }
-
-
                 }
-            }
-            catch (NullReferenceException ex)
-            {
-                System.Diagnostics.Debug.WriteLine(ex);
+
+                ToastError("Ocorreu um erro ao cadastrar fazenda!");
             }
             catch (Exception e)
             {
-                DialogService.Toast(e.Message);
+                ToastError(e.Message);
             }
 
         }
+        private async Task<bool> ValidateFazenda(Fazenda fazenda)
+        {
+            var validator = new FazendaValidation();
+            var results = validator.Validate(fazenda);
 
+            if (!results.IsValid)
+            {
+                await DialogService.AlertAsync("Os campos abaixo, são obrigatorios: \n" +
+                                     $"{string.Join("\n", results.Errors.Select(x => x.ErrorMessage))}", "Opps..", "Ok");
 
+            }
+            return results.IsValid;
+        }
         private Fazenda CreateNewInstancia()
         {
             return new Fazenda
@@ -101,13 +159,24 @@ namespace IFAvaliacao.ViewModels
                 Nome = Nome,
                 NomeFazenda = NomeFazenda,
                 Cep = Cep,
-                Rua = Rua,
-                Bairro = Bairro,
+                Endereco = Endereco,
                 Cidade = Cidade,
                 Estado = Estado
             };
-
-
         }
+
+        private void MontarViewEdit(Fazenda fazenda)
+        {
+            Id = fazenda.Id;
+            Nome = fazenda.Nome;
+            NomeFazenda = fazenda.NomeFazenda;
+            InscricaoEstadual = fazenda.EscricaoEstadual;
+            Cep = fazenda.Cep;
+            Endereco = fazenda.Endereco;
+            Cidade = fazenda.Cidade;
+            Estado = fazenda.Estado;
+        }
+
+        public IUserDialogs UserDialogService() => DialogService;
     }
 }

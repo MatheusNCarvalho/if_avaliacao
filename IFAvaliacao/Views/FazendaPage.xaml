@@ -19,9 +19,11 @@
     <ContentPage.Content>
         <StackLayout>
             <CollectionView ItemsSource="{Binding Fazendas}"  Margin="10,10,10,0"
-                            SelectionMode="Single">
+                            SelectionMode="Single"
+                            SelectedItem="{Binding FazendaSelectionItem}"
+                            SelectionChangedCommand="{Binding FazedaActionsCommand}">
                 <CollectionView.EmptyView>
-                    <Label Text="Não temos fazendas para Exibir :("/>
+                    <Label Text="Não temos nenhum cadastro para Exibir :("/>
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>

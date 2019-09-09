@@ -5,6 +5,7 @@ using IFAvaliacao.Domain.Entities;
 using IFAvaliacao.Views;
 using Prism.Commands;
 using Prism.Navigation;
+using Acr.UserDialogs;
 
 namespace IFAvaliacao.ViewModels
 {
@@ -17,12 +18,17 @@ namespace IFAvaliacao.ViewModels
             Title = "Fazendas";
             NavigatePageCommand = new DelegateCommand(async () => await NavigateToCadastroPage());
             Fazendas = new ObservableCollection<Fazenda>();
-            DeleteCommand = new DelegateCommand<Fazenda>(async (fazenda) => await ExecuteDeteleCommand(fazenda));
+            FazedaActionsCommand = new DelegateCommand(async () => await ExecuteFazendaActionsCommand());
         }
 
 
-        public DelegateCommand<Fazenda> DeleteCommand { get; }
+        public DelegateCommand FazedaActionsCommand { get; }
         public DelegateCommand NavigatePageCommand { get; }
+
+        private Fazenda _fazendaSelectionItem;
+        public Fazenda FazendaSelectionItem { get => _fazendaSelectionItem; set => SetProperty(ref _fazendaSelectionItem, value); }
+
+        public Fazenda Fazenda { get; set; }
 
         private ObservableCollection<Fazenda> _fazendas;
         public ObservableCollection<Fazenda> Fazendas { get => _fazendas; set => SetProperty(ref _fazendas, value); }
@@ -38,9 +44,32 @@ namespace IFAvaliacao.ViewModels
             await NavigationService.NavigateAsync(nameof(CadastroFazendaPage));
         }
 
-        private async Task ExecuteDeteleCommand(Fazenda fazenda)
+        private async Task ExecuteFazendaActionsCommand()
         {
-            await DialogService.AlertAsync("Teste", $"Id da Fazenda {fazenda?.Id}", "Ok");
+            if (FazendaSelectionItem == null) return;
+
+            var actionConfig = new ActionSheetConfig()
+                .SetTitle("Escolha uma opção para continuar.")
+                .SetCancel("Cancelar.")
+                .Add($"Editar fazenda {FazendaSelectionItem?.NomeFazenda}.", async () => await EditarFazenda())
+                .Add($"Deletar fazenda {FazendaSelectionItem?.NomeFazenda}.", async () => await DeletarFazenda())
+                .SetUseBottomSheet(true);
+            DialogService.ActionSheet(actionConfig);
+            Fazenda = FazendaSelectionItem;
+            FazendaSelectionItem = null;
+        }
+
+        private async Task EditarFazenda()
+        {
+            var paramenters = new NavigationParameters();
+            paramenters.Add(nameof(Fazenda), Fazenda);
+            await NavigationService.NavigateAsync(nameof(CadastroFazendaPage), paramenters);
+        }
+
+        private async Task DeletarFazenda()
+        {
+            await _fazendaRepository.DeleteAsync(Fazenda);
+            await LoadAsync();
         }
     }
 }

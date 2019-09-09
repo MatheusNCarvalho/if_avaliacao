@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Acr.UserDialogs;
 using IFAvaliacao.Domain.Entities.Enum;
 using IFAvaliacao.Views;
+using Plugin.Connectivity;
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
@@ -44,11 +45,11 @@ namespace IFAvaliacao.ViewModels
                 MenuList
                     .Add(new Domain.Entities.Menu("Avalições", 1, "checklist.png", EMenuType.Avaliacao, true, typeof(PreenchimentoTabPage)));
                 MenuList
-                    .Add(new Domain.Entities.Menu("Fazendas", 1, "house.png", EMenuType.Avaliacao, true, typeof(FazendaPage)));
+                    .Add(new Domain.Entities.Menu("Fazendas", 1, "house.png", EMenuType.Fazenda, true, typeof(FazendaPage)));
                 MenuList
-                    .Add(new Domain.Entities.Menu("Vacas", 1, "cow_face_front.png", EMenuType.Avaliacao, true, typeof(VacaPage)));
+                    .Add(new Domain.Entities.Menu("Vacas", 1, "cow_face_front.png", EMenuType.Vaca, true, typeof(VacaPage)));
                 MenuList
-                    .Add(new Domain.Entities.Menu("Sair", 1, "logout", EMenuType.Avaliacao, true, typeof(PreenchimentoTabPage)));
+                    .Add(new Domain.Entities.Menu("Sair", 1, "logout", EMenuType.Exit, true, typeof(PreenchimentoTabPage)));
             }
             catch (Exception ex)
             {
@@ -60,6 +61,17 @@ namespace IFAvaliacao.ViewModels
         private async Task ExecuteMenuComand(Domain.Entities.Menu menu)
         {
             if (menu == null) return;
+
+            if (menu.MenuType.Equals(EMenuType.Fazenda))
+            {
+                if (!CrossConnectivity.Current.IsConnected)
+                {
+                    await DialogService.AlertAsync("Dispostivo não está conectado com a internet!");
+                    ItemSelected = null;
+                    return;
+                }
+            }
+
             var mainPage = Application.Current.MainPage as NavigationPage;
             var masterDetail = mainPage.Navigation.NavigationStack.FirstOrDefault() as MasterDetailPage;
             masterDetail.IsPresented = false;

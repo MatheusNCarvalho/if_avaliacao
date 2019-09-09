@@ -1,6 +1,7 @@
 ﻿using Prism.Mvvm;
 using Prism.Navigation;
 using Acr.UserDialogs;
+using System;
 
 namespace IFAvaliacao.ViewModels
 {
@@ -45,6 +46,31 @@ namespace IFAvaliacao.ViewModels
         public virtual void OnNavigatedTo(INavigationParameters parameters)
         {
         }
+
+        public void ToastSuccess(string message)
+        {
+            var toastConfig = new ToastConfig(message);
+            toastConfig.SetBackgroundColor(System.Drawing.Color.Green);
+            DialogService.Toast(toastConfig);
+        }
+
+        public void ToastError(string message)
+        {
+            var toastConfig = new ToastConfig(message);
+            toastConfig.SetBackgroundColor(System.Drawing.Color.Red);
+            toastConfig.SetDuration(7000);
+            DialogService.Toast(toastConfig);
+        }
+
+        public void ToastWarning(string message)
+        {
+            var toastConfig = new ToastConfig(message);
+            toastConfig.SetBackgroundColor(System.Drawing.Color.Gold);
+            toastConfig.SetMessageTextColor(System.Drawing.Color.Black);
+            toastConfig.SetDuration(7000);
+            DialogService.Toast(toastConfig);
+        }
+
 
 
         public virtual void Destroy()
