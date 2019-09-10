@@ -12,6 +12,7 @@ namespace IFAvaliacao.Data.Repository
             var connection = sqlConnection.GetConnection();
 
             connection.CreateTable<Fazenda>();
+            connection.CreateTable<Vaca>();
         }
     }
 }

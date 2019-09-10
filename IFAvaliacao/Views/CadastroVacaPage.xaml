@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:behaviorPack="clr-namespace:Xamarin.Forms.BehaviorValidationPack;assembly=Xamarin.Forms.BehaviorValidationPack"
+             Title="{Binding Title}"
+             Visual="Material"
+             BackgroundColor="{StaticResource BackgroundColor}"
+             x:Class="IFAvaliacao.Views.CadastroVacaPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Entry">
+                <Setter Property="Margin" Value="0,10"/>
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="ReturnType" Value="Next"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout Padding="20">
+            <Label  Text="Selecione a fazenda" 
+                    FontAttributes="Bold"/>
+            <Picker Title="Selecione a fazenda."
+                    BackgroundColor="White" 
+                    ItemsSource="{Binding Fazendas}"
+                    SelectedItem="{Binding Fazenda}"
+                    SelectedIndex="{Binding FazendaIndex}"
+                    ItemDisplayBinding="{Binding NomeFazenda}"/>
+            <ScrollView>
+
+                <FlexLayout 
+                        Direction="Column"
+                        Padding="0">
+                    <Entry Placeholder="Nome" Text="{Binding Nome}"/>
+                    <Entry Placeholder="Numero" Text="{Binding Numero}" Keyboard="Numeric" />
+                    <Entry Placeholder="Nome do Pai" Text="{Binding NomePai}"/>
+                    <Entry Placeholder="Numero do Pai" Text="{Binding NumeroPai}" Keyboard="Numeric" />
+                    <Entry Placeholder="Nome da Mae" Text="{Binding NomeMae}" />
+                    <Entry Placeholder="Numero da Mae" Text="{Binding NumeroMae}" Keyboard="Numeric" />
+                    <Entry Placeholder="Raça" Text="{Binding Raca}"/>
+                    <Entry Placeholder="Data de Nascimento" Text="{Binding DataNascimento}" Keyboard="Numeric">
+                        <Entry.Behaviors>
+                            <behaviorPack:MaskedBehavior Mask="XX/XX/XXXX" />
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Entry  Placeholder="Grau sanguíneo" Text="{Binding GrauSanguinio}" />
+                    <Entry  Placeholder="Ordem de parto" Text="{Binding OrdemParto}" Keyboard="Numeric" />
+                    <Entry  Placeholder="IPP" Text="{Binding Ipp}" Keyboard="Numeric" />
+
+                    <Button Text="Salvar"
+                            BackgroundColor="{StaticResource GreenDark}" 
+                            HeightRequest="50"
+                            Command="{Binding SaveCommand}"/>
+
+                </FlexLayout>
+            </ScrollView>
+        </StackLayout>
+
+
+    </ContentPage.Content>
+</ContentPage>

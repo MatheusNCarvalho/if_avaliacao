@@ -52,6 +52,8 @@ namespace IFAvaliacao.ViewModels
         private string _estado;
         public string Estado { get => _estado; set => SetProperty(ref _estado, value); }
 
+        private bool _liberar;
+        public bool Liberar { get => _liberar; set => SetProperty(ref _liberar, value); }
 
 
         public override void OnNavigatedTo(INavigationParameters parameters)
@@ -175,6 +177,7 @@ namespace IFAvaliacao.ViewModels
             Endereco = fazenda.Endereco;
             Cidade = fazenda.Cidade;
             Estado = fazenda.Estado;
+            Liberar = true;
         }
 
         public IUserDialogs UserDialogService() => DialogService;

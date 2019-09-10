@@ -19,7 +19,7 @@
                 </x:Arguments>
             </Keyboard>
 
-            <Style x:Key="CapitalizeWordEntryStyle"   TargetType="Entry">
+            <Style x:Key="CapitalizeWordEntryStyle"  TargetType="Entry">
                 <Setter Property="Keyboard"
                         Value="{StaticResource CapitalizeWordKeyboard}"/>
             </Style>
@@ -50,9 +50,9 @@
                     </Entry.Behaviors>
                 </Entry>
 
-                <Entry x:Name="entryEndereco" Placeholder="Endereco" IsEnabled="False" Text="{Binding Endereco}"/>
-                <Entry x:Name="entryCidade" Placeholder="Cidade" IsEnabled="False" Text="{Binding Cidade}"/>
-                <Entry x:Name="entryEstado" Placeholder="Estado" IsEnabled="False" Text="{Binding Estado}"/>
+                <Entry x:Name="entryEndereco" Placeholder="Endereco" IsEnabled="{Binding Liberar}" Text="{Binding Endereco}"/>
+                <Entry x:Name="entryCidade" Placeholder="Cidade" IsEnabled="{Binding Liberar}" Text="{Binding Cidade}"/>
+                <Entry x:Name="entryEstado" Placeholder="Estado" IsEnabled="{Binding Liberar}" Text="{Binding Estado}"/>
 
                 <Button Text="Salvar"
                      BackgroundColor="{StaticResource GreenDark}" 

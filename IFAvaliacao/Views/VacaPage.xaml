@@ -4,7 +4,17 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"  
+             Title="{Binding Title}"
              x:Class="IFAvaliacao.Views.VacaPage">
+   
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="plus_white.png"
+                     Command="{Binding NavigationToCadastroPageCommand}">
+            
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Listagem de vacas"

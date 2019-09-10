@@ -12,6 +12,7 @@ namespace IFAvaliacao.Utils.Extensions
         public static IContainerRegistry DependecyInjection(this IContainerRegistry container)
         {
             container.Register<IFazendaRepository, FazendaReposiotry>();
+            container.Register<IVacaRepository, VacaRepository>();
 
             container.RegisterForNavigation<NavigationPage>();
             container.RegisterForNavigation<MainPage, MainViewModel>();
@@ -22,6 +23,7 @@ namespace IFAvaliacao.Utils.Extensions
             container.RegisterForNavigation<FazendaPage, FazendaViewModel>();
             container.RegisterForNavigation<VacaPage, VacaViewModel>();
             container.RegisterForNavigation<CadastroFazendaPage, CadastroFazendaViewModel>();
+            container.RegisterForNavigation<CadastroVacaPage, CadastroVacaViewModel>();
 
             return container;
         }

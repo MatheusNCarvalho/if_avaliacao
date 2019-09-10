@@ -28,9 +28,7 @@ namespace IFAvaliacao.Views
             var result = await viewModel.ExecuteFinZipCodeCommand();
             if (result)
             {
-                entryEndereco.IsEnabled = true;
-                entryCidade.IsEnabled = true;
-                entryEstado.IsEnabled = true;
+                viewModel.Liberar = true;
             }
 
         }
