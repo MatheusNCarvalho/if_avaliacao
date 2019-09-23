@@ -10,8 +10,7 @@ namespace IFAvaliacao.Domain.Entities
         public int Numero { get; set; }
         public string NomePai { get; set; }
         public int NumeroPai { get; set; }
-        public string NomeMae { get; set; }
-        public int NumeroMae { get; set; }
+        public string IdVacaMae { get; set; }
         public string Raca { get; set; }
         public string GrauSanguinio { get; set; }
         public DateTime? DataNascimento { get; set; }
@@ -26,5 +25,7 @@ namespace IFAvaliacao.Domain.Entities
 
         [Ignore]
         public Fazenda Fazenda { get; set; }
+        [Ignore]
+        public Vaca VacaMae { get; set; }
     }
 }

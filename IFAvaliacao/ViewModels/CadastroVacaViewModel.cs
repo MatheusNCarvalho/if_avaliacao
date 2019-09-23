@@ -19,13 +19,15 @@ namespace IFAvaliacao.ViewModels
 
         private readonly IFazendaRepository _fazendaRepository;
         private readonly IVacaRepository _vacaRepository;
+        private readonly IVacaService _vacaService;
         public CadastroVacaViewModel(INavigationService navigationService, IFazendaRepository fazendaRepository,
-            IVacaRepository vacaRepository) : base(navigationService)
+            IVacaRepository vacaRepository, IVacaService vacaService) : base(navigationService)
         {
             Title = "Cadastro Vaca";
             _fazendaRepository = fazendaRepository;
             _vacaRepository = vacaRepository;
-            Initialization = LoadFazendaAsync();
+            _vacaService = vacaService;
+            Initialization = LoadAsync();
             SaveCommand = new DelegateCommand(async () => await ExecuteSaveCommand());
 
         }
@@ -34,6 +36,8 @@ namespace IFAvaliacao.ViewModels
 
         private string _id;
         public string Id { get => _id; set => SetProperty(ref _id, value); }
+
+        public DateTime DataCriacao { get; set; }
 
         private string _fazendaId;
         public string FazendaId { get => _fazendaId; set => SetProperty(ref _fazendaId, value); }
@@ -49,12 +53,6 @@ namespace IFAvaliacao.ViewModels
 
         private int _numeroPai;
         public int NumeroPai { get => _numeroPai; set => SetProperty(ref _numeroPai, value); }
-
-        private string _nomeMae;
-        public string NomeMae { get => _nomeMae; set => SetProperty(ref _nomeMae, value); }
-
-        private int _numeroMae;
-        public int NumeroMae { get => _numeroMae; set => SetProperty(ref _numeroMae, value); }
 
         private string _raca;
         public string Raca { get => _raca; set => SetProperty(ref _raca, value); }
@@ -86,27 +84,61 @@ namespace IFAvaliacao.ViewModels
         private int _fazendaIndex = -1;
         public int FazendaIndex { get => _fazendaIndex; set => SetProperty(ref _fazendaIndex, value); }
 
+        private ObservableCollection<Vaca> _vacas;
+        public ObservableCollection<Vaca> Vacas { get => _vacas; set => SetProperty(ref _vacas, value); }
+
+        private Vaca _vacaSelecionada;
+        public Vaca VacaSelecionada { get => _vacaSelecionada; set => SetProperty(ref _vacaSelecionada, value); }
+
+        private int _vacaIndex = -1;
+        public int VacaIndex { get => _vacaIndex; set => SetProperty(ref _vacaIndex, value); }
+
+        private bool _existeVacas;
+        public bool ExisteVacas { get => _existeVacas; set => SetProperty(ref _existeVacas, value); }
+
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            var vaca = (Vaca)parameters[nameof(Vaca)];
+            if (vaca != null)
+                MontarView(vaca);
+
+            base.OnNavigatedTo(parameters);
+        }
+
 
         private async Task ExecuteSaveCommand()
         {
             try
             {
                 var vaca = CreateInstance();
+                var valid = await ValidateVaca(vaca);
+                if (!valid) return;
+
+                if (await _vacaService.ExisteVacaPorFazendaAsync(Id, vaca.FazendaId, Numero))
+                {
+                    await DialogService.AlertAsync("O numero informado já esta vinculado há outro cadastro!", "Alerta", "Ok");
+                    return;
+                }
+
                 if (Id.HasValue())
                 {
-
-                }
-                else
-                {
-                    var valid = await ValidateVaca(vaca);
-                    if (!valid) return;
-                    if (await _vacaRepository.AddAsync(vaca))
+                    vaca.SetId(Id);
+                    vaca.AddDataCriacao(DataCriacao);
+                    if (await _vacaRepository.UpdateAsync(vaca))
                     {
-                        ToastSuccess("Cadastro realizado com sucesso!");
+                        ToastSuccess("Cadastro atualizado com sucesso!");
                         await NavigationService.GoBackAsync();
                         return;
                     }
                 }
+
+                if (await _vacaRepository.AddAsync(vaca))
+                {
+                    ToastSuccess("Cadastro realizado com sucesso!");
+                    await NavigationService.GoBackAsync();
+                    return;
+                }
+
                 ToastError("Ocorreu um erro ao salvar!");
             }
             catch (Exception ex)
@@ -137,8 +169,7 @@ namespace IFAvaliacao.ViewModels
                 FazendaId = Fazenda?.Id,
                 Numero = Numero,
                 Nome = Nome,
-                NomeMae = NomeMae,
-                NumeroMae = NumeroMae,
+                IdVacaMae = VacaSelecionada?.Id,
                 NomePai = NomePai,
                 NumeroPai = NumeroPai,
                 Ipp = Ipp,
@@ -154,13 +185,40 @@ namespace IFAvaliacao.ViewModels
         }
 
 
-        private async Task LoadFazendaAsync()
+        private async void MontarView(Vaca vaca)
+        {
+            Id = vaca.Id;
+            FazendaId = vaca.FazendaId;
+            Fazenda = await _fazendaRepository.GetByIdAsync(FazendaId);
+            FazendaIndex = Fazendas.ToList().FindIndex(x => x.Id.Equals(FazendaId));
+            if (vaca.IdVacaMae.HasValue())
+            {
+                VacaSelecionada = await _vacaRepository.GetByIdAsync(vaca.IdVacaMae);
+                VacaIndex = Vacas.ToList().FindIndex(x => x.Id.Equals(VacaSelecionada.Id));              
+            }
+            var vacaIndexAtual = Vacas.ToList().FindIndex(x => x.Id.Equals(Id));
+            Vacas.RemoveAt(vacaIndexAtual);
+
+            Nome = vaca.Nome;
+            Numero = vaca.Numero;
+            NomePai = vaca.NomePai;
+            NumeroPai = vaca.NumeroPai;
+            Ipp = vaca.Ipp;
+            OrdemParto = vaca.OrdemParto;
+            Raca = vaca.Raca;
+            GrauSanguinio = vaca.GrauSanguinio;
+        }
+
+        private async Task LoadAsync()
         {
             try
             {
-                DialogService.ShowLoading("Aguarde, buscando fazendas.");
+                DialogService.ShowLoading("Aguarde, buscando fazendas e vacas mães.");
                 var fazendas = await _fazendaRepository.GetAsync();
+                var vacas = await _vacaRepository.GetAsync();
                 Fazendas = new ObservableCollection<Fazenda>(fazendas);
+                Vacas = new ObservableCollection<Vaca>(vacas);
+                ExisteVacas = Vacas.Any();
             }
             catch (Exception ex)
             {

@@ -6,15 +6,18 @@ using IFAvaliacao.Views;
 using Prism.Commands;
 using Prism.Navigation;
 using Acr.UserDialogs;
+using System.Linq;
 
 namespace IFAvaliacao.ViewModels
 {
     public class FazendaViewModel : ViewModelBase
     {
         private readonly IFazendaRepository _fazendaRepository;
-        public FazendaViewModel(INavigationService navigationService, IFazendaRepository fazendaRepository) : base(navigationService)
+        private readonly IVacaRepository _vacaRepository;
+        public FazendaViewModel(INavigationService navigationService, IFazendaRepository fazendaRepository, IVacaRepository vacaRepository) : base(navigationService)
         {
             _fazendaRepository = fazendaRepository;
+            _vacaRepository = vacaRepository;
             Title = "Fazendas";
             NavigatePageCommand = new DelegateCommand(async () => await NavigateToCadastroPage());
             Fazendas = new ObservableCollection<Fazenda>();
@@ -68,6 +71,14 @@ namespace IFAvaliacao.ViewModels
 
         private async Task DeletarFazenda()
         {
+            var existeVaca = await _vacaRepository.GetAsync(x => x.FazendaId.Equals(Fazenda.Id));
+
+            if (existeVaca.Any())
+            {
+                await DialogService.AlertAsync($"Fazenda '{Fazenda.NomeFazenda}' não pode apagada pois, existe vacas vinculadas.", "Alerta", "Ok");
+                return;
+            }
+
             await _fazendaRepository.DeleteAsync(Fazenda);
             await LoadAsync();
         }

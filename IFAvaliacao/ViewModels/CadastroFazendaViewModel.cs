@@ -3,7 +3,6 @@ using IFAvaliacao.Data.Repository.Interfaces;
 using IFAvaliacao.Domain.Entities;
 using IFAvaliacao.Domain.Validation;
 using IFAvaliacao.Services.Api;
-using IFAvaliacao.Utils;
 using IFAvaliacao.Utils.Extensions;
 using Prism.Commands;
 using Prism.Navigation;
@@ -31,6 +30,8 @@ namespace IFAvaliacao.ViewModels
         private string _id;
         public string Id { get => _id; set => SetProperty(ref _id, value); }
 
+        public DateTime DataCriacao { get; set; }
+
         private string _inscricaoEstadual;
         public string InscricaoEstadual { get => _inscricaoEstadual; set => SetProperty(ref _inscricaoEstadual, value); }
 
@@ -52,10 +53,6 @@ namespace IFAvaliacao.ViewModels
         private string _estado;
         public string Estado { get => _estado; set => SetProperty(ref _estado, value); }
 
-        private bool _liberar;
-        public bool Liberar { get => _liberar; set => SetProperty(ref _liberar, value); }
-
-
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             var fazenda = (Fazenda)parameters[nameof(Fazenda)];
@@ -66,38 +63,38 @@ namespace IFAvaliacao.ViewModels
             base.OnNavigatedTo(parameters);
         }
 
-        public async Task<bool> ExecuteFinZipCodeCommand()
-        {
-            try
-            {
-                if (!Help.IsConnected)
-                {
-                    await DialogService.AlertAsync("Dispostivo não está conectado com a internet!");
-                    return false;
-                }
-                DialogService.ShowLoading("Aguarde, buscando cep!");
-                var zipCode = await _findZipCodeApi.FindZipCodeAsync(Cep.Replace("-", ""));
-                if (zipCode.Erro)
-                {
-                    ToastWarning("Cep inexistente!");
-                    return false;
-                }
-                Cidade = zipCode.Localidade;
-                Estado = zipCode.Uf;
-                return true;
-            }
-            catch (Exception ex)
-            {
-                DialogService.HideLoading();
-                ToastError(ex.Message);
-                return false;
-            }
-            finally
-            {
-                DialogService.HideLoading();
+        //public async Task<bool> ExecuteFinZipCodeCommand()
+        //{
+        //    try
+        //    {
+        //        if (!Help.IsConnected)
+        //        {
+        //            await DialogService.AlertAsync("Dispostivo não está conectado com a internet!");
+        //            return false;
+        //        }
+        //        DialogService.ShowLoading("Aguarde, buscando cep!");
+        //        var zipCode = await _findZipCodeApi.FindZipCodeAsync(Cep.Replace("-", ""));
+        //        if (zipCode.Erro)
+        //        {
+        //            ToastWarning("Cep inexistente!");
+        //            return false;
+        //        }
+        //        Cidade = zipCode.Localidade;
+        //        Estado = zipCode.Uf;
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        DialogService.HideLoading();
+        //        ToastError(ex.Message);
+        //        return false;
+        //    }
+        //    finally
+        //    {
+        //        DialogService.HideLoading();
 
-            }
-        }
+        //    }
+        //}
 
 
         private async Task ExecuteSaveCommand()
@@ -106,12 +103,18 @@ namespace IFAvaliacao.ViewModels
             try
             {
                 var fazenda = CreateNewInstancia();
+                if (await _fazendaRepository.ExisteFazendaPorInscricaoEstadual(InscricaoEstadual, Id))
+                {
+                    await DialogService.AlertAsync($"Inscrição Estadual '{InscricaoEstadual}', já esta vinculada há uma fazenda.", "Ops...", "Ok");
+                    return;
+                }
+                var result = await ValidateFazenda(fazenda);
+                if (!result) return;
 
                 if (Id.HasValue())
                 {
-                    var result = await ValidateFazenda(fazenda);
-                    if (!result) return;
-                    fazenda.Id = Id;
+                    fazenda.SetId(Id);
+                    fazenda.AddDataCriacao(DataCriacao);
                     if (await _fazendaRepository.UpdateAsync(fazenda))
                     {
                         ToastSuccess("Cadastro atualizado com sucesso!");
@@ -120,17 +123,15 @@ namespace IFAvaliacao.ViewModels
                     }
 
                 }
-                else
+
+                fazenda.AddDataCriacao();
+                if (await _fazendaRepository.AddAsync(fazenda))
                 {
-                    var result = await ValidateFazenda(fazenda);
-                    if (!result) return;
-                    if (await _fazendaRepository.AddAsync(fazenda))
-                    {
-                        ToastSuccess("Cadastro realizado com sucesso!");
-                        await NavigationService.GoBackAsync();
-                        return;
-                    }
+                    ToastSuccess("Cadastro realizado com sucesso!");
+                    await NavigationService.GoBackAsync();
+                    return;
                 }
+
 
                 ToastError("Ocorreu um erro ao cadastrar fazenda!");
             }
@@ -157,7 +158,7 @@ namespace IFAvaliacao.ViewModels
         {
             return new Fazenda
             {
-                EscricaoEstadual = InscricaoEstadual,
+                InscricaoEstadual = InscricaoEstadual,
                 Nome = Nome,
                 NomeFazenda = NomeFazenda,
                 Cep = Cep,
@@ -172,12 +173,12 @@ namespace IFAvaliacao.ViewModels
             Id = fazenda.Id;
             Nome = fazenda.Nome;
             NomeFazenda = fazenda.NomeFazenda;
-            InscricaoEstadual = fazenda.EscricaoEstadual;
+            InscricaoEstadual = fazenda.InscricaoEstadual;
             Cep = fazenda.Cep;
             Endereco = fazenda.Endereco;
             Cidade = fazenda.Cidade;
             Estado = fazenda.Estado;
-            Liberar = true;
+            DataCriacao = fazenda.DataCriacao;
         }
 
         public IUserDialogs UserDialogService() => DialogService;

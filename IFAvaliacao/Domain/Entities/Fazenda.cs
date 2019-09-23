@@ -5,7 +5,7 @@ namespace IFAvaliacao.Domain.Entities
     public class Fazenda : EntityBase
     {
 
-        public string EscricaoEstadual { get; set; }
+        public string InscricaoEstadual { get; set; }
         public string Nome { get; set; }
         public string NomeFazenda { get; set; }
         public string Cep { get; set; }

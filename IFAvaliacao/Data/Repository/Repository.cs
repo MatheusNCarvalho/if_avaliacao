@@ -9,7 +9,7 @@ namespace IFAvaliacao.Data.Repository
 {
     public abstract  class Repository<TEntity> : IRepository<TEntity> where TEntity : EntityBase, new()
     {
-        private readonly ISQLitePlatform _sQLitePlatform;
+        protected readonly ISQLitePlatform _sQLitePlatform;
         protected Repository(ISQLitePlatform sQLitePlatform)
         {
             _sQLitePlatform = sQLitePlatform;

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using FluentValidation;
+﻿using FluentValidation;
 using IFAvaliacao.Domain.Entities;
 
 namespace IFAvaliacao.Domain.Validation
@@ -17,6 +14,10 @@ namespace IFAvaliacao.Domain.Validation
             RuleFor(x => x.NomeFazenda)
                 .NotEmpty()
                 .WithMessage("Nome da fazenda é obrigatorio.");
+
+            RuleFor(x => x.InscricaoEstadual)
+               .NotEmpty()
+               .WithMessage("Inscrição Estadual é obrigatorio.");
 
             RuleFor(x => x.Endereco)
                 .NotEmpty()

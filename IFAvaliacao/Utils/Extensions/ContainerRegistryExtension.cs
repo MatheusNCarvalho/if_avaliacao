@@ -1,5 +1,7 @@
 ﻿using IFAvaliacao.Data.Repository;
 using IFAvaliacao.Data.Repository.Interfaces;
+using IFAvaliacao.Services;
+using IFAvaliacao.Services.Interfaces;
 using IFAvaliacao.ViewModels;
 using IFAvaliacao.Views;
 using Prism.Ioc;
@@ -13,6 +15,7 @@ namespace IFAvaliacao.Utils.Extensions
         {
             container.Register<IFazendaRepository, FazendaReposiotry>();
             container.Register<IVacaRepository, VacaRepository>();
+            container.Register<IVacaService, VacaService>();
 
             container.RegisterForNavigation<NavigationPage>();
             container.RegisterForNavigation<MainPage, MainViewModel>();

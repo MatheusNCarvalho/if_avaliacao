@@ -37,10 +37,18 @@
                         Padding="0">
                     <Entry Placeholder="Nome" Text="{Binding Nome}"/>
                     <Entry Placeholder="Numero" Text="{Binding Numero}" Keyboard="Numeric" />
+                    <Label  Text="Selecione a Vaca mãe" 
+                            FontAttributes="Bold" IsVisible="{Binding ExisteVacas}"/>
+                    <Picker Title="Selecione a Vaca mãe."
+                            BackgroundColor="White"
+                            IsVisible="{Binding ExisteVacas}"
+                            ItemsSource="{Binding Vacas}"
+                            SelectedItem="{Binding VacaSelecionada}"                            
+                            SelectedIndex="{Binding VacaIndex}"
+                            ItemDisplayBinding="{Binding Nome}"/>
+
                     <Entry Placeholder="Nome do Pai" Text="{Binding NomePai}"/>
                     <Entry Placeholder="Numero do Pai" Text="{Binding NumeroPai}" Keyboard="Numeric" />
-                    <Entry Placeholder="Nome da Mae" Text="{Binding NomeMae}" />
-                    <Entry Placeholder="Numero da Mae" Text="{Binding NumeroMae}" Keyboard="Numeric" />
                     <Entry Placeholder="Raça" Text="{Binding Raca}"/>
                     <Entry Placeholder="Data de Nascimento" Text="{Binding DataNascimento}" Keyboard="Numeric">
                         <Entry.Behaviors>

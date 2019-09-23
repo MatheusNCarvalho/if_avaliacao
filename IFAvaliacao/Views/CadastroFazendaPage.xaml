@@ -42,17 +42,16 @@
                 <Entry Placeholder="Nome da Fazenda" Text="{Binding NomeFazenda}"/>
                 <Entry Placeholder="Inscrição Estadual" Text="{Binding InscricaoEstadual}" Keyboard="Numeric"/>
                 <Entry Placeholder="Cep" Text="{Binding Cep}" 
-                       Keyboard="Numeric"
-                       Completed="Entry_Completed">
+                       Keyboard="Numeric">
                     <Entry.Behaviors>
                         <behaviorPack:CEPValidationBehavior />
                         <behaviorPack:MaskedBehavior Mask="XXXXX-XXX" />
                     </Entry.Behaviors>
                 </Entry>
 
-                <Entry x:Name="entryEndereco" Placeholder="Endereco" IsEnabled="{Binding Liberar}" Text="{Binding Endereco}"/>
-                <Entry x:Name="entryCidade" Placeholder="Cidade" IsEnabled="{Binding Liberar}" Text="{Binding Cidade}"/>
-                <Entry x:Name="entryEstado" Placeholder="Estado" IsEnabled="{Binding Liberar}" Text="{Binding Estado}"/>
+                <Entry x:Name="entryEndereco" Placeholder="Endereco" Text="{Binding Endereco}"/>
+                <Entry x:Name="entryCidade" Placeholder="Cidade"  Text="{Binding Cidade}"/>
+                <Entry x:Name="entryEstado" Placeholder="Estado" Text="{Binding Estado}"/>
 
                 <Button Text="Salvar"
                      BackgroundColor="{StaticResource GreenDark}" 

@@ -60,17 +60,7 @@ namespace IFAvaliacao.ViewModels
 
         private async Task ExecuteMenuComand(Domain.Entities.Menu menu)
         {
-            if (menu == null) return;
-
-            if (menu.MenuType.Equals(EMenuType.Fazenda))
-            {
-                if (!CrossConnectivity.Current.IsConnected)
-                {
-                    await DialogService.AlertAsync("Dispostivo não está conectado com a internet!");
-                    ItemSelected = null;
-                    return;
-                }
-            }
+            if (menu == null) return;          
 
             var mainPage = Application.Current.MainPage as NavigationPage;
             var masterDetail = mainPage.Navigation.NavigationStack.FirstOrDefault() as MasterDetailPage;

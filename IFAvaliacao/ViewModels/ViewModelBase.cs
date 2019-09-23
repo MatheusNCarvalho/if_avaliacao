@@ -43,6 +43,11 @@ namespace IFAvaliacao.ViewModels
         {
 
         }
+
+        /// <summary>
+        /// Sobrescrever para capturar os dados durante a navegação
+        /// </summary>
+        /// <param name="parameters"></param>
         public virtual void OnNavigatedTo(INavigationParameters parameters)
         {
         }
