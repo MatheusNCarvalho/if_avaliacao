@@ -13,6 +13,7 @@ namespace IFAvaliacao.Data.Repository
 
             connection.CreateTable<Fazenda>();
             connection.CreateTable<Vaca>();
+            connection.CreateTable<AvaliacaoVaca>();
         }
     }
 }

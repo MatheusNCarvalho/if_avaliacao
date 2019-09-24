@@ -1,8 +1,6 @@
 ﻿using System.Windows.Input;
-using Acr.UserDialogs;
 using IFAvaliacao.Domain.Entities;
 using Prism.Navigation;
-using Prism.Services;
 using Xamarin.Forms;
 
 namespace IFAvaliacao.ViewModels
@@ -13,10 +11,12 @@ namespace IFAvaliacao.ViewModels
         public PreenchimentoViewModel(INavigationService navigationService) : base(navigationService)
         {
             _tapCommand = new Command(OnTapped);
+            SaveCommand = new Command(ExecuteSaveCommand);
             SliderMinimum = 1.0;
         }
 
         public ICommand TapCommand { get => _tapCommand; }
+        public ICommand SaveCommand { get; }
 
         private double _angulosidade;
         public double Angulosiodade
@@ -61,13 +61,13 @@ namespace IFAvaliacao.ViewModels
         public double AnguloCasco { get => _anguloCasco; set => SetProperty(ref _anguloCasco, value); }
 
         private double _jarreteLateral;
-        public double JarreteLateral { get => _jarreteLateral; set => SetProperty(ref _jarreteLateral,value); }
+        public double JarreteLateral { get => _jarreteLateral; set => SetProperty(ref _jarreteLateral, value); }
 
         private double _jarreteTras;
         public double JarreteTras { get => _jarreteTras; set => SetProperty(ref _jarreteTras, value); }
 
         private double _ubereFirmeza;
-        public double UbereFirmeza { get => _ubereFirmeza; set => SetProperty(ref _ubereFirmeza,value); }
+        public double UbereFirmeza { get => _ubereFirmeza; set => SetProperty(ref _ubereFirmeza, value); }
 
         private double _uberePosterior;
         public double UberePosterior { get => _uberePosterior; set => SetProperty(ref _uberePosterior, value); }
@@ -76,11 +76,11 @@ namespace IFAvaliacao.ViewModels
         public double AlturaUbere { get => _alturaUltere; set => SetProperty(ref _alturaUltere, value); }
 
         private double _ligamentoCentral;
-        public double LigamentoCentral { get => _ligamentoCentral; set => SetProperty(ref _ligamentoCentral,value); }
+        public double LigamentoCentral { get => _ligamentoCentral; set => SetProperty(ref _ligamentoCentral, value); }
 
         private double _posicaoTetos;
         public double PosicaoTetos { get => _posicaoTetos; set => SetProperty(ref _posicaoTetos, value); }
-                         
+
 
         private int _nameCow;
         public int NameCow
@@ -102,13 +102,18 @@ namespace IFAvaliacao.ViewModels
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
-            var profileCow = (ProfileCow)parameters[nameof(ProfileCow)];
+            var profileCow = (AvaliacaoVaca)parameters[nameof(AvaliacaoVaca)];
 
             if (profileCow != null)
             {
                 BodyWight = profileCow.BodyWight;
                 NameCow = profileCow.NameCow;
             }
+        }
+
+        private async void ExecuteSaveCommand()
+        {
+
         }
 
         private void OnTapped(object type)

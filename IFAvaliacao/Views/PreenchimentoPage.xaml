@@ -40,6 +40,7 @@
             <Style x:Key="LabelItemCenter" TargetType="Label">
                 <Setter Property="HorizontalTextAlignment" Value="Center"/>
                 <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="LineBreakMode" Value="TailTruncation"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
             </Style>
             <Style x:Key="LabelSliderValue" TargetType="Label">
@@ -59,7 +60,7 @@
             </Style>
             <Style TargetType="Frame">
                 <Setter Property="Margin" Value="0,0,0,10"/>
-                <Setter Property="HeightRequest" Value="80"/>
+                <Setter Property="HeightRequest" Value="100"/>
                 <Setter Property="CornerRadius" Value="3"/>
                 <Setter Property="Padding" Value="5"/>
             </Style>
@@ -531,7 +532,9 @@
                         </FlexLayout>
                     </Frame>
 
-                    <Button CornerRadius="5" HeightRequest="40" BackgroundColor="{StaticResource GreenDark}" Text="Concluir"/>
+                    <Button CornerRadius="5" HeightRequest="40"
+                            BackgroundColor="{StaticResource GreenDark}" Text="Concluir"
+                            Command="{Binding SaveCommand}"/>
                 </FlexLayout>
             </ScrollView>
 

@@ -39,13 +39,21 @@
                     Direction="Column"
                     AlignItems="Stretch">
 
-                <Entry  x:Name="entryNameCow"
+                <Label  Text="Selecione a fazenda" 
+                    FontAttributes="Bold"/>
+                <Picker Title="Selecione a vaca."
+                    BackgroundColor="White" 
+                    ItemsSource="{Binding Vacas}"
+                    SelectedItem="{Binding VacaSelecionada}"
+                    ItemDisplayBinding="{Binding Nome}"/>
+
+                <!--<Entry  x:Name="entryNameCow"
                         Placeholder="Numero da Vaca"
                         Keyboard="Numeric"
                         Text="{Binding NameCow}"
                         TextColor="Black"
                         BackgroundColor="White"
-                        Margin="0,0,0,5"/>
+                        Margin="0,0,0,5"/>-->
 
                 <Editor  x:Name="entryBodyWight"
                         Placeholder="Peso Corporal"
