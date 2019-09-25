@@ -6,7 +6,15 @@ namespace IFAvaliacao.Domain.Entities
     {
         public AvaliacaoVaca() { }
 
-        public AvaliacaoVaca(int nameCow, decimal bodyWight, double angulosiodade, double profundidadeCorporal, double forcaLeiteira, double alturaGarupaHipometro, double comprimentoCorpo, double anguloCarupa, double larguraIleo, double larguraIsquio, double anguloCasco, double jarreteLateral, double jarreteTras, double ubereFirmeza, double uberePosterior, double alturaUbere, double ligamentoCentral, double posicaoTetos)
+        public AvaliacaoVaca(int nameCow, decimal bodyWight)
+        {
+            NameCow = nameCow;
+            BodyWight = bodyWight;
+        }
+        public AvaliacaoVaca(int nameCow, decimal bodyWight, int angulosiodade, int profundidadeCorporal, int forcaLeiteira,
+                             int alturaGarupaHipometro, int comprimentoCorpo, int anguloCarupa, int larguraIleo,
+                             int larguraIsquio, int anguloCasco, int jarreteLateral, int jarreteTras, int ubereFirmeza,
+                             int uberePosterior, int alturaUbere, int ligamentoCentral, int posicaoTetos, DateTime dataHoraIinicio)
         {
             NameCow = nameCow;
             BodyWight = bodyWight;
@@ -26,7 +34,7 @@ namespace IFAvaliacao.Domain.Entities
             AlturaUbere = alturaUbere;
             LigamentoCentral = ligamentoCentral;
             PosicaoTetos = posicaoTetos;
-            DataHoraInicio = DateTime.Now;
+            DataHoraInicio = dataHoraIinicio;
         }
 
         public DateTime DataHoraInicio { get; set; }
@@ -34,35 +42,35 @@ namespace IFAvaliacao.Domain.Entities
         public int NameCow { get; set; }
         public decimal BodyWight { get; set; }
 
-        public double Angulosiodade { get; set; }
+        public int Angulosiodade { get; set; }
 
-        public double ProfundidadeCorporal { get; set; }
+        public int ProfundidadeCorporal { get; set; }
 
-        public double ForcaLeiteira { get; set; }
+        public int ForcaLeiteira { get; set; }
 
-        public double AlturaGarupaHipometro { get; set; }
+        public int AlturaGarupaHipometro { get; set; }
 
-        public double ComprimentoCorpo { get; set; }
+        public int ComprimentoCorpo { get; set; }
 
-        public double AnguloCarupa { get; set; }
+        public int AnguloCarupa { get; set; }
 
-        public double LarguraIleo { get; set; }
+        public int LarguraIleo { get; set; }
 
-        public double LarguraIsquio { get; set; }
+        public int LarguraIsquio { get; set; }
 
-        public double AnguloCasco { get; set; }
+        public int AnguloCasco { get; set; }
 
-        public double JarreteLateral { get; set; }
+        public int JarreteLateral { get; set; }
 
-        public double JarreteTras { get; set; }
+        public int JarreteTras { get; set; }
 
-        public double UbereFirmeza { get; set; }
-        public double UberePosterior { get; set; }
+        public int UbereFirmeza { get; set; }
+        public int UberePosterior { get; set; }
 
-        public double AlturaUbere { get; set; }
+        public int AlturaUbere { get; set; }
 
-        public double LigamentoCentral { get; set; }
+        public int LigamentoCentral { get; set; }
 
-        public double PosicaoTetos { get; set; }
+        public int PosicaoTetos { get; set; }
     }
 }

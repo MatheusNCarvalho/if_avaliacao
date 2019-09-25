@@ -507,12 +507,12 @@
                         <FlexLayout Style="{StaticResource FlexLayoutMaster}" Padding="0">
                             <Label Text="Comprimento de Tetos"/>
                             <FlexLayout FlexLayout.Grow="1" Padding="0" JustifyContent="Center">
-                                <Entry FlexLayout.Grow="1" Keyboard="Numeric" HeightRequest="60" Margin="5" Placeholder="T1"/>
-                                <Entry FlexLayout.Grow="1" Keyboard="Numeric" HeightRequest="60" Margin="5" Placeholder="T2"/>                                
+                                <Entry FlexLayout.Grow="1" Text="{Binding ComprimentoTeto1}" Keyboard="Numeric" HeightRequest="60" Margin="5" Placeholder="T1"/>
+                                <Entry FlexLayout.Grow="1" Text="{Binding ComprimentoTeto2}" Keyboard="Numeric" HeightRequest="60" Margin="5" Placeholder="T2"/>                                
                             </FlexLayout>
                             <FlexLayout FlexLayout.Grow="1" Padding="0" JustifyContent="Center">
-                                <Entry FlexLayout.Grow="1" Keyboard="Numeric" HeightRequest="60" Margin="5" Placeholder="T3"/>
-                                <Entry FlexLayout.Grow="1" Keyboard="Numeric" HeightRequest="60" Margin="5" Placeholder="T4"/>
+                                <Entry FlexLayout.Grow="1" Text="{Binding ComprimentoTeto3}" Keyboard="Numeric" HeightRequest="60" Margin="5" Placeholder="T3"/>
+                                <Entry FlexLayout.Grow="1" Text="{Binding ComprimentoTeto4}" Keyboard="Numeric" HeightRequest="60" Margin="5" Placeholder="T4"/>
                             </FlexLayout>
                         </FlexLayout>
                     </Frame>

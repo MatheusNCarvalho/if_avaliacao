@@ -1,5 +1,8 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
+using IFAvaliacao.Data.Repository.Interfaces;
 using IFAvaliacao.Domain.Entities;
+using IFAvaliacao.Utils.Extensions;
 using Prism.Navigation;
 using Xamarin.Forms;
 
@@ -8,15 +11,20 @@ namespace IFAvaliacao.ViewModels
     public class PreenchimentoViewModel : ViewModelBase
     {
         private readonly ICommand _tapCommand;
-        public PreenchimentoViewModel(INavigationService navigationService) : base(navigationService)
+        private readonly IAvaliacaoRepository _avaliacaoRepository;
+        public PreenchimentoViewModel(INavigationService navigationService, IAvaliacaoRepository avaliacaoRepository) : base(navigationService)
         {
+            _avaliacaoRepository = avaliacaoRepository;
             _tapCommand = new Command(OnTapped);
             SaveCommand = new Command(ExecuteSaveCommand);
             SliderMinimum = 1.0;
+            DataHoraInicio = DateTime.Now;
         }
 
         public ICommand TapCommand { get => _tapCommand; }
         public ICommand SaveCommand { get; }
+
+        public DateTime DataHoraInicio { get; set; }
 
         private double _angulosidade;
         public double Angulosiodade
@@ -81,6 +89,29 @@ namespace IFAvaliacao.ViewModels
         private double _posicaoTetos;
         public double PosicaoTetos { get => _posicaoTetos; set => SetProperty(ref _posicaoTetos, value); }
 
+        private decimal _comprimentoTeto1;
+        public decimal ComprimentoTeto1 { get => _comprimentoTeto1; set => SetProperty(ref _comprimentoTeto1, value); }
+
+        private decimal _comprimentoTeto2;
+        public decimal ComprimentoTeto2 { get => _comprimentoTeto2; set => SetProperty(ref _comprimentoTeto2, value); }
+
+        private decimal _comprimentoTeto3;
+        public decimal ComprimentoTeto3 { get => _comprimentoTeto3; set => SetProperty(ref _comprimentoTeto3, value); }
+
+        private decimal _comprimentoTeto4;
+        public decimal ComprimentoTeto4 { get => _comprimentoTeto4; set => SetProperty(ref _comprimentoTeto4, value); }
+
+        private decimal _diametroTeto1;
+        public decimal DiametroTeto1 { get => _diametroTeto1; set => SetProperty(ref _diametroTeto1, value); }
+
+        private decimal _diametroTeto2;
+        public decimal DiametroTeto2 { get => _diametroTeto2; set => SetProperty(ref _diametroTeto2, value); }
+
+        private decimal _diametroTeto3;
+        public decimal DiametroTeto3 { get => _diametroTeto3; set => SetProperty(ref _diametroTeto3, value); }
+
+        private decimal _diametroTeto4;
+        public decimal DiametroTeto4 { get => _diametroTeto4; set => SetProperty(ref _diametroTeto4, value); }
 
         private int _nameCow;
         public int NameCow
@@ -102,18 +133,49 @@ namespace IFAvaliacao.ViewModels
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
-            var profileCow = (AvaliacaoVaca)parameters[nameof(AvaliacaoVaca)];
-
-            if (profileCow != null)
+            try
             {
-                BodyWight = profileCow.BodyWight;
-                NameCow = profileCow.NameCow;
+                var profileCow = (AvaliacaoVaca)parameters[nameof(AvaliacaoVaca)];
+
+                if (profileCow != null)
+                {
+                    BodyWight = profileCow.BodyWight;
+                    NameCow = profileCow.NameCow;
+                }
+            }
+            catch (Exception ex)
+            {
+                ToastError(ex.Message);
             }
         }
 
         private async void ExecuteSaveCommand()
         {
+            try
+            {
+                var avaliacao = new AvaliacaoVaca(NameCow, BodyWight, Angulosiodade.DoubleToInt(), ProfundidadeCorporal.DoubleToInt(), ForcaLeiteira.DoubleToInt(),
+                                                  AlturaGarupaHipometro.DoubleToInt(), ComprimentoCorpo.DoubleToInt(), AnguloCarupa.DoubleToInt(),
+                                                  LarguraIleo.DoubleToInt(), LarguraIsquio.DoubleToInt(), AnguloCasco.DoubleToInt(),
+                                                  JarreteLateral.DoubleToInt(), JarreteTras.DoubleToInt(), UbereFirmeza.DoubleToInt(),
+                                                  UberePosterior.DoubleToInt(), AlturaUbere.DoubleToInt(), LigamentoCentral.DoubleToInt(),
+                                                  PosicaoTetos.DoubleToInt(), DataHoraInicio)
+                {
+                    DataHoraFim = DateTime.Now
+                };
+                if (await _avaliacaoRepository.AddAsync(avaliacao))
+                {
+                    ToastSuccess("Valiação adicionada com sucesso!");
+                    await NavigationService.GoBackToRootAsync();
+                    return;
+                }
 
+                ToastError("Ocorreu um erro ao salvar avaliação, Tente novamente!");
+
+            }
+            catch (Exception ex)
+            {
+                ToastError(ex.Message);
+            }
         }
 
         private void OnTapped(object type)

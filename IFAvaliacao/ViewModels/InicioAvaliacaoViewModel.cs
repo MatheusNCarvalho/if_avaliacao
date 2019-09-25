@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using IFAvaliacao.Data.Repository.Interfaces;
 using IFAvaliacao.Domain.Entities;
 using IFAvaliacao.Services.Interfaces;
 using IFAvaliacao.Views;
@@ -14,6 +15,7 @@ namespace IFAvaliacao.ViewModels
         public Task Initialization { get; }
         public DelegateCommand StartCommand { get; set; }
         private readonly IVacaService _vacaService;
+        
 
         public InicioAvaliacaoViewModel(INavigationService navigationService, IVacaService vacaService) : base(navigationService)
         {

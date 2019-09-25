@@ -39,7 +39,7 @@
                     Direction="Column"
                     AlignItems="Stretch">
 
-                <Label  Text="Selecione a fazenda" 
+                <Label  Text="Selecione a vaca" 
                     FontAttributes="Bold"/>
                 <Picker Title="Selecione a vaca."
                     BackgroundColor="White" 

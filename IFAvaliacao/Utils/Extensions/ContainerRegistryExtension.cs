@@ -16,6 +16,7 @@ namespace IFAvaliacao.Utils.Extensions
             container.Register<IFazendaRepository, FazendaReposiotry>();
             container.Register<IVacaRepository, VacaRepository>();
             container.Register<IVacaService, VacaService>();
+            container.Register<IAvaliacaoRepository, AvaliacaoRepository>();
 
             container.RegisterForNavigation<NavigationPage>();
             container.RegisterForNavigation<MainPage, MainViewModel>();

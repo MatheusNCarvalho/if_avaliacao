@@ -19,9 +19,41 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <CollectionView ItemsSource="{Binding AvaliacaoVacas}"  
+                            Margin="10,10,10,0"                           
+                            SelectionMode="Single">
+                <CollectionView.EmptyView>
+                    <Label Text="Não temos nenhuma avaliacao para Exibir :(" HorizontalTextAlignment="Center"/>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <ContentView BackgroundColor="{StaticResource BackgroundColor}">
+                            <Frame CornerRadius="3" HasShadow="False" Padding="0" Margin="0,0,0,10">
+                                <StackLayout Orientation="Horizontal">
+
+                                    <BoxView WidthRequest="10"
+                                                     BackgroundColor="Green" />
+
+                                    <StackLayout VerticalOptions="Center"
+                                                         Padding="5"
+                                                         Spacing="0">
+                                        <Label Text="{Binding  NameCow, StringFormat='Vaca Numero: {0:0}'}" />
+
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding DataHoraInicio, StringFormat='Iniciado: {0:dd/MM/yyyy HH:mm}'}" />
+
+                                            <Label Text="{Binding DataHoraFim, StringFormat='Finalizado: {0:dd/MM/yyyy HH:mm}'}" />
+                                        </StackLayout>
+
+                                        <Label  Text="{Binding BodyWight, StringFormat='Peso Corporal: {0:0}'}" />
+                                    </StackLayout>
+
+                                </StackLayout>
+                            </Frame>
+                        </ContentView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
