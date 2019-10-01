@@ -1,7 +1,5 @@
 ﻿using IFAvaliacao.Data.Repository;
-using IFAvaliacao.Data.Repository.Interfaces;
 using IFAvaliacao.Utils.Extensions;
-using IFAvaliacao.ViewModels;
 using IFAvaliacao.Views;
 using Prism;
 using Prism.DryIoc;
@@ -20,29 +18,30 @@ namespace IFAvaliacao
         {
             InitializeComponent();
             VersionTracking.Track();
-            new MobileDatabaseService().GenerateDatabase();
-            await NavigationService.NavigateAsync("/NavigationPage/MainPage");
+            InitializeNavigation();
+        }
+
+        private void InitializeNavigation()
+        {
+            if (AppSettings.Usuario == null)
+            {
+                //await NavigationService.NavigateAsync("/NavigationPage/LoginPage");
+                MainPage = new NavigationPage(new LoginPage());
+                return;
+            }
+            MainPage = new NavigationPage(new MainPage());
+            //await NavigationService.NavigateAsync("/NavigationPage/MainPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.DependecyInjection();
-            //containerRegistry.Register<IFazendaRepository, FazendaReposiotry>();
-
-            //containerRegistry.RegisterForNavigation<NavigationPage>();
-            //containerRegistry.RegisterForNavigation<MainPage, MainViewModel>();
-            //containerRegistry.RegisterForNavigation<PreenchimentoPage, PreenchimentoViewModel>();
-            //containerRegistry.RegisterForNavigation<PreenchimentoTabPage, PreenchimentoTabViewModel>();
-            //containerRegistry.RegisterForNavigation<PreenchimentoConcluidosPage, PreenchimentoConcluidosViewModel>();
-            //containerRegistry.RegisterForNavigation<AvaliacaoInicioPage, InicioAvaliacaoViewModel>();
-            //containerRegistry.RegisterForNavigation<FazendaPage, FazendaViewModel>();
-            //containerRegistry.RegisterForNavigation<VacaPage, VacaViewModel>();
-            //containerRegistry.RegisterForNavigation<CadastroFazendaPage, CadastroFazendaViewModel>();
         }
 
 
         protected override void OnStart()
         {
+            new MobileDatabaseService().GenerateDatabase();
             // Handle when your app starts
         }
 

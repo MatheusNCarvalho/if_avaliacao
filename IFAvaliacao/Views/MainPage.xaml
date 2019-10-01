@@ -5,10 +5,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"                  
              mc:Ignorable="d"       
              Visual="Material"
-                   xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-                  xmlns:c="clr-namespace:IFAvaliacao.Converter"
-                  prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:c="clr-namespace:IFAvaliacao.Converter"
+             prism:ViewModelLocator.AutowireViewModel="True"
              Opacity="50"
              Title="{Binding Title}"
              x:Class="IFAvaliacao.MainPage">

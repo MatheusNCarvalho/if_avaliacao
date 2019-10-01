@@ -45,11 +45,11 @@ namespace IFAvaliacao.ViewModels
                 MenuList
                     .Add(new Domain.Entities.Menu("Avalições", 1, "checklist.png", EMenuType.Avaliacao, true, typeof(PreenchimentoTabPage)));
                 MenuList
-                    .Add(new Domain.Entities.Menu("Fazendas", 1, "house.png", EMenuType.Fazenda, true, typeof(FazendaPage)));
+                    .Add(new Domain.Entities.Menu("Fazendas", 2, "house.png", EMenuType.Fazenda, true, typeof(FazendaPage)));
                 MenuList
-                    .Add(new Domain.Entities.Menu("Vacas", 1, "cow_face_front.png", EMenuType.Vaca, true, typeof(VacaPage)));
+                    .Add(new Domain.Entities.Menu("Vacas", 3, "cow_face_front.png", EMenuType.Vaca, true, typeof(VacaPage)));
                 MenuList
-                    .Add(new Domain.Entities.Menu("Sair", 1, "logout", EMenuType.Exit, true, typeof(PreenchimentoTabPage)));
+                    .Add(new Domain.Entities.Menu("Sair", 4, "logout", EMenuType.Exit, true, typeof(LoginPage)));
             }
             catch (Exception ex)
             {
@@ -60,8 +60,13 @@ namespace IFAvaliacao.ViewModels
 
         private async Task ExecuteMenuComand(Domain.Entities.Menu menu)
         {
-            if (menu == null) return;          
+            if (menu == null) return;
 
+            if (menu.MenuType.Equals(EMenuType.Exit))
+            {
+                Application.Current.MainPage = new NavigationPage(new LoginPage());
+                return;
+            }
             var mainPage = Application.Current.MainPage as NavigationPage;
             var masterDetail = mainPage.Navigation.NavigationStack.FirstOrDefault() as MasterDetailPage;
             masterDetail.IsPresented = false;

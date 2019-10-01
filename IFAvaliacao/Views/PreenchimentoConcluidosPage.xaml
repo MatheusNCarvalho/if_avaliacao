@@ -32,11 +32,11 @@
                                 <StackLayout Orientation="Horizontal">
 
                                     <BoxView WidthRequest="10"
-                                                     BackgroundColor="Green" />
+                                             BackgroundColor="Green" />
 
                                     <StackLayout VerticalOptions="Center"
-                                                         Padding="5"
-                                                         Spacing="0">
+                                                 Padding="5"
+                                                 Spacing="0">
                                         <Label Text="{Binding  NameCow, StringFormat='Vaca Numero: {0:0}'}" />
 
                                         <StackLayout Orientation="Horizontal">
