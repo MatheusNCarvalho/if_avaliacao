@@ -6,9 +6,13 @@ namespace IFAVALIACAO.API.Domain.Entites
     {
         protected Entity()
         {
-             Id  = Guid.NewGuid();   
+            Id = Guid.NewGuid();
+            DataCriacao = DateTime.Now;
+            DataAtualizacao = DateTime.Now;
         }
 
         public Guid Id { get; protected set; }
+        public DateTime DataCriacao { get; protected set; }
+        public DateTime DataAtualizacao { get; protected set; }
     }
 }

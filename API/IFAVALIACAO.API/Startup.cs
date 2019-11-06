@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using IFAVALIACAO.API.Configurations;
+using IFAVALIACAO.API.Configurations.IoC;
+using IFAVALIACAO.API.Data;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace IFAVALIACAO.API
 {
@@ -22,10 +21,34 @@ namespace IFAVALIACAO.API
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddDbContext<IFDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("policy", builder =>
+                {
+                    builder.AllowAnyOrigin();
+                    builder.AllowAnyHeader();
+                    builder.AllowAnyMethod();
+                });
+            });
+
+            services.AddMediatR(typeof(Startup));
+            services.AddDependencyInjection();
+            services.AddAutheticateJWT(Configuration);
+
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(new AuthorizeFilter("Bearer"));
+            })
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+            .AddJsonOptions(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,8 +64,14 @@ namespace IFAVALIACAO.API
                 app.UseHsts();
             }
 
+            app.UseCors("policy");
             app.UseHttpsRedirection();
+            app.UseAuthentication();
             app.UseMvc();
+            app.UseInitializeDatabase();
         }
+
+
+
     }
 }
