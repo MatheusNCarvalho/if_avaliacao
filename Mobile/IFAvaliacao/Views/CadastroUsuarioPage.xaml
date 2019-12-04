@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             Visual="Material"
+             BackgroundColor="{StaticResource BackgroundColor}"   
+             x:Class="IFAvaliacao.Views.CadastroUsuarioPage">
+    
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <StackLayout VerticalOptions="CenterAndExpand" Padding="10">
+                
+                <Entry Placeholder="E-email" ReturnType="Next" BackgroundColor="White" />
+
+                <Entry IsPassword="true" Placeholder="Senha" 
+                       ReturnType="Next"
+                       BackgroundColor="White" />
+
+                <Entry IsPassword="true" Placeholder="Conifrmar Senha" 
+                       Margin="0,0,0,25" 
+                       BackgroundColor="White" />
+
+                <Button Text="Cadastrar"
+                        FontSize="Medium"
+                        BackgroundColor="Green"
+                        VerticalOptions="End"
+                        HeightRequest="40"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

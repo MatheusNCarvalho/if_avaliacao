@@ -89,7 +89,7 @@
 
             <Label 
                 FontSize="Medium"
-                Text="{Binding NameCow, StringFormat='Nome da vaca: {0}'}" />
+                Text="{Binding NameCow, StringFormat='Numero da vaca: {0}'}" />
 
             <Label FontSize="Medium" 
                    Text="{Binding BodyWight, StringFormat='Peso corporal da balança: {0}'}"/>

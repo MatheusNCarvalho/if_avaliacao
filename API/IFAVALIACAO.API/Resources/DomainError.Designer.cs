@@ -61,6 +61,15 @@ namespace IFAVALIACAO.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fazenda não encontrada..
+        /// </summary>
+        public static string FazendaNaoEncontrada {
+            get {
+                return ResourceManager.GetString("FazendaNaoEncontrada", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to O E-mail &apos;{0}&apos;, já esta sendo utilizado.
         /// </summary>
         public static string UserEmailDuplicado {

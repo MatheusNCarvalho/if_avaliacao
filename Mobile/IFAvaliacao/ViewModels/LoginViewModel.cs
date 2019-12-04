@@ -1,4 +1,6 @@
 ﻿using System.Threading.Tasks;
+using IFAvaliacao.Utils.Extensions;
+using IFAvaliacao.Views;
 using Prism.Commands;
 using Prism.Navigation;
 using Xamarin.Forms;
@@ -10,6 +12,7 @@ namespace IFAvaliacao.ViewModels
         public LoginViewModel(INavigationService navigationService) : base(navigationService)
         {
             LoginCommand = new DelegateCommand(async () => await ExecuteLoginCommand());
+            CadastrarCommand = new DelegateCommand(async () => await ExecuteCadastrarCommand());
         }
 
         private string _email;
@@ -19,10 +22,27 @@ namespace IFAvaliacao.ViewModels
         public string Password { get => _password; set => SetProperty(ref _password, value); }
 
         public DelegateCommand LoginCommand { get; }
+        public DelegateCommand CadastrarCommand { get; }
         private async Task ExecuteLoginCommand()
         {
+            if (!Email.HasValue())
+            {
+                await DialogService.AlertAsync("Email é obrigatorio", "Alerta", "Ok");
+                return;
+            }
+
+            if (!Password.HasValue())
+            {
+                await DialogService.AlertAsync("Senha é obrigatorio", "Alerta", "Ok");
+                return;
+            }
+
             Application.Current.MainPage = new NavigationPage(new MainPage());
-            //await NavigationService.NavigateAsync(nameof(MainPage));
+        }
+
+        private async Task ExecuteCadastrarCommand()
+        {
+            await NavigationService.NavigateAsync(nameof(CadastroUsuarioPage));
         }
     }
 }

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IFAVALIACAO.API.Controllers
 {
-    [Route("api/")]
+    [Route("api/v1/")]
     public class AutenticacaoController : ControllerBase
     {
         private readonly IAutenticacaoService _autenticacaoService;

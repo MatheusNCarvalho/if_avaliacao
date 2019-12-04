@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using IFAVALIACAO.API.Domain.Entites;
 
 namespace IFAVALIACAO.API.Domain.Repository
@@ -9,6 +11,7 @@ namespace IFAVALIACAO.API.Domain.Repository
         void Add(TEntity obj);
         TEntity GetById(Guid id);
         IQueryable<TEntity> GetAll();
+        IList<TEntity> Get(Expression<Func<TEntity, bool>> expression, string include = null);
         void Update(TEntity obj);
         void Remove(Guid id);
     }

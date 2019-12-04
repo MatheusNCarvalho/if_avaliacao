@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using IFAVALIACAO.API.Domain.Entites;
+using IFAVALIACAO.API.Domain.Extension;
 using IFAVALIACAO.API.Domain.Repository;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,6 +33,23 @@ namespace IFAVALIACAO.API.Data.Repository
         public virtual IQueryable<TEntity> GetAll()
         {
             return DbSet;
+        }
+
+        public IList<TEntity> Get(Expression<Func<TEntity, bool>> expression, string include = null)
+        {
+            var query = GetAll();
+
+            if (include.HasValue())
+            {
+                var includes = include.Split(',');
+                foreach (var incl in includes)
+                {
+                    query = query.Include(incl);
+                }
+            }
+
+            query = query.Where(expression);
+            return query.ToList();
         }
 
         public virtual void Update(TEntity obj)

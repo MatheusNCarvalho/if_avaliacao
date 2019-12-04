@@ -31,7 +31,7 @@ namespace IFAVALIACAO.API.Controllers
             return BadRequest(new { message = string.Join("\n", errorMessages.Select(x => x.Value)) });
         }
 
-        private bool IsValidOperation()
+        protected bool IsValidOperation()
         {
             return _notifications.HasNotifications();
         }

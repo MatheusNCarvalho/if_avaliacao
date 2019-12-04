@@ -10,14 +10,16 @@ using Microsoft.AspNetCore.Mvc;
 namespace IFAVALIACAO.API.Controllers
 {
 
-    [Route("api/usuarios")]
+    [Route("api/v1/usuarios")]
     public class UsuarioController : ControllerBase
     {
         private readonly IUsuarioService _usuarioService;
+        private readonly IAutenticacaoService _autenticacaoService;
 
-        public UsuarioController(IUsuarioService usuarioService, IMediator bus, INotificationHandler<DomainNotification> notifications) : base(bus, notifications)
+        public UsuarioController(IUsuarioService usuarioService, IMediator bus, INotificationHandler<DomainNotification> notifications, IAutenticacaoService autenticacaoService) : base(bus, notifications)
         {
             _usuarioService = usuarioService;
+            _autenticacaoService = autenticacaoService;
         }
 
 
@@ -39,7 +41,11 @@ namespace IFAVALIACAO.API.Controllers
             }
 
             _usuarioService.Add(model);
-            return Response(null, 201);
+
+            if (IsValidOperation()) return Response(null, 201);
+
+            var result = _autenticacaoService.Login(new LoginModel { Email = model.Email, Password = model.Password });
+            return Response(result);
         }
     }
 }

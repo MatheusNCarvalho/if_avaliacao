@@ -14,8 +14,8 @@
     <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
             <StackLayout VerticalOptions="CenterAndExpand" Padding="10">
-                <Entry Placeholder="E-email" ReturnType="Next" BackgroundColor="White" />
-                <Entry IsPassword="true" Placeholder="Senha" Margin="0,0,0,25" 
+                <Entry Placeholder="E-email" ReturnType="Next" Text="{Binding Email}" BackgroundColor="White" />
+                <Entry IsPassword="true" Placeholder="Senha" Text="{Binding Password}" Margin="0,0,0,25" 
                    BackgroundColor="White" 
                    ReturnType="Go" 
                    ReturnCommand="{Binding LoginCommand}"/>
@@ -26,7 +26,9 @@
                         Command="{Binding LoginCommand}" 
                         VerticalOptions="End"
                         HeightRequest="40"/>
+                
                 <Button Text="Cadastra-se"
+                        Command="{Binding CadastrarCommand}"
                         FontSize="Medium"
                         BackgroundColor="Gray"
                         VerticalOptions="End"

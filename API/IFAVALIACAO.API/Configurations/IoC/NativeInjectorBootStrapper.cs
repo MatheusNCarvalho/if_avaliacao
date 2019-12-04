@@ -23,6 +23,7 @@ namespace IFAVALIACAO.API.Configurations.IoC
             services.AddScoped<IUsuarioService, UsuarioService>();
             services.AddScoped<ITokenEncoder, TokenEncoder>();
             services.AddScoped<IAutenticacaoService, AutenticacaoService>();
+            services.AddScoped<IFazendaService, FazendaService>();
 
             services.AddSingleton<ISigningConfiguration, SigningConfiguration>();
             services.AddSingleton<ITokenConfiguration, TokenConfiguration>();
