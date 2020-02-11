@@ -58,6 +58,7 @@ namespace IFAvaliacao.ViewModels
             {
                 var usuarioService = RestService.For<ICadastrarUsuarioApi>(AppSettings.ApiUrl);
                 var response = await usuarioService.Post(new Usuario { Email = Email, Password = Password, Name = Name, PasswordConfirmation = ConfirmarPassword });
+
                 Console.WriteLine(response);
             }
             catch (ValidationApiException validation)
