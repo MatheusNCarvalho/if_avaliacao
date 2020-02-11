@@ -10,6 +10,8 @@ namespace IFAvaliacao
         public static string Username = "admin";
         public static string Password = "admin";
 
+        public static string ApiUrl = "http://192.168.2.106:5000";
+
 
         public static bool UsuarioLogado
         {

@@ -4,14 +4,16 @@ using IFAVALIACAO.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IFAVALIACAO.API.Migrations
 {
     [DbContext(typeof(IFDbContext))]
-    partial class IFDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200211011407_alter_table_User_modify_column")]
+    partial class alter_table_User_modify_column
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

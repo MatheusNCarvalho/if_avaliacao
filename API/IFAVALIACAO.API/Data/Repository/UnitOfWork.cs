@@ -24,7 +24,7 @@ namespace IFAVALIACAO.API.Data.Repository
             }
             catch (Exception e)
             {
-                _mediator.Publish(new DomainNotification("Commit", e.Message));
+                _mediator.Publish(new DomainNotification("Commit", e.InnerException?.Message ?? e.Message));
                 return false;
             }
         }

@@ -13,18 +13,32 @@
     <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
             <StackLayout VerticalOptions="CenterAndExpand" Padding="10">
+
+                <Entry Placeholder="Nome" 
+                       ReturnType="Next"  
+                       Text="{Binding Name}" 
+                       BackgroundColor="White" />
                 
-                <Entry Placeholder="E-email" ReturnType="Next" BackgroundColor="White" />
+                <Entry Placeholder="E-email" 
+                       ReturnType="Next"  
+                       Text="{Binding Email}" 
+                       BackgroundColor="White" />
 
                 <Entry IsPassword="true" Placeholder="Senha" 
                        ReturnType="Next"
-                       BackgroundColor="White" />
+                       BackgroundColor="White"
+                       Text="{Binding Password}"/>
 
-                <Entry IsPassword="true" Placeholder="Conifrmar Senha" 
+                <Entry IsPassword="true" 
+                       Placeholder="Conifrmar Senha" 
                        Margin="0,0,0,25" 
-                       BackgroundColor="White" />
+                       BackgroundColor="White"
+                       Text="{Binding ConfirmarPassword}"
+                       ReturnType="Go" 
+                       ReturnCommand="{Binding CadastrarCommand}"/>
 
                 <Button Text="Cadastrar"
+                        Command="{Binding CadastrarCommand}"
                         FontSize="Medium"
                         BackgroundColor="Green"
                         VerticalOptions="End"
