@@ -1,16 +1,24 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using IFAvaliacao.Services.Interfaces;
+using IFAvaliacao.Services.Response;
 using IFAvaliacao.Utils.Extensions;
 using IFAvaliacao.Views;
 using Prism.Commands;
 using Prism.Navigation;
+using Refit;
 using Xamarin.Forms;
 
 namespace IFAvaliacao.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
-        public LoginViewModel(INavigationService navigationService) : base(navigationService)
+        private readonly IUserService _userService;
+
+        public LoginViewModel(INavigationService navigationService,
+                             IUserService userService) : base(navigationService)
         {
+            _userService = userService;
             LoginCommand = new DelegateCommand(async () => await ExecuteLoginCommand());
             CadastrarCommand = new DelegateCommand(async () => await ExecuteCadastrarCommand());
         }
@@ -37,7 +45,26 @@ namespace IFAvaliacao.ViewModels
                 return;
             }
 
-            Application.Current.MainPage = new NavigationPage(new MainPage());
+            try
+            {
+                await _userService.LoginAsync(Email, Password).ConfigureAwait(false);
+                Application.Current.MainPage = new NavigationPage(new MainPage());
+            }
+            catch (ValidationApiException validation)
+            {
+                var error = await validation.GetContentAsAsync<ErrorResponse>();
+                await DialogService.AlertAsync(error.Message);
+            }
+            catch (ApiException apiException)
+            {
+                var error = await apiException.GetContentAsAsync<ErrorResponse>();
+                await DialogService.AlertAsync(error.Message);
+
+            }
+            catch (Exception e)
+            {
+                await DialogService.AlertAsync(e.Message);
+            }
         }
 
         private async Task ExecuteCadastrarCommand()
