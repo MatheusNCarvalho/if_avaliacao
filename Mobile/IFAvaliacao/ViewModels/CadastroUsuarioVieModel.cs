@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using IFAvaliacao.Domain.Entities;
 using IFAvaliacao.Services.Api;
+using IFAvaliacao.Services.Interfaces;
 using IFAvaliacao.Services.Response;
 using IFAvaliacao.Utils.Extensions;
 using Prism.Commands;
@@ -14,9 +13,12 @@ namespace IFAvaliacao.ViewModels
 {
     public class CadastroUsuarioVieModel : ViewModelBase
     {
-        public CadastroUsuarioVieModel(INavigationService navigationService) : base(navigationService)
+        private readonly IUserService _userService;
+
+        public CadastroUsuarioVieModel(INavigationService navigationService, IUserService userService) : base(navigationService)
         {
             CadastrarCommand = new DelegateCommand(async () => await ExecuteLoginCommand());
+            _userService = userService;
         }
 
         private string _name;
@@ -56,33 +58,27 @@ namespace IFAvaliacao.ViewModels
 
             try
             {
-                var usuarioService = RestService.For<ICadastrarUsuarioApi>(AppSettings.ApiUrl);
+                var usuarioService = RestService.For<IAccountApi>(AppSettings.ApiUrl);
                 var response = await usuarioService.Post(new Usuario { Email = Email, Password = Password, Name = Name, PasswordConfirmation = ConfirmarPassword });
-
-                Console.WriteLine(response);
+                await _userService.AddUserInCache(response.Data);
             }
             catch (ValidationApiException validation)
             {
-               var error = await validation.GetContentAsAsync<ErrorResponse>();
-               await DialogService.AlertAsync(error.Message);
-
-                Console.WriteLine(validation);
+                var error = await validation.GetContentAsAsync<ErrorResponse>();
+                await DialogService.AlertAsync(error.Message);
             }
             catch (ApiException apiException)
             {
                 var error = await apiException.GetContentAsAsync<ErrorResponse>();
                 await DialogService.AlertAsync(error.Message);
-                Console.WriteLine(apiException);
 
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                await DialogService.AlertAsync(e.Message);
             }
 
 
         }
-
-
     }
 }

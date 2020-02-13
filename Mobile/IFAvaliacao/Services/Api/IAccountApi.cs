@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 namespace IFAvaliacao.Services.Api
 {
     [Headers("Accept: application/json")]
-    public interface ICadastrarUsuarioApi
+    public interface IAccountApi
     {
         [Post("/api/v1/usuarios")]
         Task<Response<LoginResponse>> Post([Body] Usuario usuario);
-
+        
     }
 }

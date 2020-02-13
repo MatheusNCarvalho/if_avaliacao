@@ -34,7 +34,15 @@ namespace IFAVALIACAO.API.Services
             return new LoginResponseModel
             {
                 Nome = usuario.Name,
-                Token = token
+                Token = token,
+                User = new UserModel
+                {
+                    Id = usuario.Id,
+                    Email = usuario.Email,
+                    Name = usuario.Name,
+                    DataCriacao = usuario.DataCriacao,
+                    DataAtualizacao = usuario.DataAtualizacao
+                }
             };
         }
     }

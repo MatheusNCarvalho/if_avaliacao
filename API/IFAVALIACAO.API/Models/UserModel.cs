@@ -2,7 +2,7 @@
 
 namespace IFAVALIACAO.API.Models
 {
-    public class UserModel
+    public class UserModel : EntityModel
     {
 
         [Required(ErrorMessage = "Nome é obrigatorio")]

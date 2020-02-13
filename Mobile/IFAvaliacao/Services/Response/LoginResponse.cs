@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IFAvaliacao.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,5 +9,6 @@ namespace IFAvaliacao.Services.Response
     {
         public string Nome { get; set; }
         public string Token { get; set; }
+        public Usuario User { get; set; }
     }
 }
