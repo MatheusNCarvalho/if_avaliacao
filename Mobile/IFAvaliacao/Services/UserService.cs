@@ -11,7 +11,6 @@ namespace IFAvaliacao.Services
     {
         private readonly IAccountApi _accountApi;
 
-
         public UserService()
         {
             _accountApi = RestService.For<IAccountApi>(AppSettings.ApiUrl);
@@ -25,7 +24,6 @@ namespace IFAvaliacao.Services
 
         public async Task LoginAsync(string username, string senha)
         {
-
             var request = new LoginRequest(username, senha);
 
             var result = await _accountApi.LoginAsync(request).ConfigureAwait(false);

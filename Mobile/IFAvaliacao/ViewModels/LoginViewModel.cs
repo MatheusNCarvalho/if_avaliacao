@@ -47,7 +47,7 @@ namespace IFAvaliacao.ViewModels
 
             try
             {
-                await _userService.LoginAsync(Email, Password).ConfigureAwait(false);
+                await _userService.LoginAsync(Email, Password);
                 Application.Current.MainPage = new NavigationPage(new MainPage());
             }
             catch (ValidationApiException validation)

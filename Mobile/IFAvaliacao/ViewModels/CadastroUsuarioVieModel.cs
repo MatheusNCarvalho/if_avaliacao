@@ -58,8 +58,8 @@ namespace IFAvaliacao.ViewModels
 
             try
             {
-                var usuarioService = RestService.For<IAccountApi>(AppSettings.ApiUrl);
-                var response = await usuarioService.PostAsync(new Usuario
+                var usuarioApiService = RestService.For<IAccountApi>(AppSettings.ApiUrl);
+                var response = await usuarioApiService.PostAsync(new Usuario
                 {
                     Email = Email,
                     Password = Password,

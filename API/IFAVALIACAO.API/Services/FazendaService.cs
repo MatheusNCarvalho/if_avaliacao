@@ -40,9 +40,12 @@ namespace IFAVALIACAO.API.Services
 
         }
 
-        public void Save(IList<FazendaModel> model)
+        public void SaveOrUpdate(IList<FazendaModel> model)
         {
-            var existeFazendas = _repository.Get(x => model.Select(ins => ins.InscricaoEstadual).ToList().Contains(x.InscricaoEstadual));
+            var inscricoesEstaduais = model.Select(x => x.InscricaoEstadual).ToList();
+
+            var existeFazendas = _repository
+                .Get(x => inscricoesEstaduais.Contains(x.InscricaoEstadual)).ToList();
 
             foreach (var fazendaModel in model)
             {
@@ -54,7 +57,7 @@ namespace IFAVALIACAO.API.Services
                     continue;
                 }
 
-                if (!(fazendaModel.DataAtualizacao > existeFazenda.DataAtualizacao)) continue;
+                if (existeFazenda.DataAtualizacao > fazendaModel.DataAtualizacao) continue;
 
                 Update(fazendaModel, existeFazenda);
             }

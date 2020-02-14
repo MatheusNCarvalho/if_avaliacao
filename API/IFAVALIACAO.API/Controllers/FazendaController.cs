@@ -39,7 +39,7 @@ namespace IFAVALIACAO.API.Controllers
                 return Response();
             }
 
-            _fazendaService.Save(model);
+            _fazendaService.SaveOrUpdate(model);
             return Response();
         }
     }
