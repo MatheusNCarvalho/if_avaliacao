@@ -1,8 +1,8 @@
 ﻿using IFAvaliacao.Data.Repository.Interfaces;
 using IFAvaliacao.Domain.Entities;
 using IFAvaliacao.Domain.Validation;
+using IFAvaliacao.Extensions;
 using IFAvaliacao.Services.Interfaces;
-using IFAvaliacao.Utils.Extensions;
 using Prism.Commands;
 using Prism.Navigation;
 using System;

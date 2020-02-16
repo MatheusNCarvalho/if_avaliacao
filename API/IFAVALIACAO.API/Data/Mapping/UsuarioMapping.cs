@@ -12,7 +12,6 @@ namespace IFAVALIACAO.API.Data.Mapping
             builder.Property(x => x.Email).IsRequired();
             builder.Property(x => x.Password).IsRequired();
 
-
             builder.HasIndex(x => x.Email).IsUnique();
         }
     }

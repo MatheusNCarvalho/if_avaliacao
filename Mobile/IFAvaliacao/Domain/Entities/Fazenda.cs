@@ -1,11 +1,14 @@
 ﻿
 
+using Newtonsoft.Json;
+
 namespace IFAvaliacao.Domain.Entities
 {
     public class Fazenda : EntityBase
     {
 
         public string InscricaoEstadual { get; set; }
+        [JsonProperty(PropertyName = "nomeProprietario")]
         public string Nome { get; set; }
         public string NomeFazenda { get; set; }
         public string Cep { get; set; }

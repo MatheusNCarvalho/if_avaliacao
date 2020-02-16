@@ -5,11 +5,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
 using IFAvaliacao.Domain.Entities.Enum;
+using IFAvaliacao.Services.Interfaces;
+using IFAvaliacao.Services.Response;
+using IFAvaliacao.Utils;
 using IFAvaliacao.Views;
-using Plugin.Connectivity;
 using Prism.Commands;
 using Prism.Navigation;
-using Prism.Services;
+using Refit;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -17,10 +19,12 @@ namespace IFAvaliacao.ViewModels
 {
     public class MainViewModel : ViewModelBase, IMasterDetailPageOptions
     {
+        private readonly IFazendaService _fazendaService;
 
-        public MainViewModel(INavigationService navigationService) : base(navigationService)
+        public MainViewModel(INavigationService navigationService, IFazendaService fazendaService) : base(navigationService)
         {
             MenuList = new ObservableCollection<Domain.Entities.Menu>();
+            _fazendaService = fazendaService;
             LoadMenu();
 
         }
@@ -49,7 +53,10 @@ namespace IFAvaliacao.ViewModels
                 MenuList
                     .Add(new Domain.Entities.Menu("Vacas", 3, "cow_face_front.png", EMenuType.Vaca, true, typeof(VacaPage)));
                 MenuList
+                 .Add(new Domain.Entities.Menu("Sincronizar", 4, "synchronization.png", EMenuType.Sincronizar, true, typeof(LoginPage)));
+                MenuList
                     .Add(new Domain.Entities.Menu("Sair", 4, "logout", EMenuType.Exit, true, typeof(LoginPage)));
+             
             }
             catch (Exception ex)
             {
@@ -60,18 +67,96 @@ namespace IFAvaliacao.ViewModels
 
         private async Task ExecuteMenuComand(Domain.Entities.Menu menu)
         {
-            if (menu == null) return;
+            if (menu == null || ItemSelected == null) return;
+
+            var mainPage = Application.Current.MainPage as NavigationPage;
+            var masterDetail = mainPage.Navigation.NavigationStack.FirstOrDefault() as MasterDetailPage;
+
+            try
+            {
+                masterDetail.IsPresented = false;
+            }
+            catch (Exception)
+            {
+
+            }
 
             if (menu.MenuType.Equals(EMenuType.Exit))
             {
-                Application.Current.MainPage = new NavigationPage(new LoginPage());
+                var connfirmConfig = new ConfirmConfig()
+                               .SetTitle("Alerta")
+                               .SetMessage("Deseja realmente sair do aplicativo?")
+                               .SetOkText("Sim")
+                               .SetCancelText("Não");
+
+                var confirm = await DialogService.ConfirmAsync(connfirmConfig);
+                if (!confirm)
+                {
+                    return;
+                }
+                AppSettings.RemoverUsuarioLogado();
+                Help.SetNavigationPageRoot(typeof(LoginPage));
                 return;
             }
-            var mainPage = Application.Current.MainPage as NavigationPage;
-            var masterDetail = mainPage.Navigation.NavigationStack.FirstOrDefault() as MasterDetailPage;
-            masterDetail.IsPresented = false;
+
+            if(menu.MenuType == EMenuType.Sincronizar)
+            {
+                await Sync();
+                return;
+            }      
+      
 
             masterDetail.Detail = new NavigationPage((Page)Activator.CreateInstance(menu.TargetType));
+        }
+
+
+        private async Task Sync()
+        {
+            if (!Help.IsConnected)
+            {
+                ItemSelected = null;
+                await DialogService.AlertAsync("Parece que você não está conecatado. Verifique sua conexão com a internet", "Oops...", "OK");
+                return;
+            }
+            var connfirmConfig = new ConfirmConfig()
+                        .SetTitle("Alerta")
+                        .SetMessage("Deseja sincronizar os dados ?")
+                        .SetOkText("Sim")
+                        .SetCancelText("Não");
+
+            var confirm = await DialogService.ConfirmAsync(connfirmConfig);
+            if (!confirm)
+            {
+                return;
+            }
+
+            try
+            {
+                DialogService.ShowLoading("Aguarde, sincronizando...");
+                await _fazendaService.PushAsync();
+            }
+            catch (ValidationApiException validation)
+            {
+                DialogService.HideLoading();
+                var error = await validation.GetContentAsAsync<ErrorResponse>();
+                await DialogService.AlertAsync(error.Message);
+            }
+            catch (ApiException apiException)
+            {
+                DialogService.HideLoading();
+                var error = await apiException.GetContentAsAsync<ErrorResponse>();
+                await DialogService.AlertAsync(apiException.StatusCode == System.Net.HttpStatusCode.NotFound ? "Api não encontrada"  : error?.Message);
+
+            }
+            catch (Exception e)
+            {
+                DialogService.HideLoading();
+                await DialogService.AlertAsync(e.Message);
+            }
+            finally
+            {
+                DialogService.HideLoading();
+            }
         }
 
         public bool IsPresentedAfterNavigation => Device.Idiom != TargetIdiom.Phone;

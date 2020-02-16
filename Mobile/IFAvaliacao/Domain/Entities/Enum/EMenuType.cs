@@ -5,6 +5,7 @@
         Avaliacao = 1,
         Fazenda,
         Vaca,
+        Sincronizar,
         Exit
     }
 }

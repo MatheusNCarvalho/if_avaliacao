@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
+using IFAvaliacao.Extensions;
 using IFAvaliacao.Services.Interfaces;
 using IFAvaliacao.Services.Response;
-using IFAvaliacao.Utils.Extensions;
 using IFAvaliacao.Views;
 using Prism.Commands;
 using Prism.Navigation;

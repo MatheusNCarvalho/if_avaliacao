@@ -7,7 +7,7 @@ using IFAvaliacao.Views;
 using Prism.Ioc;
 using Xamarin.Forms;
 
-namespace IFAvaliacao.Utils.Extensions
+namespace IFAvaliacao.Extensions
 {
     public static class ContainerRegistryExtension
     {
@@ -18,6 +18,7 @@ namespace IFAvaliacao.Utils.Extensions
             container.Register<IVacaService, VacaService>();
             container.Register<IAvaliacaoRepository, AvaliacaoRepository>();
             container.Register<IUserService, UserService>();
+            container.Register<IFazendaService, FazendaService>();
 
             container.RegisterForNavigation<NavigationPage>();
             container.RegisterForNavigation<MainPage, MainViewModel>();

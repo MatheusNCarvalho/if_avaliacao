@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
 using IFAvaliacao.Domain.Entities;
+using IFAvaliacao.Extensions;
 using IFAvaliacao.Services.Api;
 using IFAvaliacao.Services.Interfaces;
 using IFAvaliacao.Services.Response;
-using IFAvaliacao.Utils.Extensions;
 using Prism.Commands;
 using Prism.Navigation;
 using Refit;

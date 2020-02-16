@@ -1,9 +1,9 @@
 ﻿
 
 using IFAvaliacao.Domain.Entities;
+using IFAvaliacao.Extensions;
 using IFAvaliacao.Services.Response;
 using IFAvaliacao.Utils;
-using IFAvaliacao.Utils.Extensions;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -44,6 +44,11 @@ namespace IFAvaliacao
 
             securityUserUpdate.User.Password = security.User.Password;
             await SetSecurityUser(key, securityUserUpdate);
+        }
+
+        public static void RemoverUsuarioLogado()
+        {
+            Preferences.Remove(nameof(Usuario));
         }
 
 

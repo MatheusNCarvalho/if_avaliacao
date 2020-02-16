@@ -2,8 +2,8 @@
 using IFAvaliacao.Data.Repository.Interfaces;
 using IFAvaliacao.Domain.Entities;
 using IFAvaliacao.Domain.Validation;
+using IFAvaliacao.Extensions;
 using IFAvaliacao.Services.Api;
-using IFAvaliacao.Utils.Extensions;
 using Prism.Commands;
 using Prism.Navigation;
 using Refit;
@@ -61,40 +61,7 @@ namespace IFAvaliacao.ViewModels
 
 
             base.OnNavigatedTo(parameters);
-        }
-
-        //public async Task<bool> ExecuteFinZipCodeCommand()
-        //{
-        //    try
-        //    {
-        //        if (!Help.IsConnected)
-        //        {
-        //            await DialogService.AlertAsync("Dispostivo não está conectado com a internet!");
-        //            return false;
-        //        }
-        //        DialogService.ShowLoading("Aguarde, buscando cep!");
-        //        var zipCode = await _findZipCodeApi.FindZipCodeAsync(Cep.Replace("-", ""));
-        //        if (zipCode.Erro)
-        //        {
-        //            ToastWarning("Cep inexistente!");
-        //            return false;
-        //        }
-        //        Cidade = zipCode.Localidade;
-        //        Estado = zipCode.Uf;
-        //        return true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        DialogService.HideLoading();
-        //        ToastError(ex.Message);
-        //        return false;
-        //    }
-        //    finally
-        //    {
-        //        DialogService.HideLoading();
-
-        //    }
-        //}
+        }      
 
 
         private async Task ExecuteSaveCommand()

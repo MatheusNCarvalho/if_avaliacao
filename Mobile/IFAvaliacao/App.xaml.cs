@@ -1,5 +1,5 @@
 ﻿using IFAvaliacao.Data.Repository;
-using IFAvaliacao.Utils.Extensions;
+using IFAvaliacao.Extensions;
 using IFAvaliacao.Views;
 using Prism;
 using Prism.DryIoc;

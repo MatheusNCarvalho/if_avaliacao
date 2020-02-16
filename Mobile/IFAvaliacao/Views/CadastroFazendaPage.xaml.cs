@@ -1,6 +1,4 @@
-﻿using IFAvaliacao.Utils.Extensions;
-using IFAvaliacao.ViewModels;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace IFAvaliacao.Views

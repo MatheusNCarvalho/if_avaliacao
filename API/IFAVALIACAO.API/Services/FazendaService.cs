@@ -57,7 +57,7 @@ namespace IFAVALIACAO.API.Services
                     continue;
                 }
 
-                if (existeFazenda.DataAtualizacao > fazendaModel.DataAtualizacao) continue;
+                if (existeFazenda.DataAtualizacao?.Ticks >= fazendaModel.DataAtualizacao?.Ticks) continue;
 
                 Update(fazendaModel, existeFazenda);
             }

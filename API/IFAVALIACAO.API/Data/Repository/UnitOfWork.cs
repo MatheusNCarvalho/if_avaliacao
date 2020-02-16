@@ -20,7 +20,8 @@ namespace IFAVALIACAO.API.Data.Repository
         {
             try
             {
-                return _context.SaveChanges() > 0;
+                 _context.SaveChanges();
+                 return true;
             }
             catch (Exception e)
             {

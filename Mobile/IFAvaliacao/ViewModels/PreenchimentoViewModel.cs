@@ -2,7 +2,7 @@
 using System.Windows.Input;
 using IFAvaliacao.Data.Repository.Interfaces;
 using IFAvaliacao.Domain.Entities;
-using IFAvaliacao.Utils.Extensions;
+using IFAvaliacao.Extensions;
 using Prism.Navigation;
 using Xamarin.Forms;
 
