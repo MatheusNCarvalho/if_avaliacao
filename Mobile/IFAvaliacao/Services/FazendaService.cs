@@ -15,6 +15,11 @@ namespace IFAvaliacao.Services
             _fazendaRepository = fazendaRepository;
         }
 
+        public async Task PullAsync()
+        {
+            
+        }
+
         public async Task PushAsync()
         {
             var fazendas = await _fazendaRepository.GetAsync();

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using IFAVALIACAO.API.Domain.Entites;
+using IFAVALIACAO.API.Domain.Filters;
 using IFAVALIACAO.API.Domain.Repository;
 using IFAVALIACAO.API.Models;
 using IFAVALIACAO.API.Resources;
@@ -14,11 +16,18 @@ namespace IFAVALIACAO.API.Services
     public class FazendaService : ServiceBase, IFazendaService
     {
         private readonly IRepository<Fazenda> _repository;
-        public FazendaService(IUnitOfWork ofWork, IMediator mediator, INotificationHandler<DomainNotification> notifications, IRepository<Fazenda> repository) : base(ofWork, mediator, notifications)
+        private readonly IMapper _mapper;
+        public FazendaService(IUnitOfWork ofWork, IMediator mediator, INotificationHandler<DomainNotification> notifications, IRepository<Fazenda> repository, IMapper mapper) : base(ofWork, mediator, notifications)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
+
+        public IList<FazendaModel> SearchItemsToSync(SyncFilter filter)
+        {
+            return _mapper.Map<IList<FazendaModel>>(_repository.SearchItemsToSync(filter.FirstSync,filter.LastDateStart));
+        }
 
         public void Save(FazendaModel model)
         {

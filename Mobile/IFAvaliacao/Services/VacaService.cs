@@ -42,5 +42,15 @@ namespace IFAvaliacao.Services
 
             return vacas;
         }
+
+        public Task PullAsync()
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task PushAsync()
+        {
+            return Task.CompletedTask;
+        }
     }
 }

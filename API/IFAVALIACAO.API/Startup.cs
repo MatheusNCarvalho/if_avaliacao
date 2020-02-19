@@ -1,4 +1,5 @@
-﻿using IFAVALIACAO.API.Configurations;
+﻿using AutoMapper;
+using IFAVALIACAO.API.Configurations;
 using IFAVALIACAO.API.Configurations.IoC;
 using IFAVALIACAO.API.Data;
 using MediatR;
@@ -39,6 +40,7 @@ namespace IFAVALIACAO.API
             services.AddMediatR(typeof(Startup));
             services.AddDependencyInjection();
             services.AddAutheticateJWT(Configuration);
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddMvc(options =>
             {

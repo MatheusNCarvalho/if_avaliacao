@@ -35,6 +35,21 @@ namespace IFAVALIACAO.API.Data.Repository
             return DbSet;
         }
 
+        public IList<TEntity> SearchItemsToSync(bool firstSync, DateTimeOffset? lastDateStart, string includes = null)
+        {
+            var query = GetAll();
+
+
+            if (!firstSync && lastDateStart.HasValue)
+            {
+                query = query.Where(x => x.DataCriacao >= lastDateStart.Value.LocalDateTime || 
+                                         x.DataAtualizacao >= lastDateStart.Value.LocalDateTime);
+            }
+
+            query = query.OrderByDescending(x => x.DataCriacao);
+            return query.ToList();
+        }
+
         public IList<TEntity> Get(Expression<Func<TEntity, bool>> expression, string include = null)
         {
             var query = GetAll();
@@ -51,6 +66,8 @@ namespace IFAVALIACAO.API.Data.Repository
             query = query.Where(expression);
             return query.ToList();
         }
+
+
 
         public virtual void Update(TEntity obj)
         {

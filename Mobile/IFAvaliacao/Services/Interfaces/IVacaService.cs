@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace IFAvaliacao.Services.Interfaces
 {
-    public interface IVacaService
+    public interface IVacaService : ISyncService
     {
         Task<IList<Vaca>> GetAllAsync();
         Task<bool> DeleteAsync(Vaca vaca);

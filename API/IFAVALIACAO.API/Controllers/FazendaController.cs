@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using IFAVALIACAO.API.Domain.Filters;
 using IFAVALIACAO.API.Models;
 using IFAVALIACAO.API.Services.Interfaces;
 using IFAVALIACAO.API.Services.Notifications;
@@ -16,6 +17,11 @@ namespace IFAVALIACAO.API.Controllers
             _fazendaService = fazendaService;
         }
 
+        [HttpGet]
+        public IActionResult Get([FromQuery] SyncFilter filter)
+        {
+          return  Response(_fazendaService.SearchItemsToSync(filter));
+        }
 
         [HttpPost]
         public IActionResult Post([FromBody] FazendaModel model)
