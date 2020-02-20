@@ -7,11 +7,14 @@ namespace IFAvaliacao.Services
     {
         private readonly IFazendaService _fazendaService;
         private readonly IVacaService _vacaService;
+        private readonly IAvaliacaoService _avaliacaoService;
 
-        public SyncService(IFazendaService fazendaService, IVacaService vacaService)
+
+        public SyncService(IFazendaService fazendaService, IVacaService vacaService, IAvaliacaoService avaliacaoService)
         {
             _fazendaService = fazendaService;
             _vacaService = vacaService;
+            _avaliacaoService = avaliacaoService;
         }
 
         public async Task PullAsync()
@@ -24,6 +27,7 @@ namespace IFAvaliacao.Services
         {
             await _fazendaService.PushAsync();
             await _vacaService.PushAsync();
+            await _avaliacaoService.PushAsync();
         }
     }
 }

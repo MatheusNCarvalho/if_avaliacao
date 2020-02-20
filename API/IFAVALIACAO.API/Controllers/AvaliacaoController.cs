@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IFAVALIACAO.API.Controllers
 {
+
+    [Route("api/v1/avaliacoes")]
     public class AvaliacaoController : ControllerBase
     {
         private readonly IAvaliacaoService _avaliacaoService;
@@ -16,6 +18,7 @@ namespace IFAVALIACAO.API.Controllers
             _avaliacaoService = avaliacaoService;
         }
 
+        [HttpPost]
         public IActionResult Post([FromBody] IList<AvaliacaoModel> models)
         {
             if (!ModelState.IsValid)
