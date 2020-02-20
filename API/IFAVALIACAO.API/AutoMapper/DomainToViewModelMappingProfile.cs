@@ -9,6 +9,7 @@ namespace IFAVALIACAO.API.AutoMapper
         public DomainToViewModelMappingProfile()
         {
             CreateMap<Fazenda, FazendaModel>();
+            CreateMap<Vaca, VacaModel>();
         }
     }
 }

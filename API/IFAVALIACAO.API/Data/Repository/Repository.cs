@@ -30,6 +30,11 @@ namespace IFAVALIACAO.API.Data.Repository
             return DbSet.Find(id);
         }
 
+        public IList<TEntity> GetByIds(IList<Guid> ids)
+        {
+            return GetAll().Where(x => ids.Contains(x.Id)).ToList();
+        }
+
         public virtual IQueryable<TEntity> GetAll()
         {
             return DbSet;

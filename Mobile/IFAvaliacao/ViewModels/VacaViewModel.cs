@@ -74,7 +74,10 @@ namespace IFAvaliacao.ViewModels
 
         private async Task ExcluirVaca()
         {
-            await _vacaService.DeleteAsync(Vaca);
+            Vaca.Deletado = true;
+            Vaca.AddDataAtualizacao();
+
+            await _vacaService.UpdateAsync(Vaca);
             await LoadAsync();
         }
     }

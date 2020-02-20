@@ -10,6 +10,7 @@ namespace IFAVALIACAO.API.Domain.Repository
     {
         void Add(TEntity obj);
         TEntity GetById(Guid id);
+        IList<TEntity> GetByIds(IList<Guid> ids);
         IQueryable<TEntity> GetAll();
         IList<TEntity> SearchItemsToSync(bool firstSync, DateTimeOffset? lastDateStart, string includes = null);
         IList<TEntity> Get(Expression<Func<TEntity, bool>> expression, string include = null);

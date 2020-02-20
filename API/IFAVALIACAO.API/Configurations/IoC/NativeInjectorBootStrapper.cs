@@ -24,6 +24,7 @@ namespace IFAVALIACAO.API.Configurations.IoC
             services.AddScoped<ITokenEncoder, TokenEncoder>();
             services.AddScoped<IAutenticacaoService, AutenticacaoService>();
             services.AddScoped<IFazendaService, FazendaService>();
+            services.AddScoped<IVacaService, VacaService>();
 
             services.AddSingleton<ISigningConfiguration, SigningConfiguration>();
             services.AddSingleton<ITokenConfiguration, TokenConfiguration>();
@@ -32,6 +33,8 @@ namespace IFAVALIACAO.API.Configurations.IoC
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<IFazendaRepository, FazendaRepository>();
+            services.AddScoped<IVacaRepository, VacaRepository>();
 
             return services;
         }

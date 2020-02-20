@@ -6,8 +6,10 @@ namespace IFAvaliacao.Services.Interfaces
 {
     public interface IVacaService : ISyncService
     {
+        Task UpdateAsync(Vaca vaca);
         Task<IList<Vaca>> GetAllAsync();
-        Task<bool> DeleteAsync(Vaca vaca);
         Task<bool> ExisteVacaPorFazendaAsync(string id, string idFazenda, int numero);
+        Task<bool> DeleteAsync(Vaca vaca);
+     
     }
 }

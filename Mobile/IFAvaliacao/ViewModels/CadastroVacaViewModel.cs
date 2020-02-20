@@ -51,8 +51,8 @@ namespace IFAvaliacao.ViewModels
         private string _nomePai;
         public string NomePai { get => _nomePai; set => SetProperty(ref _nomePai, value); }
 
-        private int _numeroPai;
-        public int NumeroPai { get => _numeroPai; set => SetProperty(ref _numeroPai, value); }
+        private int? _numeroPai;
+        public int? NumeroPai { get => _numeroPai; set => SetProperty(ref _numeroPai, value); }
 
         private string _raca;
         public string Raca { get => _raca; set => SetProperty(ref _raca, value); }
@@ -66,14 +66,14 @@ namespace IFAvaliacao.ViewModels
         /// <summary>
         /// Ordem de parto: (quantos partos a vaca teve ao longo da vida)
         /// </summary>
-        private int _ordemParto;
-        public int OrdemParto { get => _ordemParto; set => SetProperty(ref _ordemParto, value); }
+        private int? _ordemParto;
+        public int? OrdemParto { get => _ordemParto; set => SetProperty(ref _ordemParto, value); }
 
         /// <summary>
         /// IPP (idade ao primeiro parto):
         /// </summary>
-        private int _ipp;
-        public int Ipp { get => _ipp; set => SetProperty(ref _ipp, value); }
+        private int? _ipp;
+        public int? Ipp { get => _ipp; set => SetProperty(ref _ipp, value); }
 
         private ObservableCollection<Fazenda> _fazendas;
         public ObservableCollection<Fazenda> Fazendas { get => _fazendas; set => SetProperty(ref _fazendas, value); }
@@ -124,6 +124,7 @@ namespace IFAvaliacao.ViewModels
                 {
                     vaca.SetId(Id);
                     vaca.AddDataCriacao(DataCriacao);
+                    vaca.AddDataAtualizacao();
                     if (await _vacaRepository.UpdateAsync(vaca))
                     {
                         ToastSuccess("Cadastro atualizado com sucesso!");
@@ -167,9 +168,11 @@ namespace IFAvaliacao.ViewModels
             var newObj = new Vaca
             {
                 FazendaId = Fazenda?.Id,
+                FazendaInscricaoEstadual = Fazenda?.InscricaoEstadual,
                 Numero = Numero,
                 Nome = Nome,
-                IdVacaMae = VacaSelecionada?.Id,
+                VacaMaeId = VacaSelecionada?.Id,
+                NumeroVacaMae = VacaSelecionada?.Numero,
                 NomePai = NomePai,
                 NumeroPai = NumeroPai,
                 Ipp = Ipp,
@@ -191,9 +194,9 @@ namespace IFAvaliacao.ViewModels
             FazendaId = vaca.FazendaId;
             Fazenda = await _fazendaRepository.GetByIdAsync(FazendaId);
             FazendaIndex = Fazendas.ToList().FindIndex(x => x.Id.Equals(FazendaId));
-            if (vaca.IdVacaMae.HasValue())
+            if (vaca.VacaMaeId.HasValue())
             {
-                VacaSelecionada = await _vacaRepository.GetByIdAsync(vaca.IdVacaMae);
+                VacaSelecionada = await _vacaRepository.GetByIdAsync(vaca.VacaMaeId);
                 VacaIndex = Vacas.ToList().FindIndex(x => x.Id.Equals(VacaSelecionada.Id));              
             }
             var vacaIndexAtual = Vacas.ToList().FindIndex(x => x.Id.Equals(Id));

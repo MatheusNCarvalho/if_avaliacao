@@ -36,11 +36,12 @@ namespace IFAvaliacao.Services
                     continue;
                 }
                 if (existiItem.DataAtualizacao.Value.Ticks >= item.DataAtualizacao.Value.Ticks) continue;
-                await _fazendaRepository.UpdateAsync(item);
+                await UpdateFazendaAsync(existiItem,item);
             }
             tableSchema.SetLastSync(dataSync);
             await UpdateTableSchemaAsync(tableSchema);
-        }
+        }    
+
 
         public async Task PushAsync()
         {
@@ -52,6 +53,18 @@ namespace IFAvaliacao.Services
             var tableSchema = await GetByTableSchemaAsync(nameof(Fazenda));
             tableSchema?.SetLastSync(DateTime.Now);
             await UpdateTableSchemaAsync(tableSchema);
+        }
+
+        private async Task UpdateFazendaAsync(Fazenda oldValue, Fazenda newValue)
+        {
+            oldValue.InscricaoEstadual = newValue.InscricaoEstadual;
+            oldValue.Nome = newValue.Nome;
+            oldValue.NomeFazenda = newValue.NomeFazenda;
+            oldValue.Cep = newValue.Cep;
+            oldValue.Endereco = newValue.Endereco;
+            oldValue.Cidade = newValue.Cidade;
+            oldValue.Estado = newValue.Estado;
+            await _fazendaRepository.UpdateAsync(oldValue);
         }
     }
 }
