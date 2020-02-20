@@ -77,6 +77,12 @@ namespace IFAvaliacao.Services
             await UpdateTableSchemaAsync(tableSchema);
         }
 
+        public async Task<bool> ExisteVacaPorNumero(string id, int numero)
+        {
+            var result = await _vacaRepository.GetAsync(x => x.NumeroVacaMae == numero && x.Id != id);
+            return result.Any();
+        }
+
         public async Task<bool> DeleteAsync(Vaca vaca)
         {
             return await _vacaRepository.DeleteAsync(vaca);
@@ -103,5 +109,7 @@ namespace IFAvaliacao.Services
             oldValue.DataAtualizacao = newValue.DataAtualizacao;
             await _vacaRepository.UpdateAsync(oldValue);
         }
+
+       
     }
 }

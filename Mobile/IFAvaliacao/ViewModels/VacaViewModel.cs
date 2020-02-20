@@ -74,11 +74,16 @@ namespace IFAvaliacao.ViewModels
 
         private async Task ExcluirVaca()
         {
+            var result = await _vacaService.ExisteVacaPorNumero(Vaca.Id, Vaca.Numero);
+            if (result)
+            {
+                await DialogService.AlertAsync("Vaca não pode ser deletado pois, possui referençias com outras vacas", "Alerta", "Ok");
+                return;
+            }
+
             Vaca.Deletado = true;
             Vaca.AddDataAtualizacao();
-
-            //await _vacaService.UpdateAsync(Vaca);
-            await _vacaService.DeleteAsync(Vaca);
+            await _vacaService.UpdateAsync(Vaca);
             await LoadAsync();
         }
     }

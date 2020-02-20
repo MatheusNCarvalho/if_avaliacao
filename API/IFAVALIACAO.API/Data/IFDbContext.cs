@@ -13,6 +13,7 @@ namespace IFAVALIACAO.API.Data
             modelBuilder.ApplyConfiguration(new UsuarioMapping());
             modelBuilder.ApplyConfiguration(new FazendaMapping());
             modelBuilder.ApplyConfiguration(new VacaMapping());
+            modelBuilder.ApplyConfiguration(new AvaliacaoMapping());
         }
     }
 }

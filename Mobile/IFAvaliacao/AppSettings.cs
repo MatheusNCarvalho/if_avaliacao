@@ -12,7 +12,14 @@ namespace IFAvaliacao
 {
     public static class AppSettings
     {
-        public static string ApiUrl = "http://192.168.2.103:5000";
+        public static string DefaultApiUrl = "http://192.168.2.103:5000";
+
+
+        public static string ApiUrl
+        {
+            get => Preferences.Get(nameof(ApiUrl), DefaultApiUrl);
+            set => Preferences.Set(nameof(ApiUrl), value);
+        }
 
         public static Usuario Usuario
         {

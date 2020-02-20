@@ -159,9 +159,10 @@ namespace IFAvaliacao.ViewModels
                                                   JarreteLateral.DoubleToInt(), JarreteTras.DoubleToInt(), UbereFirmeza.DoubleToInt(),
                                                   UberePosterior.DoubleToInt(), AlturaUbere.DoubleToInt(), LigamentoCentral.DoubleToInt(),
                                                   PosicaoTetos.DoubleToInt(), DataHoraInicio)
-                {
-                    DataHoraFim = DateTime.Now
-                };
+                                {
+                                    DataHoraFim = DateTime.Now
+                                };
+
                 if (await _avaliacaoRepository.AddAsync(avaliacao))
                 {
                     ToastSuccess("Valiação adicionada com sucesso!");

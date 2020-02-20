@@ -1,9 +1,10 @@
-﻿using IFAVALIACAO.API.Models;
+﻿using System.Collections.Generic;
+using IFAVALIACAO.API.Models;
 
 namespace IFAVALIACAO.API.Services.Interfaces
 {
     public interface IAvaliacaoService
     {
-        void Save(AvaliacaoModel model);
+        void Save(IList<AvaliacaoModel> model);
     }
 }

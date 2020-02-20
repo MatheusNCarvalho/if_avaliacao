@@ -35,6 +35,8 @@ namespace IFAVALIACAO.API.Configurations.IoC
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<IFazendaRepository, FazendaRepository>();
             services.AddScoped<IVacaRepository, VacaRepository>();
+            services.AddScoped<IAvaliacaoRepository, AvaliacaoRepository>();
+            services.AddScoped<IAvaliacaoService, AvaliacaoService>();
 
             return services;
         }

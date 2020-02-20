@@ -57,7 +57,9 @@ namespace IFAvaliacao.ViewModels
                  .Add(new Domain.Entities.Menu("Sincronizar", 4, "synchronization.png", EMenuType.Sincronizar, true, typeof(LoginPage)));
                 MenuList
                     .Add(new Domain.Entities.Menu("Sair", 4, "logout", EMenuType.Exit, true, typeof(LoginPage)));
-             
+                MenuList
+                    .Add(new Domain.Entities.Menu("Configurações", 4, "settings.png", EMenuType.Configuration, true, typeof(SettingsPage)));
+
             }
             catch (Exception ex)
             {

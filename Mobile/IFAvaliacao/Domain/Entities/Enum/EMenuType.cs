@@ -6,6 +6,7 @@
         Fazenda,
         Vaca,
         Sincronizar,
-        Exit
+        Exit,
+        Configuration
     }
 }

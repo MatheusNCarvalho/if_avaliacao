@@ -9,7 +9,8 @@ namespace IFAvaliacao.Services.Interfaces
         Task UpdateAsync(Vaca vaca);
         Task<IList<Vaca>> GetAllAsync();
         Task<bool> ExisteVacaPorFazendaAsync(string id, string idFazenda, int numero);
+        Task<bool> ExisteVacaPorNumero(string id, int numero);
         Task<bool> DeleteAsync(Vaca vaca);
-     
+
     }
 }

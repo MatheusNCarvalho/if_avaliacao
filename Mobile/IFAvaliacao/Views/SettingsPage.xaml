@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             mc:Ignorable="d"
+             Title="Configurações"
+             BackgroundColor="{StaticResource BackgroundColor}"
+             x:Class="IFAvaliacao.Views.SettingsPage">
+    <ContentPage.Content>
+        <TableView
+            Intent="Settings">
+            <TableRoot>
+                <TableSection Title="Servidor">
+                   
+                    <EntryCell
+                        HorizontalTextAlignment="End"
+                        Label="Endereço da API:"
+                        Text="{Binding EndApi}"
+                        Keyboard="Url"/>            
+                </TableSection>             
+            </TableRoot>
+        </TableView>
+    </ContentPage.Content>
+</ContentPage>
