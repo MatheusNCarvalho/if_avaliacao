@@ -15,12 +15,12 @@ namespace IFAVALIACAO.API.Models
         public Guid? VacaMaeId { get; set; }
         public int? NumeroVacaMae { get; set; }
         public string NomePai { get; set; }
-        public int NumeroPai { get; set; }
+        public int? NumeroPai { get; set; }
         public string Raca { get; set; }
-        public DateTime DataNascimento { get; set; }
+        public DateTime? DataNascimento { get; set; }
         public string GrauSanguineo { get; set; }
-        public int OrdemParto { get; set; }
-        public int Ipp { get; set; }
+        public int? OrdemParto { get; set; }
+        public int? Ipp { get; set; }
 
         public FazendaModel Fazenda { get; set; }
         public VacaModel Vaca { get; set; }

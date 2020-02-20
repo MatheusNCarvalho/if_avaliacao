@@ -178,7 +178,8 @@ namespace IFAvaliacao.ViewModels
                 Ipp = Ipp,
                 OrdemParto = OrdemParto,
                 Raca = Raca,
-                GrauSanguinio = GrauSanguinio
+                GrauSanguinio = GrauSanguinio,
+                DataCriacao = DateTime.Now
             };
 
             if (DataNascimento.HasValue())
@@ -210,6 +211,10 @@ namespace IFAvaliacao.ViewModels
             OrdemParto = vaca.OrdemParto;
             Raca = vaca.Raca;
             GrauSanguinio = vaca.GrauSanguinio;
+            if(vaca.DataNascimento.HasValue)
+            {
+                DataNascimento = vaca.DataNascimento.ToString();
+            }
         }
 
         private async Task LoadAsync()

@@ -51,6 +51,11 @@ namespace IFAVALIACAO.API.Data.Repository
                                          x.DataAtualizacao >= lastDateStart.Value.LocalDateTime);
             }
 
+            if (includes.HasValue())
+            {
+                query = query.Include(includes);
+            }
+
             query = query.OrderByDescending(x => x.DataCriacao);
             return query.ToList();
         }

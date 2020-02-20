@@ -1,6 +1,8 @@
 ﻿using IFAvaliacao.Data.Repository.Interfaces;
 using IFAvaliacao.Domain.Entities;
+using IFAvaliacao.Services.Api;
 using IFAvaliacao.Services.Interfaces;
+using Refit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,9 +65,16 @@ namespace IFAvaliacao.Services
             await UpdateTableSchemaAsync(tableSchema);
         }
 
-        public Task PushAsync()
+        public async Task PushAsync()
         {
-            return Task.CompletedTask;
+            var vacas = await _vacaRepository.GetAsync(true);
+
+            var vacaApi = RestService.For<IVacaApi>(HttpClientInstance.Current);
+            await vacaApi.PostOrPutAsync(vacas);
+
+            var tableSchema = await GetByTableSchemaAsync(nameof(Vaca));
+            tableSchema?.SetLastSync(DateTime.Now);
+            await UpdateTableSchemaAsync(tableSchema);
         }
 
         public async Task<bool> DeleteAsync(Vaca vaca)
@@ -91,6 +100,7 @@ namespace IFAvaliacao.Services
             oldValue.DataNascimento = newValue.DataNascimento;
             oldValue.OrdemParto = newValue.OrdemParto;
             oldValue.Ipp = newValue.Ipp;
+            oldValue.DataAtualizacao = newValue.DataAtualizacao;
             await _vacaRepository.UpdateAsync(oldValue);
         }
     }

@@ -27,7 +27,7 @@ namespace IFAVALIACAO.API.Services
 
         public IList<VacaModel> SearchItemsToSync(SyncFilter filter)
         {
-            return _mapper.Map<IList<VacaModel>>(_vacaRepository.SearchItemsToSync(filter.FirstSync, filter.LastDateStart));
+            return _mapper.Map<IList<VacaModel>>(_vacaRepository.SearchItemsToSync(filter.FirstSync, filter.LastDateStart, "Fazenda"));
         }
 
         public void Save(VacaModel model)
@@ -43,7 +43,7 @@ namespace IFAVALIACAO.API.Services
                 .ToList();
 
             var vacasExistente = _vacaRepository
-                .GetByNumeros(models.Where(x => x.NumeroVacaMae.HasValue).Select(x => x.NumeroVacaMae.Value).ToList())
+                .GetByNumeros(models.Select(x => x.Numero).ToList())
                 .ToList();
 
             foreach (var vacaModel in models)

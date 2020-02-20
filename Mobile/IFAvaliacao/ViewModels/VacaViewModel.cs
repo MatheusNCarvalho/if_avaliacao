@@ -77,7 +77,8 @@ namespace IFAvaliacao.ViewModels
             Vaca.Deletado = true;
             Vaca.AddDataAtualizacao();
 
-            await _vacaService.UpdateAsync(Vaca);
+            //await _vacaService.UpdateAsync(Vaca);
+            await _vacaService.DeleteAsync(Vaca);
             await LoadAsync();
         }
     }

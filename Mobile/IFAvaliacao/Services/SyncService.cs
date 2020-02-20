@@ -23,7 +23,7 @@ namespace IFAvaliacao.Services
         public async Task PushAsync()
         {
             await _fazendaService.PushAsync();
-            await _fazendaService.PushAsync();
+            await _vacaService.PushAsync();
         }
     }
 }
