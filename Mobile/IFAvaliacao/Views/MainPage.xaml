@@ -9,7 +9,6 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:c="clr-namespace:IFAvaliacao.Converter"
              prism:ViewModelLocator.AutowireViewModel="True"
-             Opacity="50"
              Title="{Binding Title}"
              x:Class="IFAvaliacao.MainPage">
 
@@ -51,9 +50,10 @@
                     <BoxView HorizontalOptions="FillAndExpand" VerticalOptions="Center" HeightRequest="1" BackgroundColor="Black" />
                     <ListView SeparatorVisibility="None"
                               CachingStrategy="RecycleElement"
-                              HasUnevenRows="True"                                                       
+                              HasUnevenRows="True"
+                               SelectedItem="{Binding ItemSelected}"
                               ItemsSource="{Binding MenuList}"
-                              SelectedItem="{Binding ItemSelected}">
+                             >
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>

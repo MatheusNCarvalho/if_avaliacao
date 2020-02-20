@@ -13,10 +13,12 @@ namespace IFAvaliacao.Extensions
     {
         public static IContainerRegistry DependecyInjection(this IContainerRegistry container)
         {
+       
             container.Register<IFazendaRepository, FazendaReposiotry>();
             container.Register<IVacaRepository, VacaRepository>();
             container.Register<IVacaService, VacaService>();
             container.Register<IAvaliacaoRepository, AvaliacaoRepository>();
+            container.Register<IMobileTableSchemaRepository, MobileTableSchemaRepository>();
             container.Register<IUserService, UserService>();
             container.Register<IFazendaService, FazendaService>();
             container.Register<ISyncService, SyncService>();

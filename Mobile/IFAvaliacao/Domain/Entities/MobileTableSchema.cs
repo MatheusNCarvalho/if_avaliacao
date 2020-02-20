@@ -5,8 +5,8 @@ using System.Text;
 
 namespace IFAvaliacao.Domain.Entities
 {
-    [Table("__mobileServiceTableSchema")]
-    public class MobileServiceTableSchema : EntityBase
+    [Table("__mobileTableSchema")]
+    public class MobileTableSchema : EntityBase
     {
         public string TableName { get; set; }
         public DateTimeOffset? LastSync { get; set; }

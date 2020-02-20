@@ -8,6 +8,12 @@ namespace IFAvaliacao.Services
         private readonly IFazendaService _fazendaService;
         private readonly IVacaService _vacaService;
 
+        public SyncService(IFazendaService fazendaService, IVacaService vacaService)
+        {
+            _fazendaService = fazendaService;
+            _vacaService = vacaService;
+        }
+
         public async Task PullAsync()
         {
             await _fazendaService.PullAsync();

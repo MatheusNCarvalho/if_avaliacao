@@ -15,11 +15,13 @@ namespace IFAvaliacao.Domain.Entities
         public string Id { get; set; }
         public DateTime DataCriacao { get; set; }
         public DateTime? DataAtualizacao { get; set; }
+        public bool Deletado { get; set; }
 
         public void SetId(string id) => Id = id;
 
         public void AddDataCriacao() => DataCriacao = DateTime.Now;
 
         public void AddDataCriacao(DateTime dateTime) => DataCriacao = dateTime;
+        public void AddDataAtualizacao() => DataAtualizacao = DateTime.Now;
     }
 }

@@ -64,8 +64,10 @@ namespace IFAvaliacao.ViewModels
 
         private async Task EditarFazenda()
         {
-            var paramenters = new NavigationParameters();
-            paramenters.Add(nameof(Fazenda), Fazenda);
+            var paramenters = new NavigationParameters
+            {
+                { nameof(Fazenda), Fazenda }
+            };
             await NavigationService.NavigateAsync(nameof(CadastroFazendaPage), paramenters);
         }
 
@@ -78,8 +80,10 @@ namespace IFAvaliacao.ViewModels
                 await DialogService.AlertAsync($"Fazenda '{Fazenda.NomeFazenda}' não pode apagada pois, existe vacas vinculadas.", "Alerta", "Ok");
                 return;
             }
+            Fazenda.Deletado = true;
+            Fazenda.AddDataAtualizacao();
 
-            await _fazendaRepository.DeleteAsync(Fazenda);
+            await _fazendaRepository.UpdateAsync(Fazenda);
             await LoadAsync();
         }
     }

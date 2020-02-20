@@ -13,10 +13,17 @@ namespace IFAVALIACAO.API.Domain.Entites
         public Guid Id { get; protected set; }
         public DateTime DataCriacao { get; protected set; }
         public DateTime? DataAtualizacao { get; protected set; }
+        public bool Deletado { get; protected set; }
+
 
         public void SetDataCriacao(DateTime dataCriacao)
         {
             DataCriacao = dataCriacao;
+        }
+
+        public void SetDeletado(bool deletado)
+        {
+            Deletado = deletado;
         }
 
         public void SetDataAtualizacao(DateTime? dataAtualizacao)

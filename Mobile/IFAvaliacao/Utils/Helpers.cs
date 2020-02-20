@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace IFAvaliacao.Utils
 {
-    public static class Help
+    public static class Helpers
     {
         public static bool IsConnected => CrossConnectivity.Current.IsConnected;
 

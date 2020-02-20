@@ -1,4 +1,5 @@
 ﻿using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
 
 namespace IFAvaliacao.Views
@@ -9,6 +10,7 @@ namespace IFAvaliacao.Views
         public PreenchimentoTabPage()
         {
             InitializeComponent();
+            On<Xamarin.Forms.PlatformConfiguration.iOS>().SetUseSafeArea(true);
         }
     }
 }

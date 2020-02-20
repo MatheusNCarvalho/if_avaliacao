@@ -113,6 +113,8 @@ namespace IFAVALIACAO.API.Services
             fazenda.SetInscricaoEstadual(model.InscricaoEstadual);
             fazenda.SetNomeFazenda(model.NomeFazenda);
             fazenda.SetNomeProprietario(model.NomeProprietario);
+            fazenda.SetDeletado(model.Deletado);
+            fazenda.SetDataAtualizacao(model.DataAtualizacao);
 
             _repository.Update(fazenda);
         }
@@ -124,6 +126,7 @@ namespace IFAVALIACAO.API.Services
 
             fazenda.SetDataCriacao(model.DataCriacao);
             fazenda.SetDataAtualizacao(model.DataAtualizacao);
+            fazenda.SetDeletado(model.Deletado);
             return fazenda;
         }
 

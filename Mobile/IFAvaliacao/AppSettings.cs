@@ -12,12 +12,22 @@ namespace IFAvaliacao
 {
     public static class AppSettings
     {
-        public static string ApiUrl = "http://192.168.2.106:5000";
+        public static string ApiUrl = "http://192.168.2.103:5000";
 
         public static Usuario Usuario
         {
             get => PreferencesHelpers.Get(nameof(Usuario), default(Usuario));
             set => PreferencesHelpers.Set(nameof(Usuario), value);
+        }
+
+        public static bool PrimeiraInicializacao
+        {
+            get
+            {
+                var result = PreferencesHelpers.Get(nameof(PrimeiraInicializacao), default(bool?));
+                return result ?? true;
+            }
+            set => PreferencesHelpers.Set(nameof(PrimeiraInicializacao), value);
         }
 
         public static async Task<LoginResponse> GetSecurityUser(string key)

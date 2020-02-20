@@ -19,14 +19,13 @@ namespace IFAvaliacao.ViewModels
 {
     public class MainViewModel : ViewModelBase, IMasterDetailPageOptions
     {
-        private readonly IFazendaService _fazendaService;
+        private readonly ISyncService _syncService;
 
-        public MainViewModel(INavigationService navigationService, IFazendaService fazendaService) : base(navigationService)
+        public MainViewModel(INavigationService navigationService, ISyncService syncService) : base(navigationService)
         {
             MenuList = new ObservableCollection<Domain.Entities.Menu>();
-            _fazendaService = fazendaService;
+            _syncService = syncService;
             LoadMenu();
-
         }
 
         private DelegateCommand<Domain.Entities.Menu> _menuCommand;
@@ -41,6 +40,8 @@ namespace IFAvaliacao.ViewModels
         {
             get { return $"{VersionTracking.CurrentBuild} ({VersionTracking.CurrentVersion})"; }
         }
+
+        public bool IsPresentedAfterNavigation => Device.Idiom != TargetIdiom.Phone;
 
         private void LoadMenu()
         {
@@ -95,7 +96,7 @@ namespace IFAvaliacao.ViewModels
                     return;
                 }
                 AppSettings.RemoverUsuarioLogado();
-                Help.SetNavigationPageRoot(typeof(LoginPage));
+                Helpers.SetNavigationPageRoot(typeof(LoginPage));
                 return;
             }
 
@@ -112,7 +113,7 @@ namespace IFAvaliacao.ViewModels
 
         private async Task Sync()
         {
-            if (!Help.IsConnected)
+            if (!Helpers.IsConnected)
             {
                 ItemSelected = null;
                 await DialogService.AlertAsync("Parece que você não está conecatado. Verifique sua conexão com a internet", "Oops...", "OK");
@@ -133,7 +134,8 @@ namespace IFAvaliacao.ViewModels
             try
             {
                 DialogService.ShowLoading("Aguarde, sincronizando...");
-                await _fazendaService.PushAsync();
+                await _syncService.PullAsync();
+                await _syncService.PushAsync();
             }
             catch (ValidationApiException validation)
             {
@@ -159,7 +161,7 @@ namespace IFAvaliacao.ViewModels
             }
         }
 
-        public bool IsPresentedAfterNavigation => Device.Idiom != TargetIdiom.Phone;
+      
 
     }
 }

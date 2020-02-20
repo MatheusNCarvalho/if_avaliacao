@@ -4,14 +4,16 @@ using IFAVALIACAO.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IFAVALIACAO.API.Migrations
 {
     [DbContext(typeof(IFDbContext))]
-    partial class IFDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200219234916_alter_all_table_add_column_deletado")]
+    partial class alter_all_table_add_column_deletado
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

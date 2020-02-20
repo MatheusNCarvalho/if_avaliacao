@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using IFAvaliacao.Extensions;
 using IFAvaliacao.Services.Interfaces;
 using IFAvaliacao.Services.Response;
+using IFAvaliacao.Utils;
 using IFAvaliacao.Views;
 using Prism.Commands;
 using Prism.Navigation;
@@ -14,11 +15,14 @@ namespace IFAvaliacao.ViewModels
     public class LoginViewModel : ViewModelBase
     {
         private readonly IUserService _userService;
+        private readonly ISyncService _syncService;
 
         public LoginViewModel(INavigationService navigationService,
-                             IUserService userService) : base(navigationService)
+                             IUserService userService,
+                             ISyncService syncService) : base(navigationService)
         {
             _userService = userService;
+            _syncService = syncService;
             LoginCommand = new DelegateCommand(async () => await ExecuteLoginCommand());
             CadastrarCommand = new DelegateCommand(async () => await ExecuteCadastrarCommand());
         }
@@ -47,23 +51,35 @@ namespace IFAvaliacao.ViewModels
 
             try
             {
+                DialogService.ShowLoading("Realizando autenticação, aguarde...");
                 await _userService.LoginAsync(Email, Password);
-                Application.Current.MainPage = new NavigationPage(new MainPage());
+                if (AppSettings.PrimeiraInicializacao)
+                {
+                    DialogService.HideLoading();
+                    DialogService.ShowLoading("Preparando o aplicativo para o primeiro uso, aguarde...");
+                    await _syncService.PullAsync();
+                    AppSettings.PrimeiraInicializacao = false;
+                }
+                Helpers.SetNavigationPageRoot(typeof(MainPage));
             }
             catch (ValidationApiException validation)
             {
                 var error = await validation.GetContentAsAsync<ErrorResponse>();
-                await DialogService.AlertAsync(error.Message);
+                await DialogService.AlertAsync(error?.Message);
             }
             catch (ApiException apiException)
             {
                 var error = await apiException.GetContentAsAsync<ErrorResponse>();
-                await DialogService.AlertAsync(error.Message);
+                await DialogService.AlertAsync(error?.Message);
 
             }
             catch (Exception e)
             {
                 await DialogService.AlertAsync(e.Message);
+            }
+            finally
+            {
+                DialogService.HideLoading();
             }
         }
 
