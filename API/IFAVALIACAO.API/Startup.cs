@@ -70,7 +70,7 @@ namespace IFAVALIACAO.API
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseMvc();
-            app.UseInitializeDatabase();
+            //app.UseInitializeDatabase();
         }
 
 

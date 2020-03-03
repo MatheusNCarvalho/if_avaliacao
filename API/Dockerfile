@@ -3,7 +3,7 @@ FROM microsoft/dotnet:2.2-sdk AS build-env
 WORKDIR /app
 
 ## Copiar todos projetos e restaurar dependencias
-COPY src/ /app
+COPY . /app
 RUN dotnet restore IFAVALIACAO.API/IFAVALIACAO.API.csproj
 RUN dotnet publish IFAVALIACAO.API/IFAVALIACAO.API.csproj -c Release -o /app/publish
 
@@ -20,5 +20,6 @@ WORKDIR /app
 COPY --from=build-env /app/publish .
 
 # ENV ASPNETCORE_ENVIRONMENT Staging
+ENV ASPNETCORE_URLS http://+:50470
 
 ENTRYPOINT ["dotnet", "IFAVALIACAO.API.dll"]
