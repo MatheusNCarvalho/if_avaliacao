@@ -5,6 +5,8 @@ using IFAvaliacao.Extensions;
 using IFAvaliacao.Services.Api;
 using IFAvaliacao.Services.Interfaces;
 using IFAvaliacao.Services.Response;
+using IFAvaliacao.Utils;
+using IFAvaliacao.Views;
 using Prism.Commands;
 using Prism.Navigation;
 using Refit;
@@ -67,6 +69,7 @@ namespace IFAvaliacao.ViewModels
                     PasswordConfirmation = ConfirmarPassword
                 });
                 await _userService.AddUserInCache(response.Data);
+                Helpers.SetNavigationPageRoot(typeof(MainPage));
             }
             catch (ValidationApiException validation)
             {

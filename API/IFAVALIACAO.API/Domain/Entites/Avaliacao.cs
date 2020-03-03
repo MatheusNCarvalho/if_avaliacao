@@ -30,6 +30,7 @@ namespace IFAVALIACAO.API.Domain.Entites
             PosicaoTetos = posicaoTetos;
         }
 
+        
         public DateTime DataHoraInicio { get; private set; }
         public DateTime DataHoraFim { get; private set; }
         public int NameCow { get; private set; }
