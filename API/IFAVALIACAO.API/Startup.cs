@@ -51,6 +51,8 @@ namespace IFAVALIACAO.API
             {
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
+
+            services.AddSwagger();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,6 +72,11 @@ namespace IFAVALIACAO.API
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseMvc();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("../swagger/v1/swagger.json", "BullApp");
+            });
             //app.UseInitializeDatabase();
         }
 
