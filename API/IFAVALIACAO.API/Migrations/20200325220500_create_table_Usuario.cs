@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IFAVALIACAO.API.Migrations
 {
-    public partial class create_table_usuario : Migration
+    public partial class create_table_Usuario : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,8 @@ namespace IFAVALIACAO.API.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     DataCriacao = table.Column<DateTime>(nullable: false),
-                    DataAtualizacao = table.Column<DateTime>(nullable: false),
+                    DataAtualizacao = table.Column<DateTime>(nullable: true),
+                    Deletado = table.Column<bool>(nullable: false),
                     Name = table.Column<string>(nullable: false),
                     Email = table.Column<string>(nullable: false),
                     Password = table.Column<string>(nullable: false)

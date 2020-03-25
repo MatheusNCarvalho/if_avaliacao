@@ -14,6 +14,7 @@ namespace IFAVALIACAO.API.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     DataCriacao = table.Column<DateTime>(nullable: false),
                     DataAtualizacao = table.Column<DateTime>(nullable: true),
+                    Deletado = table.Column<bool>(nullable: false),
                     NomeProprietario = table.Column<string>(nullable: true),
                     NomeFazenda = table.Column<string>(nullable: true),
                     InscricaoEstadual = table.Column<string>(nullable: true),

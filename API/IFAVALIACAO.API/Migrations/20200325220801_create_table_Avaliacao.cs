@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IFAVALIACAO.API.Migrations
 {
-    public partial class create_table_avaliacao : Migration
+    public partial class create_table_Avaliacao : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

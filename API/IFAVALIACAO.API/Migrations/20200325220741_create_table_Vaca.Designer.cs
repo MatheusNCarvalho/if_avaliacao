@@ -3,79 +3,23 @@ using System;
 using IFAVALIACAO.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace IFAVALIACAO.API.Migrations
 {
     [DbContext(typeof(IFDbContext))]
-    [Migration("20200220160022_create_table_avaliacao")]
-    partial class create_table_avaliacao
+    [Migration("20200325220741_create_table_Vaca")]
+    partial class create_table_Vaca
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
                 .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("IFAVALIACAO.API.Domain.Entites.Avaliacao", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AlturaGarupaHipometro");
-
-                    b.Property<int>("AlturaUbere");
-
-                    b.Property<int>("AnguloCarupa");
-
-                    b.Property<int>("AnguloCasco");
-
-                    b.Property<int>("Angulosiodade");
-
-                    b.Property<decimal>("BodyWight");
-
-                    b.Property<int>("ComprimentoCorpo");
-
-                    b.Property<DateTime?>("DataAtualizacao");
-
-                    b.Property<DateTime>("DataCriacao");
-
-                    b.Property<DateTime>("DataHoraFim");
-
-                    b.Property<DateTime>("DataHoraInicio");
-
-                    b.Property<bool>("Deletado");
-
-                    b.Property<int>("ForcaLeiteira");
-
-                    b.Property<int>("JarreteLateral");
-
-                    b.Property<int>("JarreteTras");
-
-                    b.Property<int>("LarguraIleo");
-
-                    b.Property<int>("LarguraIsquio");
-
-                    b.Property<int>("LigamentoCentral");
-
-                    b.Property<int>("NameCow");
-
-                    b.Property<int>("PosicaoTetos");
-
-                    b.Property<int>("ProfundidadeCorporal");
-
-                    b.Property<int>("UbereFirmeza");
-
-                    b.Property<int>("UberePosterior");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Avaliacao");
-                });
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             modelBuilder.Entity("IFAVALIACAO.API.Domain.Entites.Fazenda", b =>
                 {

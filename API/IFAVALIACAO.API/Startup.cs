@@ -25,7 +25,7 @@ namespace IFAVALIACAO.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<IFDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
+            services.AddDbContext<IFDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("Default")));
 
             services.AddCors(options =>
             {
