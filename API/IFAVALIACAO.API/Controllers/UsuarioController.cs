@@ -32,7 +32,7 @@ namespace IFAVALIACAO.API.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public IActionResult Post([FromBody] UserModel model)
+        public IActionResult Post([FromBody] CreateUserModel model)
         {
             if (!ModelState.IsValid)
             {

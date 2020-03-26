@@ -25,7 +25,7 @@ namespace IFAVALIACAO.API.Services
             return _usuarioRepository.GetAll().ToList();
         }
 
-        public void Add(UserModel model)
+        public void Add(CreateUserModel model)
         {
             if (_usuarioRepository.ExisteEmail(model.Email))
             {

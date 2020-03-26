@@ -7,6 +7,6 @@ namespace IFAVALIACAO.API.Services.Interfaces
     public interface IUsuarioService
     {
         IEnumerable<User> GetAll();
-        void Add(UserModel model);
+        void Add(CreateUserModel model);
     }
 }
