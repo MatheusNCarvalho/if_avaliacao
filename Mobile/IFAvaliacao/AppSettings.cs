@@ -15,6 +15,11 @@ namespace IFAvaliacao
         public static string DefaultApiUrl = "http://68.183.133.49:50470";
 
 
+        public static string AppCenterAndroid
+        {
+            get => "8faf8e5e-7f40-4e28-906a-fad483e19c86";
+        }
+
         public static string ApiUrl
         {
             get => Preferences.Get(nameof(ApiUrl), DefaultApiUrl);
