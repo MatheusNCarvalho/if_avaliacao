@@ -41,6 +41,15 @@
     <WarningLevel>4</WarningLevel>
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
+    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+    <BundleAssemblies>false</BundleAssemblies>
+    <AndroidKeyStore>true</AndroidKeyStore>
+    <AndroidSigningKeyStore>keystore\bullapp.keystore</AndroidSigningKeyStore>
+    <AndroidSigningStorePass>bullapp@2020</AndroidSigningStorePass>
+    <AndroidSigningKeyAlias>BullApp</AndroidSigningKeyAlias>
+    <AndroidSigningKeyPass>bullpp@2020</AndroidSigningKeyPass>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
