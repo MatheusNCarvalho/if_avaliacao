@@ -12,7 +12,7 @@ namespace IFAvaliacao
 {
     public static class AppSettings
     {
-        public static string DefaultApiUrl = "http://192.168.2.103:5000";
+        public static string DefaultApiUrl = "http://68.183.133.49:50470";
 
 
         public static string ApiUrl
