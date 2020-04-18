@@ -36,10 +36,13 @@ namespace IFAvaliacao.ViewModels
 
         private Domain.Entities.Menu _itemSelected;
         public Domain.Entities.Menu ItemSelected { get => _itemSelected; set => SetProperty(ref _itemSelected, value); }
-        public string Version
-        {
-            get { return $"{VersionTracking.CurrentBuild} ({VersionTracking.CurrentVersion})"; }
-        }
+        public string Version => $"{VersionTracking.CurrentVersion} ({VersionTracking.CurrentBuild})";
+
+        private string _usuarioNome = AppSettings.Usuario?.Name;
+        public string UsuarioNome { get => _usuarioNome; set => SetProperty(ref _usuarioNome, value); }
+
+        private string _email = AppSettings.Usuario?.Email;
+        public string Email { get => _email; set => SetProperty(ref _email, value); }
 
         public bool IsPresentedAfterNavigation => Device.Idiom != TargetIdiom.Phone;
 
@@ -102,12 +105,12 @@ namespace IFAvaliacao.ViewModels
                 return;
             }
 
-            if(menu.MenuType == EMenuType.Sincronizar)
+            if (menu.MenuType == EMenuType.Sincronizar)
             {
                 await Sync();
                 return;
-            }      
-      
+            }
+
 
             masterDetail.Detail = new NavigationPage((Page)Activator.CreateInstance(menu.TargetType));
         }
@@ -149,7 +152,7 @@ namespace IFAvaliacao.ViewModels
             {
                 DialogService.HideLoading();
                 var error = await apiException.GetContentAsAsync<ErrorResponse>();
-                await DialogService.AlertAsync(apiException.StatusCode == System.Net.HttpStatusCode.NotFound ? "Api não encontrada"  : error?.Message);
+                await DialogService.AlertAsync(apiException.StatusCode == System.Net.HttpStatusCode.NotFound ? "Api não encontrada" : error?.Message);
 
             }
             catch (Exception e)
@@ -163,7 +166,7 @@ namespace IFAvaliacao.ViewModels
             }
         }
 
-      
+
 
     }
 }

@@ -38,9 +38,7 @@
             <FlexLayout
                     Direction="Column"
                     AlignItems="Stretch">
-
-                <Label  Text="Selecione a vaca" 
-                    FontAttributes="Bold"/>
+               
                 <Picker Title="Selecione a vaca."
                     BackgroundColor="White" 
                     ItemsSource="{Binding Vacas}"
@@ -55,13 +53,13 @@
                         BackgroundColor="White"
                         Margin="0,0,0,5"/>-->
 
-                <Editor  x:Name="entryBodyWight"
+                <Entry  x:Name="entryBodyWight"
                         Placeholder="Peso Corporal"
                         Keyboard="Numeric"
                         Text="{Binding BodyWight, Converter ={StaticResource DecimalConverter}}"
                         TextColor="Black"
                         BackgroundColor="White">
-                </Editor>
+                </Entry>
             </FlexLayout>
 
 

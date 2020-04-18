@@ -22,23 +22,22 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout Padding="20">
-            <Label  Text="Selecione a fazenda" 
-                    FontAttributes="Bold"/>
+           
             <Picker Title="Selecione a fazenda."
                     BackgroundColor="White" 
                     ItemsSource="{Binding Fazendas}"
                     SelectedItem="{Binding Fazenda}"
                     SelectedIndex="{Binding FazendaIndex}"
-                    ItemDisplayBinding="{Binding NomeFazenda}"/>
+                    ItemDisplayBinding="{Binding NomeFazenda}"
+                    />
             <ScrollView>
 
                 <FlexLayout 
                         Direction="Column"
                         Padding="0">
-                    <Entry Placeholder="Nome" Text="{Binding Nome}"/>
-                    <Entry Placeholder="Numero" Text="{Binding Numero}" Keyboard="Numeric" />
-                    <Label  Text="Selecione a Vaca mãe" 
-                            FontAttributes="Bold" IsVisible="{Binding ExisteVacas}"/>
+                    <Entry Placeholder="Nome" Text="{Binding Nome}" ClearButtonVisibility="WhileEditing" ReturnType="Next"/>
+                    <Entry Placeholder="Numero" Text="{Binding Numero}" Keyboard="Numeric" ReturnType="Next" />
+                    
                     <Picker Title="Selecione a Vaca mãe."
                             BackgroundColor="White"
                             IsVisible="{Binding ExisteVacas}"
@@ -47,17 +46,17 @@
                             SelectedIndex="{Binding VacaIndex}"
                             ItemDisplayBinding="{Binding Nome}"/>
 
-                    <Entry Placeholder="Nome do Pai" Text="{Binding NomePai}"/>
-                    <Entry Placeholder="Numero do Pai" Text="{Binding NumeroPai}" Keyboard="Numeric" />
-                    <Entry Placeholder="Raça" Text="{Binding Raca}"/>
-                    <Entry Placeholder="Data de Nascimento" Text="{Binding DataNascimento}" Keyboard="Numeric">
+                    <Entry Placeholder="Nome do Pai" Text="{Binding NomePai}" ClearButtonVisibility="WhileEditing" ReturnType="Next"/>
+                    <Entry Placeholder="Numero do Pai" Text="{Binding NumeroPai}" Keyboard="Numeric" ClearButtonVisibility="WhileEditing" ReturnType="Next"/>
+                    <Entry Placeholder="Raça" Text="{Binding Raca}" />
+                    <Entry Placeholder="Data de Nascimento" Text="{Binding DataNascimento}" Keyboard="Numeric" ClearButtonVisibility="WhileEditing" ReturnType="Next">
                         <Entry.Behaviors>
                             <behaviorPack:MaskedBehavior Mask="XX/XX/XXXX" />
                         </Entry.Behaviors>
                     </Entry>
-                    <Entry  Placeholder="Grau sanguíneo" Text="{Binding GrauSanguinio}" />
-                    <Entry  Placeholder="Ordem de parto" Text="{Binding OrdemParto}" Keyboard="Numeric" />
-                    <Entry  Placeholder="IPP" Text="{Binding Ipp}" Keyboard="Numeric" />
+                    <Entry  Placeholder="Grau sanguíneo" Text="{Binding GrauSanguinio}"  ClearButtonVisibility="WhileEditing" ReturnType="Next"/>
+                    <Entry  Placeholder="Ordem de parto" Text="{Binding OrdemParto}" Keyboard="Numeric" ClearButtonVisibility="WhileEditing" ReturnType="Next"/>
+                    <Entry  Placeholder="IPP" Text="{Binding Ipp}" Keyboard="Numeric" ClearButtonVisibility="WhileEditing" ReturnType="Next"/>
 
                     <Button Text="Salvar"
                             BackgroundColor="{StaticResource GreenDark}" 

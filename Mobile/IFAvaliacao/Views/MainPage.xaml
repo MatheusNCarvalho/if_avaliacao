@@ -38,9 +38,9 @@
                                  HorizontalOptions="StartAndExpand"
                                  Padding="10,0,0,0">
 
-                        <Label Text="Nome do Usuario"
+                        <Label Text="{Binding UsuarioNome}"
                                FontSize="Medium"/>
-                        <Label Text="E-mail"
+                        <Label Text="{Binding Email}"
                                FontSize="Small"/>
 
                     </StackLayout>

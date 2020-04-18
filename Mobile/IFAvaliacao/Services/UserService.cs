@@ -1,4 +1,5 @@
-﻿using IFAvaliacao.Services.Api;
+﻿using System.Threading;
+using IFAvaliacao.Services.Api;
 using IFAvaliacao.Services.Interfaces;
 using IFAvaliacao.Services.Request;
 using IFAvaliacao.Services.Response;
@@ -26,7 +27,11 @@ namespace IFAvaliacao.Services
         {
             var request = new LoginRequest(username, senha);
 
-            var result = await _accountApi.LoginAsync(request).ConfigureAwait(false);
+            var tokenSource = new CancellationTokenSource();
+            tokenSource.CancelAfter(30000); // 10000 ms
+            var token = tokenSource.Token;
+
+            var result = await _accountApi.LoginAsync(request, token).ConfigureAwait(false);
             result.Data.User.Password = senha;
             await AddUserInCache(result.Data);
         }
