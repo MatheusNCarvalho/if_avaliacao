@@ -19,6 +19,7 @@ namespace IFAvaliacao.Services
 
         public async Task AddUserInCache(LoginResponse response)
         {
+            if(response == null)return;
             AppSettings.Usuario = response.User;
             await AppSettings.SetSecurityUser(response.User.Email, response);
         }
