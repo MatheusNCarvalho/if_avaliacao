@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using IFAVALIACAO.API.Domain.Entites;
 
-namespace IFAVALIACAO.API.Domain.Repository
+namespace IFAVALIACAO.API.Domain.Interfaces.Repository
 {
     public interface IRepository<TEntity> : IDisposable where TEntity : Entity
     {

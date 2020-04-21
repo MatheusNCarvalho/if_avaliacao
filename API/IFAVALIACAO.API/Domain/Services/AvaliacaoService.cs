@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using IFAVALIACAO.API.Domain.Entites;
-using IFAVALIACAO.API.Domain.Repository;
+using IFAVALIACAO.API.Domain.Interfaces.Repository;
+using IFAVALIACAO.API.Domain.Interfaces.Services;
+using IFAVALIACAO.API.Domain.Notifications;
 using IFAVALIACAO.API.Models;
-using IFAVALIACAO.API.Services.Interfaces;
-using IFAVALIACAO.API.Services.Notifications;
 using MediatR;
 
-namespace IFAVALIACAO.API.Services
+namespace IFAVALIACAO.API.Domain.Services
 {
     public class AvaliacaoService : ServiceBase, IAvaliacaoService
     {

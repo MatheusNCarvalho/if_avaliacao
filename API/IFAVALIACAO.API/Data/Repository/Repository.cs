@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using IFAVALIACAO.API.Domain.Entites;
 using IFAVALIACAO.API.Domain.Extension;
-using IFAVALIACAO.API.Domain.Repository;
+using IFAVALIACAO.API.Domain.Interfaces.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace IFAVALIACAO.API.Data.Repository

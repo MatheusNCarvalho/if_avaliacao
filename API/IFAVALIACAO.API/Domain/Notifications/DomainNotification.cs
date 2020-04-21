@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace IFAVALIACAO.API.Services.Notifications
+namespace IFAVALIACAO.API.Domain.Notifications
 {
     public class DomainNotification : INotification
     {

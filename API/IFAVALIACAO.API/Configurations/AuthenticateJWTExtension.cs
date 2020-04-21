@@ -1,5 +1,5 @@
 ﻿using System;
-using IFAVALIACAO.API.Domain.Authentication;
+using IFAVALIACAO.API.Domain.Interfaces.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;

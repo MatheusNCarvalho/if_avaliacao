@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore.Internal;
 
-namespace IFAVALIACAO.API.Services.Notifications
+namespace IFAVALIACAO.API.Domain.Notifications
 {
     public class DomainNotificationHandler : INotificationHandler<DomainNotification>, IDisposable
     {

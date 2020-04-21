@@ -1,6 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 
-namespace IFAVALIACAO.API.Domain.Authentication
+namespace IFAVALIACAO.API.Domain.Interfaces.Authentication
 {
     public interface ISigningConfiguration
     {

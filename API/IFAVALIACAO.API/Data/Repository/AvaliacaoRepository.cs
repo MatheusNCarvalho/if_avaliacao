@@ -1,5 +1,5 @@
 ﻿using IFAVALIACAO.API.Domain.Entites;
-using IFAVALIACAO.API.Domain.Repository;
+using IFAVALIACAO.API.Domain.Interfaces.Repository;
 
 namespace IFAVALIACAO.API.Data.Repository
 {

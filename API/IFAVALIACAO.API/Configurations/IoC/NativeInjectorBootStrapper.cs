@@ -1,11 +1,11 @@
 ﻿using IFAVALIACAO.API.Data;
 using IFAVALIACAO.API.Data.Authentication;
 using IFAVALIACAO.API.Data.Repository;
-using IFAVALIACAO.API.Domain.Authentication;
-using IFAVALIACAO.API.Domain.Repository;
-using IFAVALIACAO.API.Services;
-using IFAVALIACAO.API.Services.Interfaces;
-using IFAVALIACAO.API.Services.Notifications;
+using IFAVALIACAO.API.Domain.Interfaces.Authentication;
+using IFAVALIACAO.API.Domain.Interfaces.Repository;
+using IFAVALIACAO.API.Domain.Interfaces.Services;
+using IFAVALIACAO.API.Domain.Notifications;
+using IFAVALIACAO.API.Domain.Services;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;

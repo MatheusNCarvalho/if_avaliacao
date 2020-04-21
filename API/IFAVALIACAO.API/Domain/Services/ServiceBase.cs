@@ -1,8 +1,8 @@
-﻿using IFAVALIACAO.API.Domain.Repository;
-using IFAVALIACAO.API.Services.Notifications;
+﻿using IFAVALIACAO.API.Domain.Interfaces.Repository;
+using IFAVALIACAO.API.Domain.Notifications;
 using MediatR;
 
-namespace IFAVALIACAO.API.Services.Interfaces
+namespace IFAVALIACAO.API.Domain.Services
 {
     public abstract class ServiceBase
     {
