@@ -10,7 +10,7 @@ namespace IFAvaliacao
         public MainPage()
         {
             InitializeComponent();
-            Detail = new NavigationPage(new PreenchimentoTabPage());
+            Detail = new NavigationPage(new FazendaPage());
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
