@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using IFAVALIACAO.API.Services.Notifications;
+using IFAVALIACAO.API.Domain.Notifications;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

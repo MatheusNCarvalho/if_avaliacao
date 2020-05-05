@@ -68,18 +68,18 @@ namespace IFAvaliacao.ViewModels
                     Name = Name,
                     PasswordConfirmation = ConfirmarPassword
                 });
-                await _userService.AddUserInCache(response.Data);
+                await _userService.AddUserInCache(response?.Data);
                 Helpers.SetNavigationPageRoot(typeof(MainPage));
             }
             catch (ValidationApiException validation)
             {
                 var error = await validation.GetContentAsAsync<ErrorResponse>();
-                await DialogService.AlertAsync(error.Message);
+                await DialogService.AlertAsync(error?.Message);
             }
             catch (ApiException apiException)
             {
                 var error = await apiException.GetContentAsAsync<ErrorResponse>();
-                await DialogService.AlertAsync(error.Message);
+                await DialogService.AlertAsync(error?.Message);
 
             }
             catch (Exception e)

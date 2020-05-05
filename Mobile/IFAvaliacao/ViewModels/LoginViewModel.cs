@@ -64,17 +64,20 @@ namespace IFAvaliacao.ViewModels
             }
             catch (ValidationApiException validation)
             {
+                DialogService.HideLoading();
                 var error = await validation.GetContentAsAsync<ErrorResponse>();
                 await DialogService.AlertAsync(error?.Message);
             }
             catch (ApiException apiException)
             {
+                DialogService.HideLoading();
                 var error = await apiException.GetContentAsAsync<ErrorResponse>();
                 await DialogService.AlertAsync(error?.Message);
 
             }
             catch (Exception e)
             {
+                DialogService.HideLoading();
                 await DialogService.AlertAsync(e.Message);
             }
             finally

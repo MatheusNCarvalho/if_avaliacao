@@ -1,4 +1,5 @@
-﻿using IFAvaliacao.Domain.Entities;
+﻿using System.Threading;
+using IFAvaliacao.Domain.Entities;
 using IFAvaliacao.Services.Request;
 using IFAvaliacao.Services.Response;
 using Refit;
@@ -12,6 +13,8 @@ namespace IFAvaliacao.Services.Api
         [Post("/api/v1/usuarios")]
         Task<Response<LoginResponse>> PostAsync([Body] Usuario usuario);
 
+        [Post("/api/v1/login")]
+        Task<Response<LoginResponse>> LoginAsync([Body] LoginRequest usuario, CancellationToken cancellationToken);
         [Post("/api/v1/login")]
         Task<Response<LoginResponse>> LoginAsync([Body] LoginRequest usuario);
 

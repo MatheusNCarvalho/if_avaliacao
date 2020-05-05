@@ -2,6 +2,7 @@
 using IFAVALIACAO.API.Configurations;
 using IFAVALIACAO.API.Configurations.IoC;
 using IFAVALIACAO.API.Data;
+using IFAVALIACAO.API.Middleware;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -45,6 +46,7 @@ namespace IFAVALIACAO.API
             services.AddMvc(options =>
             {
                 options.Filters.Add(new AuthorizeFilter("Bearer"));
+                options.Filters.Add(typeof(GlobalExceptionHandlingFilter));
             })
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
             .AddJsonOptions(options =>
@@ -58,16 +60,6 @@ namespace IFAVALIACAO.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
-
             app.UseCors("policy");
             app.UseHttpsRedirection();
             app.UseAuthentication();
@@ -77,10 +69,6 @@ namespace IFAVALIACAO.API
             {
                 c.SwaggerEndpoint("../swagger/v1/swagger.json", "BullApp");
             });
-            //app.UseInitializeDatabase();
         }
-
-
-
     }
 }

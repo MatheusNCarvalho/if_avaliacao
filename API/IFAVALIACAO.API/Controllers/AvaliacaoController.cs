@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using IFAVALIACAO.API.Domain.Interfaces.Services;
+using IFAVALIACAO.API.Domain.Notifications;
 using IFAVALIACAO.API.Models;
-using IFAVALIACAO.API.Services.Interfaces;
-using IFAVALIACAO.API.Services.Notifications;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

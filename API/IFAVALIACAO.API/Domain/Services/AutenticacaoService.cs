@@ -1,20 +1,24 @@
-﻿using IFAVALIACAO.API.Domain.Authentication;
-using IFAVALIACAO.API.Domain.Extension;
-using IFAVALIACAO.API.Domain.Repository;
+﻿using IFAVALIACAO.API.Domain.Extension;
+using IFAVALIACAO.API.Domain.Interfaces.Authentication;
+using IFAVALIACAO.API.Domain.Interfaces.Repository;
+using IFAVALIACAO.API.Domain.Interfaces.Services;
+using IFAVALIACAO.API.Domain.Notifications;
 using IFAVALIACAO.API.Models;
 using IFAVALIACAO.API.Resources;
-using IFAVALIACAO.API.Services.Interfaces;
-using IFAVALIACAO.API.Services.Notifications;
 using MediatR;
 
-namespace IFAVALIACAO.API.Services
+namespace IFAVALIACAO.API.Domain.Services
 {
     public class AutenticacaoService : ServiceBase, IAutenticacaoService
     {
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly ITokenEncoder _tokenEncoder;
 
-        public AutenticacaoService(IUnitOfWork ofWork, IMediator mediator, INotificationHandler<DomainNotification> notifications, IUsuarioRepository usuarioRepository, ITokenEncoder tokenEncoder) : base(ofWork, mediator, notifications)
+        public AutenticacaoService(IUnitOfWork ofWork, 
+            IMediator mediator, 
+            INotificationHandler<DomainNotification> notifications, 
+            IUsuarioRepository usuarioRepository, 
+            ITokenEncoder tokenEncoder) : base(ofWork, mediator, notifications)
         {
             _usuarioRepository = usuarioRepository;
             _tokenEncoder = tokenEncoder;

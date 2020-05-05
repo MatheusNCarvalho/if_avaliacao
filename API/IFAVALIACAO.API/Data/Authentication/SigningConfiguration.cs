@@ -1,5 +1,5 @@
 ﻿using System.Security.Cryptography;
-using IFAVALIACAO.API.Domain.Authentication;
+using IFAVALIACAO.API.Domain.Interfaces.Authentication;
 using Microsoft.IdentityModel.Tokens;
 
 namespace IFAVALIACAO.API.Data.Authentication

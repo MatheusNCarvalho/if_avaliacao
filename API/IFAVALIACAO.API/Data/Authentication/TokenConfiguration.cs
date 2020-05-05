@@ -1,4 +1,4 @@
-﻿using IFAVALIACAO.API.Domain.Authentication;
+﻿using IFAVALIACAO.API.Domain.Interfaces.Authentication;
 
 namespace IFAVALIACAO.API.Data.Authentication
 {

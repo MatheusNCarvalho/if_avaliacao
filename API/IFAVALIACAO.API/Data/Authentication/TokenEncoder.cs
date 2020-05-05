@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using IFAVALIACAO.API.Domain.Authentication;
 using IFAVALIACAO.API.Domain.Entites;
+using IFAVALIACAO.API.Domain.Interfaces.Authentication;
 using IFAVALIACAO.API.Domain.Parameters;
 using Microsoft.IdentityModel.Tokens;
 

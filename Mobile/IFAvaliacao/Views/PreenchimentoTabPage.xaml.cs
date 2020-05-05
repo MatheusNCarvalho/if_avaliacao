@@ -5,7 +5,7 @@ using Xamarin.Forms.Xaml;
 namespace IFAvaliacao.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PreenchimentoTabPage : TabbedPage
+    public partial class PreenchimentoTabPage : Xamarin.Forms.TabbedPage
     {
         public PreenchimentoTabPage()
         {

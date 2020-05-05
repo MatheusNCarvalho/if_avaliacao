@@ -1,6 +1,6 @@
 ﻿using System;
-using IFAVALIACAO.API.Domain.Repository;
-using IFAVALIACAO.API.Services.Notifications;
+using IFAVALIACAO.API.Domain.Interfaces.Repository;
+using IFAVALIACAO.API.Domain.Notifications;
 using MediatR;
 
 namespace IFAVALIACAO.API.Data.Repository

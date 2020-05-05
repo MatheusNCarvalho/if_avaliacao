@@ -38,20 +38,20 @@
                         Direction="Column"
                         Padding="20">
 
-                <Entry Placeholder="Nome do Proprietário" Text="{Binding Nome}" />
-                <Entry Placeholder="Nome da Fazenda" Text="{Binding NomeFazenda}"/>
-                <Entry Placeholder="Inscrição Estadual" Text="{Binding InscricaoEstadual}" Keyboard="Numeric"/>
+                <Entry Placeholder="Nome do Proprietário" Text="{Binding Nome}" ClearButtonVisibility="WhileEditing" ReturnType="Next"/>
+                <Entry Placeholder="Nome da Fazenda" Text="{Binding NomeFazenda}" ClearButtonVisibility="WhileEditing" ReturnType="Next"/>
+                <Entry Placeholder="Inscrição Estadual" Text="{Binding InscricaoEstadual}" Keyboard="Numeric" ClearButtonVisibility="WhileEditing" ReturnType="Next"/>
                 <Entry Placeholder="Cep" Text="{Binding Cep}" 
-                       Keyboard="Numeric">
+                       Keyboard="Numeric" ClearButtonVisibility="WhileEditing">
                     <Entry.Behaviors>
                         <behaviorPack:CEPValidationBehavior />
                         <behaviorPack:MaskedBehavior Mask="XXXXX-XXX" />
                     </Entry.Behaviors>
                 </Entry>
 
-                <Entry x:Name="entryEndereco" Placeholder="Endereco" Text="{Binding Endereco}"/>
-                <Entry x:Name="entryCidade" Placeholder="Cidade"  Text="{Binding Cidade}"/>
-                <Entry x:Name="entryEstado" Placeholder="Estado" Text="{Binding Estado}"/>
+                <Entry x:Name="entryEndereco" Placeholder="Endereco" Text="{Binding Endereco}" ClearButtonVisibility="WhileEditing" ReturnType="Next"/>
+                <Entry x:Name="entryCidade" Placeholder="Cidade"  Text="{Binding Cidade}" ClearButtonVisibility="WhileEditing" ReturnType="Next"/>
+                <Entry x:Name="entryEstado" Placeholder="Estado" Text="{Binding Estado}" ClearButtonVisibility="WhileEditing" ReturnType="Next"/>
 
                 <Button Text="Salvar"
                      BackgroundColor="{StaticResource GreenDark}" 
