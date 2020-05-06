@@ -522,17 +522,39 @@
                             <Label Text="Diâmetro de Tetos"/>
 
                             <FlexLayout FlexLayout.Grow="1" Padding="0" JustifyContent="Center">
-                                <Entry FlexLayout.Grow="1" Margin="5" HeightRequest="60" Keyboard="Numeric" Placeholder="T1"/>
-                                <Entry FlexLayout.Grow="1" Margin="5" HeightRequest="60" Keyboard="Numeric"  Placeholder="T2"/>                               
+                                <Entry FlexLayout.Grow="1" Text="{Binding DiametroTeto1}" 
+                                       Margin="5" 
+                                       HeightRequest="60" 
+                                       Keyboard="Numeric" 
+                                       Placeholder="T1"/>
+                                <Entry FlexLayout.Grow="1" 
+                                       Margin="5"
+                                       Text="{Binding DiametroTeto2}"
+                                       HeightRequest="60" 
+                                       Keyboard="Numeric"  
+                                       Placeholder="T2"/>                               
                             </FlexLayout>
-                            <FlexLayout FlexLayout.Grow="1" Padding="0" JustifyContent="Center">
-                                <Entry FlexLayout.Grow="1" Keyboard="Numeric" HeightRequest="60" Margin="5" Placeholder="T3"/>
-                                <Entry FlexLayout.Grow="1" Keyboard="Numeric" HeightRequest="60" Margin="5" Placeholder="T4"/>
+                            <FlexLayout FlexLayout.Grow="1" 
+                                        Padding="0" 
+                                        JustifyContent="Center">
+                                <Entry FlexLayout.Grow="1" 
+                                       Keyboard="Numeric" 
+                                       HeightRequest="60" 
+                                       Margin="5"
+                                       Text="{Binding DiametroTeto3}"
+                                       Placeholder="T3"/>
+                                <Entry FlexLayout.Grow="1" 
+                                       Keyboard="Numeric" 
+                                       HeightRequest="60" 
+                                       Margin="5"
+                                       Text="{Binding DiametroTeto4}"
+                                       Placeholder="T4"/>
                             </FlexLayout>
                         </FlexLayout>
                     </Frame>
 
                     <Button CornerRadius="5" HeightRequest="40"
+                            IsVisible="{Binding PodeSalvar}"
                             BackgroundColor="{StaticResource GreenDark}" Text="Concluir"
                             Command="{Binding SaveCommand}"/>
                 </FlexLayout>
