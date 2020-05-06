@@ -19,11 +19,16 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <CollectionView ItemsSource="{Binding AvaliacaoVacas}"  
+            <CollectionView ItemsSource="{Binding AvaliacaoVacas}"
+                            SelectedItem="{Binding AvaliacaoVacaItem}"
+                            SelectionChangedCommand="{Binding AvalicaoVacaActionSheetCommand, Mode=TwoWay}"
+                            SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference MyCollectionView}}"
+                            x:Name="MyCollectionView"
                             Margin="10,10,10,0"                           
                             SelectionMode="Single">
                 <CollectionView.EmptyView>
-                    <Label Text="Não temos nenhuma avaliacao para Exibir :(" HorizontalTextAlignment="Center"/>
+                    <Label Text="Não temos nenhuma avaliacao para Exibir :("
+                           HorizontalTextAlignment="Center"/>
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
