@@ -24,14 +24,19 @@ namespace IFAvaliacao.Services
 
         public async Task PushAsync()
         {
-            var fazendas = await _avaliacaoRepository.GetAsync(true);
+            var avaliacoes = await _avaliacaoRepository.GetAsync(true);
 
-            var fazendaApi = RestService.For<IAvaliacaoApi>(HttpClientInstance.Current);
-            await fazendaApi.Post(fazendas);
+            var avaliacaoApi = RestService.For<IAvaliacaoApi>(HttpClientInstance.Current);
+            await avaliacaoApi.Post(avaliacoes);
 
             var tableSchema = await GetByTableSchemaAsync(nameof(AvaliacaoVaca));
             tableSchema?.SetLastSync(DateTime.Now);
             await UpdateTableSchemaAsync(tableSchema);
+
+            foreach (var item in avaliacoes)
+            {
+                await _avaliacaoRepository.DeleteAsync(item);
+            }
         }
     }
 }

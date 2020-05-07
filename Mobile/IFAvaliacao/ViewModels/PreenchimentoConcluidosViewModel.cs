@@ -1,9 +1,9 @@
-﻿using Acr.UserDialogs;
-using IFAvaliacao.Data.Repository.Interfaces;
+﻿using IFAvaliacao.Data.Repository.Interfaces;
 using IFAvaliacao.Domain.Entities;
 using IFAvaliacao.Services.Interfaces;
 using Prism.Navigation;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using IFAvaliacao.Views;
 using Prism.Commands;
@@ -26,7 +26,7 @@ namespace IFAvaliacao.ViewModels
 
         private ObservableCollection<AvaliacaoVaca> _avaliacaoVacas;
         public ObservableCollection<AvaliacaoVaca> AvaliacaoVacas { get => _avaliacaoVacas; set => SetProperty(ref _avaliacaoVacas, value); }
-        
+
         private AvaliacaoVaca _avaliacaoVacaItem;
         public AvaliacaoVaca AvaliacaoVacaItem { get => _avaliacaoVacaItem; set => SetProperty(ref _avaliacaoVacaItem, value); }
 
@@ -34,7 +34,7 @@ namespace IFAvaliacao.ViewModels
         public async Task LoadAsync()
         {
             var results = await _avaliacaoRepository.GetAsync();
-            AvaliacaoVacas = new ObservableCollection<AvaliacaoVaca>(results);
+            AvaliacaoVacas = new ObservableCollection<AvaliacaoVaca>(results.OrderByDescending(x => x.DataHoraInicio));
         }
 
 
