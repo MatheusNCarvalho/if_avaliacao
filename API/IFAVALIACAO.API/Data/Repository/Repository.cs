@@ -40,16 +40,18 @@ namespace IFAVALIACAO.API.Data.Repository
             return DbSet;
         }
 
-        public IList<TEntity> SearchItemsToSync(bool firstSync, DateTimeOffset? lastDateStart, string includes = null)
+        public IList<TEntity> SearchItemsToSync(Guid userId, bool firstSync, DateTimeOffset? lastDateStart, string includes = null)
         {
             var query = GetAll();
 
 
             if (!firstSync && lastDateStart.HasValue)
             {
-                query = query.Where(x => x.DataCriacao >= lastDateStart.Value.LocalDateTime || 
+                query = query.Where(x => x.DataCriacao >= lastDateStart.Value.LocalDateTime ||
                                          x.DataAtualizacao >= lastDateStart.Value.LocalDateTime);
             }
+
+            query = query.Where(x => x.UserId == userId);
 
             if (includes.HasValue())
             {

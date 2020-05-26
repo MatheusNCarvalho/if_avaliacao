@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using IFAVALIACAO.API.Domain.Entites;
+using IFAVALIACAO.API.Domain.Interfaces.Authentication;
 using IFAVALIACAO.API.Domain.Interfaces.Repository;
 using IFAVALIACAO.API.Domain.Interfaces.Services;
 using IFAVALIACAO.API.Domain.Notifications;
@@ -11,10 +12,12 @@ namespace IFAVALIACAO.API.Domain.Services
     public class AvaliacaoService : ServiceBase, IAvaliacaoService
     {
         private readonly IAvaliacaoRepository _avaliacaoRepository;
+        private readonly IUserSession _userSession;
 
-        public AvaliacaoService(IUnitOfWork ofWork, IMediator mediator, INotificationHandler<DomainNotification> notifications, IAvaliacaoRepository avaliacaoRepository) : base(ofWork, mediator, notifications)
+        public AvaliacaoService(IUnitOfWork ofWork, IMediator mediator, INotificationHandler<DomainNotification> notifications, IAvaliacaoRepository avaliacaoRepository, IUserSession userSession) : base(ofWork, mediator, notifications)
         {
             _avaliacaoRepository = avaliacaoRepository;
+            _userSession = userSession;
         }
 
         public void Save(IList<AvaliacaoModel> model)
@@ -40,7 +43,9 @@ namespace IFAVALIACAO.API.Domain.Services
                     avaliacaoModel.UberePosterior,
                     avaliacaoModel.AlturaUbere,
                     avaliacaoModel.LigamentoCentral,
-                    avaliacaoModel.PosicaoTetos);
+                    avaliacaoModel.PosicaoTetos,
+                    _userSession.UserId);
+
                 _avaliacaoRepository.Add(avaliacao);
             }
 

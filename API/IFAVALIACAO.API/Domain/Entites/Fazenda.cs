@@ -6,7 +6,15 @@ namespace IFAVALIACAO.API.Domain.Entites
     {
         protected Fazenda() { }
 
-        public Fazenda(string nomeProprietario, string nomeFazenda, string inscricaoEstadual, string cep, string endereco, string cidade, string estado, Guid? id = null)
+        public Fazenda(string nomeProprietario,
+            string nomeFazenda,
+            string inscricaoEstadual,
+            string cep,
+            string endereco,
+            string cidade,
+            string estado, 
+            Guid userId, 
+            Guid? id = null)
         {
             if (id.HasValue)
             {
@@ -19,8 +27,8 @@ namespace IFAVALIACAO.API.Domain.Entites
             Endereco = endereco;
             Cidade = cidade;
             Estado = estado;
+            UserId = userId;
         }
-
         public string NomeProprietario { get; private set; }
         public string NomeFazenda { get; private set; }
         public string InscricaoEstadual { get; private set; }

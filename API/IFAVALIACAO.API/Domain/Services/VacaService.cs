@@ -5,6 +5,7 @@ using AutoMapper;
 using IFAVALIACAO.API.Domain.Entites;
 using IFAVALIACAO.API.Domain.Extension;
 using IFAVALIACAO.API.Domain.Filters;
+using IFAVALIACAO.API.Domain.Interfaces.Authentication;
 using IFAVALIACAO.API.Domain.Interfaces.Repository;
 using IFAVALIACAO.API.Domain.Interfaces.Services;
 using IFAVALIACAO.API.Domain.Notifications;
@@ -18,16 +19,18 @@ namespace IFAVALIACAO.API.Domain.Services
         private readonly IFazendaRepository _fazendaRepository;
         private readonly IVacaRepository _vacaRepository;
         private readonly IMapper _mapper;
-        public VacaService(IUnitOfWork ofWork, IMediator mediator, INotificationHandler<DomainNotification> notifications, IFazendaRepository fazendaRepository, IVacaRepository vacaRepository, IMapper mapper) : base(ofWork, mediator, notifications)
+        private readonly IUserSession _userSession;
+        public VacaService(IUnitOfWork ofWork, IMediator mediator, INotificationHandler<DomainNotification> notifications, IFazendaRepository fazendaRepository, IVacaRepository vacaRepository, IMapper mapper, IUserSession userSession) : base(ofWork, mediator, notifications)
         {
             _fazendaRepository = fazendaRepository;
             _vacaRepository = vacaRepository;
             _mapper = mapper;
+            _userSession = userSession;
         }
 
         public IList<VacaModel> SearchItemsToSync(SyncFilter filter)
         {
-            return _mapper.Map<IList<VacaModel>>(_vacaRepository.SearchItemsToSync(filter.FirstSync, filter.LastDateStart, "Fazenda"));
+            return _mapper.Map<IList<VacaModel>>(_vacaRepository.SearchItemsToSync(_userSession.UserId, filter.FirstSync, filter.LastDateStart, "Fazenda"));
         }
 
         public void Save(VacaModel model)
@@ -37,13 +40,14 @@ namespace IFAVALIACAO.API.Domain.Services
 
         public void SaveAll(IList<VacaModel> models)
         {
-            var fazendas = _fazendaRepository.GetByInscricoesEstaduais(models.Where(x => x.FazendaInscricaoEstadual.HasValue()).Select(x => x.FazendaInscricaoEstadual).ToList());
+            var fazendas = _fazendaRepository.GetByInscricoesEstaduais(userId: _userSession.UserId, models.Where(x => x.FazendaInscricaoEstadual.HasValue()).Select(x => x.FazendaInscricaoEstadual).ToList());
+
             var vacasMaes = _vacaRepository
-                .GetByNumeros(models.Where(x => x.NumeroVacaMae.HasValue).Select(x => x.NumeroVacaMae.Value).ToList())
+                .GetByNumeros(userId: _userSession.UserId, models.Where(x => x.NumeroVacaMae.HasValue).Select(x => x.NumeroVacaMae.Value).ToList())
                 .ToList();
 
             var vacasExistente = _vacaRepository
-                .GetByNumeros(models.Select(x => x.Numero).ToList())
+                .GetByNumeros(userId: _userSession.UserId, models.Select(x => x.Numero).ToList())
                 .ToList();
 
             foreach (var vacaModel in models)
@@ -82,7 +86,8 @@ namespace IFAVALIACAO.API.Domain.Services
         {
             var vaca = new Vaca(model.Nome, model.Numero, model.NomePai, model.NumeroPai,
                                 model.Raca, model.GrauSanguineo, model.DataNascimento,
-                                model.OrdemParto, model.Ipp, fazenda, vacaMae, model.Id);
+                                model.OrdemParto, model.Ipp, fazenda, vacaMae, _userSession.UserId, model.Id);
+
             vaca.SetDataCriacao(model.DataCriacao);
             vaca.SetDataAtualizacao(model.DataAtualizacao);
             vaca.SetDeletado(model.Deletado);

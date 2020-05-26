@@ -12,7 +12,7 @@ namespace IFAVALIACAO.API.Domain.Interfaces.Repository
         TEntity GetById(Guid id);
         IList<TEntity> GetByIds(IList<Guid> ids);
         IQueryable<TEntity> GetAll();
-        IList<TEntity> SearchItemsToSync(bool firstSync, DateTimeOffset? lastDateStart, string includes = null);
+        IList<TEntity> SearchItemsToSync(Guid userId, bool firstSync, DateTimeOffset? lastDateStart, string includes = null);
         IList<TEntity> Get(Expression<Func<TEntity, bool>> expression, string include = null);
         void Update(TEntity obj);
         void Remove(Guid id);

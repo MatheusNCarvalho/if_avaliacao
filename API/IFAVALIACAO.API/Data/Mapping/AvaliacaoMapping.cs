@@ -8,7 +8,9 @@ namespace IFAVALIACAO.API.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<Avaliacao> builder)
         {
-            
+            builder.HasOne(x => x.User)
+                .WithMany()
+                .HasForeignKey(x => x.UserId);
         }
     }
 }

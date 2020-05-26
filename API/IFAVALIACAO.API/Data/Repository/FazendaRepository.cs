@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using IFAVALIACAO.API.Domain.Entites;
 using IFAVALIACAO.API.Domain.Interfaces.Repository;
@@ -11,9 +12,9 @@ namespace IFAVALIACAO.API.Data.Repository
         {
         }
 
-        public IList<Fazenda> GetByInscricoesEstaduais(IList<string> values)
+        public IList<Fazenda> GetByInscricoesEstaduais(Guid userId, IList<string> values)
         {
-            return GetAll().Where(x => values.Contains(x.InscricaoEstadual)).ToList();
+            return GetAll().Where(x => x.UserId == userId && values.Contains(x.InscricaoEstadual)).ToList();
         }
     }
 }
