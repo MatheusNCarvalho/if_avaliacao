@@ -11,7 +11,7 @@ namespace IFAvaliacao.Droid.Services
 
     public class AndroidSQLitePlatform : ISQLitePlatform
     {
-        private const string dbName = "tmx.db3";
+        private const string dbName = "bullapp.db3";
         private static SQLiteConnection _connection;
         private static SQLiteAsyncConnection _connectionAsync;
 

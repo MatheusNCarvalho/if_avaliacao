@@ -5,6 +5,8 @@ using IFAvaliacao.Services.Request;
 using IFAvaliacao.Services.Response;
 using Refit;
 using System.Threading.Tasks;
+using System.Net.Http;
+using System;
 
 namespace IFAvaliacao.Services
 {
@@ -14,7 +16,12 @@ namespace IFAvaliacao.Services
 
         public UserService()
         {
-            _accountApi = RestService.For<IAccountApi>(AppSettings.ApiUrl);
+            _accountApi = RestService.For<IAccountApi>(new HttpClient
+            {
+                BaseAddress = new Uri(AppSettings.ApiUrl),
+                Timeout = TimeSpan.FromSeconds(30)
+            });
+          
         }
 
         public async Task AddUserInCache(LoginResponse response)

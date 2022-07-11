@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using IFAvaliacao.Extensions;
 using IFAvaliacao.Services.Interfaces;
@@ -25,6 +26,13 @@ namespace IFAvaliacao.ViewModels
             _syncService = syncService;
             LoginCommand = new DelegateCommand(async () => await ExecuteLoginCommand());
             CadastrarCommand = new DelegateCommand(async () => await ExecuteCadastrarCommand());
+            AlterarEndpointCommand = new DelegateCommand(async () => await AlterarEndpointUrlAsync());
+        }
+
+        public string EndpointApi
+        {
+            get { return AppSettings.ApiUrl; }
+            set { AppSettings.ApiUrl = value; }
         }
 
         private string _email;
@@ -32,6 +40,30 @@ namespace IFAvaliacao.ViewModels
 
         private string _password;
         public string Password { get => _password; set => SetProperty(ref _password, value); }
+
+        public DelegateCommand AlterarEndpointCommand { get; private set; }
+        public async Task AlterarEndpointUrlAsync()
+        {
+            var input = await DialogService.PromptAsync($"{EndpointApi}", "Alterar url do webservice", "Confirmar", "Cancelar");
+
+            if (InputValido(input))
+            {
+                if(IsValidURL(input.Text))
+                {
+                    EndpointApi = input.Text;
+                    return;
+                }
+
+                await DialogService.AlertAsync("Url informada é inválida");
+            }
+        }
+
+
+        private bool InputValido(Acr.UserDialogs.PromptResult input)
+        {
+
+            return input.Ok && !string.IsNullOrEmpty(input.Text) && input.Text.Length > 0;
+        }
 
         public DelegateCommand LoginCommand { get; }
         public DelegateCommand CadastrarCommand { get; }
@@ -89,6 +121,13 @@ namespace IFAvaliacao.ViewModels
         private async Task ExecuteCadastrarCommand()
         {
             await NavigationService.NavigateAsync(nameof(CadastroUsuarioPage));
+        }
+
+        private bool IsValidURL(string url)
+        {
+            string Pattern = @"^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$";
+            var regex = new Regex(Pattern, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            return regex.IsMatch(url);
         }
     }
 }
