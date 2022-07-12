@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  database:
+    image: postgres:12-alpine
+    command: "postgres -c max_connections=1000 -c shared_buffers=2GB -c log_lock_waits=on"
+    ports:
+      - "5432:5432"
+    environment:
+      - "POSTGRES_USER=root"
+      - "POSTGRES_DB=bullapp"
+      - "POSTGRES_PASSWORD=bullapp@2020"
+    networks:
+      - ifavaliacao-networks
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    
+
+  ifavaliacao-api:
+    image: ifavaliacao-api
+    build:
+      context: .
+    ports:
+      - "50470:50470"
+    restart: always
+    environment:
+      - Default=Host=database;Username=root;Password=bullapp@2020;Database=bullapp
+    networks:
+      - ifavaliacao-networks
+    depends_on:
+      - database
+
+volumes:
+  postgres-data:
+    driver: "local"
+
+networks:
+  ifavaliacao-networks:
+    driver: bridge
