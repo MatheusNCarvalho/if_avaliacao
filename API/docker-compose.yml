@@ -24,7 +24,7 @@ services:
       - "50470:50470"
     restart: always
     environment:
-      - Default=Host=database;Username=root;Password=bullapp@2020;Database=bullapp
+      - ConnectionStrings_Default=Host=database;Username=root;Password=bullapp@2020;Database=bullapp
     networks:
       - ifavaliacao-networks
     depends_on:

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
-using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace IFAVALIACAO.API.Configurations
@@ -12,12 +12,13 @@ namespace IFAVALIACAO.API.Configurations
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1",
-                    new Info
+                    new OpenApiInfo
                     {
                         Title = "BullApp",
                         Version = "v1",
                         Description = "API REST - BullApp",
                     });
+                c.CustomSchemaIds(c => c.FullName);
                 AddSecurity(c);
             });
 
@@ -32,16 +33,29 @@ namespace IFAVALIACAO.API.Configurations
                 {"Bearer", new string[] { }},
             };
 
-            options.AddSecurityDefinition("Bearer", new ApiKeyScheme
+            options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
             {
-                In = "header",
+                In = ParameterLocation.Header,
                 Description = "Autenticação baseada em Json Web Token (JWT)",
                 Name = "Authorization",
-                Type = "apiKey",
+                Type = SecuritySchemeType.ApiKey,
 
             });
 
-            options.AddSecurityRequirement(security);
+            options.AddSecurityRequirement(new OpenApiSecurityRequirement(){
+                {   new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        },
+                      Scheme = "oauth2",
+                      Name = "Bearer",
+                      In = ParameterLocation.Header,
+                    },  new List<string>()
+                }
+            });
         }
     }
 }
