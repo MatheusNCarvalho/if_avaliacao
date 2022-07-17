@@ -1,5 +1,5 @@
 ### Estágio 1 - Obter o source e gerar o Build ###
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2.105 AS build-env
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1  AS build-env
 WORKDIR /app
 
 ## Copiar todos projetos e restaurar dependencias
@@ -15,13 +15,12 @@ RUN dotnet publish IFAVALIACAO.API/IFAVALIACAO.API.csproj -c Release -o /app/pub
 
 ### Estágio 2 - Subir a aplicação através dos binários ###
 ## Build da imagem
-FROM mcr.microsoft.com/dotnet/core/aspnet:2.2.3
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 
 WORKDIR /app
 COPY --from=build-env /app/publish .
 
 # ENV ASPNETCORE_ENVIRONMENT Staging
-ENV ASPNETCORE_URLS http://+:50470
-EXPOSE 50470
+EXPOSE 80
 
 ENTRYPOINT ["dotnet", "IFAVALIACAO.API.dll"]
