@@ -23,7 +23,7 @@ services:
     build:
       context: .
     ports:
-      - "50470:80"
+      - "50470:8080"
     restart: always
     environment:
       - ConnectionStrings__Default=Host=database;Username=root;Password=bullapp@2020;Database=postgres

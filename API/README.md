@@ -1,33 +1,28 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
-
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
-
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
-
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
-
-If you want to learn more about creating good readme files then refer the following [guidelines](https://www.visualstudio.com/en-us/docs/git/create-a-readme). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+## Erros:
 
 
-``` bash
-# install dependencies
-dotnet restore
+## Erro ao gerar a imagem da API
 
-# verify that the project is OK
-dotnet build
+``` teste
 
-# run the project
-dotnet run
+C:\Program Files\dotnet\sdk\3.1.302\NuGet.targets(128,5): error : Unable to load the service index for source https://api.nuget.org/v3/index.json. [C:\src\Template.Web\Template.Web.csproj]
+C:\Program Files\dotnet\sdk\3.1.302\NuGet.targets(128,5): error :   No such host is known. [C:\src\Template.Web\Template.Web.csproj]
+The command 'cmd /S /C dotnet restore "Template.Web/Template.Web.csproj"' returned a non-zero code: 1
 
 ```
+O contêiner não tem conectividade com a Internet, portanto, não pode derrubar os pacotes. Podemos ver isso claramente construindo este arquivo docker muito simples
+
+## Solução
+
+O servidor DNS está errado no contêiner. Para corrigir, codifique o DNS no Docker, ou seja, coloque este JSON
+
+``` json
+
+{ "dns" : [ "10.1.2.3" , "8.8.8.8" ] }
+
+```
+
+https://stackoverflow.com/questions/61889848/how-to-add-a-daemon-json-file-in-docker-ubuntu
+
+* sudo touch /etc/docker/daemon.json
+* sudo vim /etc/docker/daemon.json
