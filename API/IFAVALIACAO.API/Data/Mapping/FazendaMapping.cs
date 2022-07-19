@@ -12,7 +12,9 @@ namespace IFAVALIACAO.API.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<Fazenda> builder)
         {
-            
+            builder.HasOne(x => x.User)
+                .WithMany()
+                .HasForeignKey(x => x.UserId);
         }
     }
 }

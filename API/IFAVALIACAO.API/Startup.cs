@@ -6,11 +6,11 @@ using IFAVALIACAO.API.Middleware;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 
 namespace IFAVALIACAO.API
 {
@@ -26,7 +26,9 @@ namespace IFAVALIACAO.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<IFDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("Default")));
+            services
+                .AddDbContext<IFDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("Default"))
+                                                             .EnableSensitiveDataLogging());
 
             services.AddCors(options =>
             {
@@ -39,36 +41,42 @@ namespace IFAVALIACAO.API
             });
 
             services.AddMediatR(typeof(Startup));
-            services.AddDependencyInjection();
-            services.AddAutheticateJWT(Configuration);
+            services.AddDependencyInjection();            
             services.AddAutoMapper(typeof(Startup));
 
-            services.AddMvc(options =>
+            services.AddAutheticateJWT(Configuration);
+            services.AddControllers(options =>
             {
-                options.Filters.Add(new AuthorizeFilter("Bearer"));
                 options.Filters.Add(typeof(GlobalExceptionHandlingFilter));
+                options.Filters.Add(new AuthorizeFilter("Bearer"));
+
             })
-            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-            .AddJsonOptions(options =>
-            {
-                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-            });
+              .ConfigureApiBehaviorOptions(options => options.SuppressModelStateInvalidFilter = true)
+              .AddNewtonsoftJson(x => { x.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore; });
+  
 
             services.AddSwagger();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseCors("policy");
             app.UseHttpsRedirection();
             app.UseAuthentication();
-            app.UseMvc();
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("../swagger/v1/swagger.json", "BullApp");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "BullApp");
             });
+            app.UseInitializeDatabase();
         }
     }
 }

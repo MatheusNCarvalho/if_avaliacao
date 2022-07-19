@@ -10,6 +10,10 @@ namespace IFAVALIACAO.API.Data.Mapping
         {
             builder.HasOne(x => x.Fazenda).WithMany().IsRequired();
 
+            builder.HasOne(x => x.User)
+                .WithMany()
+                .HasForeignKey(x => x.UserId);
+
             builder.HasOne(x => x.VacaMae)
                 .WithMany(x => x.VacasMaes)
                 .HasForeignKey(x => x.VacaMaeId)

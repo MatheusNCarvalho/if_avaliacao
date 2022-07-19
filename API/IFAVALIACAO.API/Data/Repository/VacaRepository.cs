@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using IFAVALIACAO.API.Domain.Entites;
 using IFAVALIACAO.API.Domain.Interfaces.Repository;
@@ -12,11 +13,11 @@ namespace IFAVALIACAO.API.Data.Repository
         {
         }
 
-        public IList<Vaca> GetByNumeros(IList<int> numeros)
+        public IList<Vaca> GetByNumeros(Guid userId, IList<int> numeros)
         {
             var query = GetAll();
             query = query.Include(x => x.Fazenda);
-            query = query.Where(x => numeros.Contains(x.Numero));
+            query = query.Where(x => x.UserId == userId && numeros.Contains(x.Numero));
             return query.ToList();
         }
     }

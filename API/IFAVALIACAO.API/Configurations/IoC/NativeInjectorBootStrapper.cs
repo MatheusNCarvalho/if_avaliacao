@@ -28,6 +28,7 @@ namespace IFAVALIACAO.API.Configurations.IoC
 
             services.AddSingleton<ISigningConfiguration, SigningConfiguration>();
             services.AddSingleton<ITokenConfiguration, TokenConfiguration>();
+            services.AddScoped<IUserSession, UserSession>();
 
             services.AddScoped<IFDbContext>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -37,6 +38,7 @@ namespace IFAVALIACAO.API.Configurations.IoC
             services.AddScoped<IVacaRepository, VacaRepository>();
             services.AddScoped<IAvaliacaoRepository, AvaliacaoRepository>();
             services.AddScoped<IAvaliacaoService, AvaliacaoService>();
+            
 
             return services;
         }

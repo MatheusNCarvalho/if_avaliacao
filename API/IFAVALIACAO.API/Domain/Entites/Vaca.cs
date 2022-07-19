@@ -5,20 +5,21 @@ namespace IFAVALIACAO.API.Domain.Entites
 {
     public class Vaca : Entity
     {
-        protected  Vaca() { }
+        protected Vaca() { }
 
         public Vaca(
-                    string nome, 
-                    int numero, 
-                    string nomePai, 
-                    int? numeroPai, 
-                    string raca, 
-                    string grauSanguinio, 
-                    DateTime? dataNascimento, 
-                    int? ordemParto, 
-                    int? ipp, 
-                    Fazenda fazenda, 
+                    string nome,
+                    int numero,
+                    string nomePai,
+                    int? numeroPai,
+                    string raca,
+                    string grauSanguinio,
+                    DateTime? dataNascimento,
+                    int? ordemParto,
+                    int? ipp,
+                    Fazenda fazenda,
                     Vaca vacaMae,
+                    Guid userId,
                     Guid? id)
         {
 
@@ -26,6 +27,8 @@ namespace IFAVALIACAO.API.Domain.Entites
             {
                 Id = id.Value;
             }
+
+            UserId = userId;
             Nome = nome;
             Numero = numero;
             NomePai = nomePai;
@@ -38,7 +41,8 @@ namespace IFAVALIACAO.API.Domain.Entites
             Fazenda = fazenda;
             VacaMae = vacaMae;
         }
-       
+
+  
         public string Nome { get; private set; }
         public int Numero { get; private set; }
         public string NomePai { get; private set; }
@@ -55,9 +59,9 @@ namespace IFAVALIACAO.API.Domain.Entites
         /// IPP (idade ao primeiro parto):
         /// </summary>
         public int? Ipp { get; private set; }
-     
+
         public Fazenda Fazenda { get; private set; }
-    
+
         public Vaca VacaMae { get; private set; }
 
         public IList<Vaca> VacasMaes { get; private set; }

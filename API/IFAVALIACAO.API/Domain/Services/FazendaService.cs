@@ -4,6 +4,7 @@ using System.Linq;
 using AutoMapper;
 using IFAVALIACAO.API.Domain.Entites;
 using IFAVALIACAO.API.Domain.Filters;
+using IFAVALIACAO.API.Domain.Interfaces.Authentication;
 using IFAVALIACAO.API.Domain.Interfaces.Repository;
 using IFAVALIACAO.API.Domain.Interfaces.Services;
 using IFAVALIACAO.API.Domain.Notifications;
@@ -17,21 +18,24 @@ namespace IFAVALIACAO.API.Domain.Services
     {
         private readonly IRepository<Fazenda> _repository;
         private readonly IMapper _mapper;
-        public FazendaService(IUnitOfWork ofWork, IMediator mediator, INotificationHandler<DomainNotification> notifications, IRepository<Fazenda> repository, IMapper mapper) : base(ofWork, mediator, notifications)
+        private readonly IUserSession _userSession;
+
+        public FazendaService(IUnitOfWork ofWork, IMediator mediator, INotificationHandler<DomainNotification> notifications, IRepository<Fazenda> repository, IMapper mapper, IUserSession userSession) : base(ofWork, mediator, notifications)
         {
             _repository = repository;
             _mapper = mapper;
+            _userSession = userSession;
         }
 
 
         public IList<FazendaModel> SearchItemsToSync(SyncFilter filter)
         {
-            return _mapper.Map<IList<FazendaModel>>(_repository.SearchItemsToSync(filter.FirstSync,filter.LastDateStart));
+            return _mapper.Map<IList<FazendaModel>>(_repository.SearchItemsToSync(_userSession.UserId, filter.FirstSync, filter.LastDateStart));
         }
 
         public void Save(FazendaModel model)
         {
-            var existeFazenda = _repository.Get(x => x.InscricaoEstadual == model.InscricaoEstadual).FirstOrDefault();
+            var existeFazenda = _repository.Get(x => x.UserId == _userSession.UserId && x.InscricaoEstadual == model.InscricaoEstadual).FirstOrDefault();
 
             if (existeFazenda == null)
             {
@@ -54,7 +58,8 @@ namespace IFAVALIACAO.API.Domain.Services
             var inscricoesEstaduais = model.Select(x => x.InscricaoEstadual).ToList();
 
             var existeFazendas = _repository
-                .Get(x => inscricoesEstaduais.Contains(x.InscricaoEstadual)).ToList();
+                .Get(x => x.UserId == _userSession.UserId 
+                          && inscricoesEstaduais.Contains(x.InscricaoEstadual)).ToList();
 
             foreach (var fazendaModel in model)
             {
@@ -122,7 +127,7 @@ namespace IFAVALIACAO.API.Domain.Services
         private Fazenda CreateFazenda(FazendaModel model)
         {
             var fazenda = new Fazenda(model.NomeProprietario, model.NomeFazenda, model.InscricaoEstadual, model.Cep,
-                model.Endereco, model.Cidade, model.Estado, model.Id);
+                model.Endereco, model.Cidade, model.Estado, _userSession.UserId, model.Id);
 
             fazenda.SetDataCriacao(model.DataCriacao);
             fazenda.SetDataAtualizacao(model.DataAtualizacao);

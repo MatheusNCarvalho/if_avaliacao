@@ -6,8 +6,29 @@ namespace IFAVALIACAO.API.Domain.Entites
     {
         protected Avaliacao() { }
 
-        public Avaliacao(DateTime dataHoraInicio, DateTime dataHoraFim, int nameCow, decimal bodyWight, int angulosiodade, int profundidadeCorporal, int forcaLeiteira, int alturaGarupaHipometro, int comprimentoCorpo, int anguloCarupa, int larguraIleo, int larguraIsquio, int anguloCasco, int jarreteLateral, int jarreteTras, int ubereFirmeza, int uberePosterior, int alturaUbere, int ligamentoCentral, int posicaoTetos)
+        public Avaliacao(DateTime dataHoraInicio,
+            DateTime dataHoraFim,
+            int nameCow,
+            decimal bodyWight,
+            int angulosiodade,
+            int profundidadeCorporal,
+            int forcaLeiteira,
+            int alturaGarupaHipometro,
+            int comprimentoCorpo,
+            int anguloCarupa,
+            int larguraIleo,
+            int larguraIsquio,
+            int anguloCasco,
+            int jarreteLateral,
+            int jarreteTras,
+            int ubereFirmeza,
+            int uberePosterior,
+            int alturaUbere,
+            int ligamentoCentral,
+            int posicaoTetos,
+            Guid userId)
         {
+            UserId = userId;
             DataHoraInicio = dataHoraInicio;
             DataHoraFim = dataHoraFim;
             NameCow = nameCow;
@@ -29,8 +50,6 @@ namespace IFAVALIACAO.API.Domain.Entites
             LigamentoCentral = ligamentoCentral;
             PosicaoTetos = posicaoTetos;
         }
-
-        
         public DateTime DataHoraInicio { get; private set; }
         public DateTime DataHoraFim { get; private set; }
         public int NameCow { get; private set; }

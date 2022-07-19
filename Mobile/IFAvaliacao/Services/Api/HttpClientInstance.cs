@@ -9,6 +9,10 @@ namespace IFAvaliacao.Services.Api
         private static HttpClient _instance;
 
         public static HttpClient Current => _instance
-           ?? (_instance = new HttpClient(new AuthenticatedHttpClientHandler()) { BaseAddress = new Uri(AppSettings.ApiUrl) });
+           ?? (_instance = new HttpClient(new AuthenticatedHttpClientHandler()) 
+           { 
+               BaseAddress = new Uri(AppSettings.ApiUrl),
+               Timeout = TimeSpan.FromSeconds(40)
+           });
     }
 }

@@ -29,10 +29,12 @@ namespace IFAVALIACAO.API.Configurations
             services.AddAuthentication(authOptions =>
             {
                 authOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                authOptions.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
                 authOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(bearedOptions =>
             {
                 bearedOptions.SaveToken = true;
+                bearedOptions.RequireHttpsMetadata = false;
 
                 var paramsValidation = bearedOptions.TokenValidationParameters;
 

@@ -8,6 +8,7 @@ namespace IFAVALIACAO.API.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
+            builder.Ignore(x => x.UserId);
             builder.Property(x => x.Name).IsRequired();
             builder.Property(x => x.Email).IsRequired();
             builder.Property(x => x.Password).IsRequired();

@@ -14,6 +14,15 @@
     <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
             <StackLayout VerticalOptions="CenterAndExpand" Padding="10">
+                <Image HorizontalOptions="Center" 
+                       WidthRequest="150" 
+                       Source="cow_face_front.png" 
+                       Margin="0,0,0,10">
+
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AlterarEndpointCommand}" />
+                    </Image.GestureRecognizers>
+                </Image>
                 <Entry Placeholder="E-email" ReturnType="Next" Text="{Binding Email}" BackgroundColor="White" />
                 <Entry IsPassword="true" Placeholder="Senha" Text="{Binding Password}" Margin="0,0,0,25" 
                    BackgroundColor="White" 
